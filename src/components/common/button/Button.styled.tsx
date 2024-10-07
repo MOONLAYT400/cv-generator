@@ -21,7 +21,7 @@ export const Wrapper = styled.button<ButtonStyles>`
   gap: 6px;
   flex-shrink: 0;
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: 5px;
   border: 1px solid
     ${({ $buttonType }) =>
       buttonStyles[$buttonType as keyof typeof buttonStyles].border ??
@@ -38,7 +38,7 @@ export const Wrapper = styled.button<ButtonStyles>`
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 16px;
   white-space: nowrap;
   transition: all 0.2s ease;
   font-family: Inter;
@@ -57,7 +57,7 @@ export const Wrapper = styled.button<ButtonStyles>`
 
   @media (${DEVICE_SIZE.TABLET}) {
     font-size: 16px;
-    line-height: 24px;
+    line-height: 18px;
   }
   @media (${DEVICE_SIZE.MOBILE}) {
     font-weight: 400;
