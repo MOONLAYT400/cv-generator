@@ -55,7 +55,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     const techArray = cvData[item.type as keyof typeof cvData]
 
     if (Array.isArray(techArray)) {
-      const filtered = techArray.filter((entry) => entry === item.name)
+      const filtered = techArray.filter((entry) => entry.name !== item.name)
       setSVData({ ...cvData, [item.type]: filtered })
     }
   }
