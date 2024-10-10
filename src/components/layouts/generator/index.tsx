@@ -46,9 +46,14 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   const updateTechArray = (type: string, name: string) => {
     const techArray = cvData[type as keyof typeof cvData]
 
-    if (Array.isArray(techArray)) techArray.push({ type, name })
+    if (Array.isArray(techArray)) {
+      const existing = techArray.find((item) => item.name === name)
 
-    setSVData({ ...cvData, [type]: techArray })
+      if (!existing) {
+        techArray.push({ type, name })
+        setSVData({ ...cvData, [type]: techArray })
+      }
+    }
   }
 
   const handleRemoveTech = (item: ITechItem) => {
