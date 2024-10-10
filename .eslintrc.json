@@ -1,7 +1,55 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"],
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "plugin:import/recommended",
+    "next/typescript"
+  ],
+  "plugins": ["import"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "paths": ["./src"]
+      }
+    }
+  },
   "rules": {
+    "@next/next/no-html-link-for-pages": ["error", "src/app"],
+    "@next/next/no-img-element": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "react/display-name": "off",
+    "react/no-unescaped-entities": "off",
+    "import/no-named-as-default-member": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "react-hooks/exhaustive-deps": "off"
+    "import/order": [
+      "warn",
+      {
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "./*.less",
+            "group": "sibling",
+            "position": "before"
+          }
+        ]
+      }
+    ]
   }
 }
