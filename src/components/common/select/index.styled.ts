@@ -13,6 +13,7 @@ interface IInputWrapper {
 
 export const Wrapper = styled.div<IInputWrapper>`
   position: relative;
+  width: 100%;
 `
 
 export const Label = styled.div`
@@ -41,7 +42,7 @@ export const InputWrapper = styled.div<IInputWrapper>`
   padding: 13px 14px;
   border-radius: 16px;
   border: 1px solid
-    ${({ $focused }) => (!$focused ? COLORS.WHITE_24 : COLORS.VIOLET)};
+    ${({ $focused }) => (!$focused ? COLORS.WHITE_24 : COLORS.TURQUOISE)};
   background: transparent;
   color: ${COLORS.WHITE_87};
   user-select: none;
@@ -96,6 +97,13 @@ export const Item = styled.div<IInputWrapper>`
   font-style: normal;
   font-weight: 400;
   line-height: 16px;
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    white-space: nowrap;
+    text-align: start;
+  }
   cursor: pointer;
   user-select: none;
   &:hover {

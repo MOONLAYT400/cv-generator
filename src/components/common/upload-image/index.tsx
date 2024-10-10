@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { FC, useMemo, useState } from "react"
 import { useDropzone } from "react-dropzone"
 
 import { FIleDrop, Preview, ThumbnailWrapper, Wrapper } from "./index.styled"
@@ -15,26 +15,35 @@ const rejectStyle = {
   borderColor: "#ff1744"
 }
 
-export const UploadLogo = () => {
-  const [image, setImage] = useState("")
+interface IImageWithPreview {
+  label?: string
+  imageSrc: string
+  saveImage: (image: string) => void
+}
 
-  const uploadSpaceLogo = async (base64String: string | ArrayBuffer) => {
-    setImage(base64String as string)
-  }
+export const ImageWithPreview: FC<IImageWithPreview> = ({
+  label = "Image",
+  imageSrc,
+  saveImage
+}) => {
+  const [image, setImage] = useState(imageSrc)
 
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
     useDropzone({
       multiple: false,
       accept: { "image/*": [] },
       onDrop: (acceptedFiles: any[]) =>
-        acceptedFiles.map((file: any) => handleResizeImage(file))
+        acceptedFiles.map((file: any) => handleBufferImage(file))
     })
 
-  const handleResizeImage = (file: any) => {
+  const handleBufferImage = (file: any) => {
     const reader = new FileReader()
     reader.onload = function (event) {
       const base64String = event?.target?.result
-      if (base64String) uploadSpaceLogo(base64String)
+      if (base64String) {
+        setImage(base64String as string)
+        saveImage(base64String as string)
+      }
     }
     reader.readAsDataURL(file)
   }
@@ -48,11 +57,9 @@ export const UploadLogo = () => {
     [isFocused, isDragAccept, isDragReject]
   )
 
-  console.log(image)
-
   return (
     <Wrapper>
-      <label>Logo</label>
+      <label>{label}</label>
       <FIleDrop {...getRootProps({ style })}>
         {!!image ? (
           <Preview $img={`url(${image})`} />

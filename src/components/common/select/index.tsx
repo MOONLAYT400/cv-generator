@@ -1,15 +1,16 @@
 import { FC, useEffect, useState, useRef } from "react"
 
+import { useOnClickOutside } from "@/hooks/useOnclickOutside"
+
 import { DownSystemIcon } from "../icons"
 
 import { Wrapper, InputWrapper, Label, DropDown, Item } from "./index.styled"
-import { useOnClickOutside } from "@/hooks/useOnclickOutside"
 
 type Select = {
   options: any[]
   label?: string
   required?: boolean
-  inputValue: any
+  inputValue?: any
   outputField?: string
   errorText?: string
   displayField?: string
@@ -106,7 +107,7 @@ export const Select: FC<Select> = ({
               }
               onClick={() => handleSelectOption(option)}
             >
-              {typeof option === "object" ? option.label : option}
+              <p>{typeof option === "object" ? option.label : option}</p>
             </Item>
           ))}
         </DropDown>

@@ -1,5 +1,6 @@
-import { COLORS } from "@/constants/styles/colors"
 import { styled } from "styled-components"
+
+import { COLORS } from "@/constants/styles/colors"
 
 export interface IUploadLogo {
   $img?: string
@@ -26,8 +27,8 @@ export const Wrapper = styled.div<IUploadLogo>`
 
 export const FIleDrop = styled.div<IUploadLogo>`
   margin: 0 0 14px;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   overflow: hidden;
   border: 1px solid ${COLORS.WHITE_24};
   border-radius: 10px;
