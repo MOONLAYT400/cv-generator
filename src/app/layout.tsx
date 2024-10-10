@@ -1,6 +1,7 @@
+import { StyledComponentsRegistry } from "@/lib/registry"
+
 import type { Metadata } from "next"
 import "../styles/globals.css"
-import { StyledComponentsRegistry } from "@/lib/registry"
 
 export const metadata: Metadata = {
   title: "CV-Maker",

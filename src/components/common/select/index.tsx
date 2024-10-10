@@ -2,7 +2,7 @@ import { FC, useEffect, useState, useRef } from "react"
 
 import { DownSystemIcon } from "../icons"
 
-import { Wrapper, InputWrapper, Label, DropDown, Item } from "./Select.styled"
+import { Wrapper, InputWrapper, Label, DropDown, Item } from "./index.styled"
 import { useOnClickOutside } from "@/hooks/useOnclickOutside"
 
 type Select = {

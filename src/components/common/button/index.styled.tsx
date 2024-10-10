@@ -1,6 +1,7 @@
+import { styled } from "styled-components"
+
 import { COLORS } from "@/constants/styles/colors"
 import { DEVICE_SIZE } from "@/constants/styles/device-size"
-import { styled } from "styled-components"
 
 interface ButtonStyles {
   $buttonType: "primary" | "secondary" | "danger" | "ghost"

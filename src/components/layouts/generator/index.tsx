@@ -1,8 +1,11 @@
 "use client"
+import { FC, useState } from "react"
 
-import { Select } from "@/components/common/select/Select"
-import { FC } from "react"
+import { Button } from "@/components/common/button"
+import { useCVGenerator } from "@/hooks/useCVGenerator"
+import { ICVParams } from "@/types/cv-data"
 
+import { Wrapper } from "./index.styled"
 interface IGeneratorLayout {
   file: { [key: string]: string[] }
 }
@@ -10,9 +13,15 @@ interface IGeneratorLayout {
 export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   console.log(file)
 
+  const [cvData, setSVData] = useState<ICVParams>({
+    fullName: "test"
+  })
+
+  const saveDocument = useCVGenerator(cvData)
+
   return (
-    <div>
-      <Select options={file.databases} />
-    </div>
+    <Wrapper>
+      {/* <Button text="Generate CV" handleClick={saveDocument} /> */}
+    </Wrapper>
   )
 }

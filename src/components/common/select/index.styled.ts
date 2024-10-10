@@ -1,5 +1,6 @@
-import { COLORS } from "@/constants/styles/colors"
 import { styled } from "styled-components"
+
+import { COLORS } from "@/constants/styles/colors"
 
 interface IInputWrapper {
   $focused?: boolean

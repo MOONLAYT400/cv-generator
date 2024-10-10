@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react"
 
-import { Wrapper, Loader } from "./Button.styled"
+import { Wrapper, Loader } from "./index.styled"
 
 export interface ICustomButton {
   icon?: ReactNode
