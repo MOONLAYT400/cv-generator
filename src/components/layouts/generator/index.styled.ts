@@ -1,7 +1,5 @@
 import { styled } from "styled-components"
 
-import { COLORS } from "@/constants/styles/colors"
-
 export const Wrapper = styled.div``
 
 export const InfoSection = styled.div`
@@ -34,4 +32,56 @@ export const TechList = styled.div`
   gap: 10px;
   margin-bottom: 20px;
   padding: 0 10px;
+`
+
+export const EducationSection = styled.div`
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0 10px;
+`
+
+export const CreateEducationWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: end;
+  margin: 20px 0;
+`
+
+export const EducationsListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 250px;
+  overflow: auto;
+`
+export const EducationItem = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+`
+
+export const ExperienceSection = styled.div`
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0 10px;
+`
+
+export const CreateExperienceWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: end;
+  margin: 20px 0;
+`
+
+export const ExperienceListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 250px;
+  overflow: auto;
+`
+export const ExperienceItem = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
 `

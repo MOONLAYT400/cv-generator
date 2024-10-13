@@ -1,23 +1,36 @@
 "use client"
 import { FC, useState } from "react"
 
-// import { Button } from "@/components/common/button"
+import { Badge } from "@/components/common/badge"
+import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
 import { Select } from "@/components/common/select"
 import { TextArea } from "@/components/common/text-area"
 import { ImageWithPreview } from "@/components/common/upload-image"
-// import { useCVGenerator } from "@/hooks/useCVGenerator"
-import { ICVParams, ITechItem } from "@/types/cv-data"
+import { useCVGenerator } from "@/hooks/useCVGenerator"
+import {
+  ICVParams,
+  IEducationItem,
+  IExperienceItem,
+  ITechItem
+} from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
 
 import {
+  CreateEducationWrapper,
+  CreateExperienceWrapper,
+  EducationItem,
+  EducationSection,
+  EducationsListWrapper,
+  ExperienceItem,
+  ExperienceListWrapper,
+  ExperienceSection,
   InfoInputs,
   InfoSection,
   TechList,
   TechSection,
   Wrapper
 } from "./index.styled"
-import { Badge } from "@/components/common/badge"
 
 interface IGeneratorLayout {
   file: IStackData
@@ -28,6 +41,8 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     fullName: "",
     shortBio: "",
     photo: "",
+    education: [],
+    experience: [],
     languages: [],
     fe: [],
     be: [],
@@ -35,6 +50,23 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     devops: [],
     test: [],
     additional: []
+  })
+  const [showAddEducation, setShowAddEducation] = useState<boolean>(false)
+  const [educationData, setEducationData] = useState({
+    university: "",
+    department: "",
+    field: "",
+    startDate: "",
+    endDate: ""
+  })
+
+  const [showAddExperience, setShowAddExperience] = useState<boolean>(false)
+  const [experienceData, setExperienceData] = useState({
+    company: "",
+    role: "",
+    duties: "",
+    startDate: "",
+    endDate: ""
   })
 
   console.log(cvData)
@@ -65,7 +97,67 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     }
   }
 
-  // const saveDocument = useCVGenerator(cvData)
+  const handleAddEducation = () => {
+    if (showAddEducation) {
+      setEducationData({
+        university: "",
+        department: "",
+        field: "",
+        startDate: "",
+        endDate: ""
+      })
+    }
+    setShowAddEducation(!showAddEducation)
+  }
+
+  const handleSetEducationData = (key: string, value: any) => {
+    setEducationData({ ...educationData, [key]: value })
+  }
+
+  const handleSaveEducation = () => {
+    const education = { ...educationData, id: cvData.education.length + 1 }
+
+    const updatedEducation = [...cvData.education, education]
+
+    setSVData({ ...cvData, education: updatedEducation })
+  }
+
+  const handleDeleteEducation = (id: number) => {
+    const filtered = cvData.education.filter((ed) => ed.id !== id)
+    setSVData({ ...cvData, education: filtered })
+  }
+
+  const handleAddExperience = () => {
+    if (showAddExperience) {
+      setExperienceData({
+        company: "",
+        role: "",
+        duties: "",
+        startDate: "",
+        endDate: ""
+      })
+    }
+    setShowAddExperience(!showAddExperience)
+  }
+
+  const handleSetExperienceData = (key: string, value: any) => {
+    setExperienceData({ ...experienceData, [key]: value })
+  }
+
+  const handleSaveExperience = () => {
+    const experience = { ...experienceData, id: cvData.experience.length + 1 }
+
+    const updatedExperience = [...cvData.experience, experience]
+
+    setSVData({ ...cvData, experience: updatedExperience })
+  }
+
+  const handleDeleteExperience = (id: number) => {
+    const filtered = cvData.experience.filter((exp) => exp.id !== id)
+    setSVData({ ...cvData, experience: filtered })
+  }
+
+  const saveDocument = useCVGenerator(cvData)
 
   return (
     <Wrapper>
@@ -89,6 +181,142 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
           />
         </InfoInputs>
       </InfoSection>
+      <EducationSection>
+        <Button
+          text={showAddEducation ? "Закрыть" : "+ Образование"}
+          handleClick={handleAddEducation}
+        />
+        {showAddEducation ? (
+          <CreateEducationWrapper>
+            <Input
+              label="Учебное заведение"
+              inputValue={educationData.university}
+              placeholder="Введите название заведения..."
+              saveInputValue={(university) =>
+                handleSetEducationData("university", university)
+              }
+            />
+            <Input
+              label="Кафедра"
+              inputValue={educationData.department}
+              placeholder="Введите название кафедры..."
+              saveInputValue={(department) =>
+                handleSetEducationData("department", department)
+              }
+            />
+            <Input
+              label="Направление"
+              inputValue={educationData.field}
+              placeholder="Введите направление..."
+              saveInputValue={(field) => handleSetEducationData("field", field)}
+            />
+            <Input
+              label="Начало учебы"
+              inputValue={educationData.startDate}
+              placeholder="Дата начала учебы..."
+              saveInputValue={(startDate) =>
+                handleSetEducationData("startDate", startDate)
+              }
+            />
+            <Input
+              label="Окончание учебы"
+              inputValue={educationData.endDate}
+              placeholder="Дата окончания учебы..."
+              saveInputValue={(endDate) =>
+                handleSetEducationData("endDate", endDate)
+              }
+            />
+            <Button text="Сохранить" handleClick={handleSaveEducation} />
+          </CreateEducationWrapper>
+        ) : null}
+        {cvData?.education?.length ? (
+          <EducationsListWrapper>
+            {cvData.education.map((education: IEducationItem) => (
+              <EducationItem key={education.id}>
+                <p>{education?.university}</p>
+                <p>{education?.department}</p>
+                <p>{education?.field}</p>
+                <p>{education?.startDate}</p>
+                <p>{education?.endDate}</p>
+                <Button
+                  text="Удалить"
+                  handleClick={() =>
+                    handleDeleteEducation(education.id as number)
+                  }
+                />
+              </EducationItem>
+            ))}
+          </EducationsListWrapper>
+        ) : null}
+      </EducationSection>
+      <ExperienceSection>
+        <Button
+          text={showAddExperience ? "Закрыть" : "+ Опыт работы"}
+          handleClick={handleAddExperience}
+        />
+        {showAddExperience ? (
+          <CreateExperienceWrapper>
+            <Input
+              label="Учебное заведение"
+              inputValue={experienceData.company}
+              placeholder="Введите название заведения..."
+              saveInputValue={(company) =>
+                handleSetExperienceData("company", company)
+              }
+            />
+            <Input
+              label="Кафедра"
+              inputValue={experienceData.role}
+              placeholder="Введите название кафедры..."
+              saveInputValue={(role) => handleSetExperienceData("role", role)}
+            />
+            <Input
+              label="Направление"
+              inputValue={experienceData.duties}
+              placeholder="Введите направление..."
+              saveInputValue={(duties) =>
+                handleSetExperienceData("duties", duties)
+              }
+            />
+            <Input
+              label="Начало учебы"
+              inputValue={experienceData.startDate}
+              placeholder="Дата начала учебы..."
+              saveInputValue={(startDate) =>
+                handleSetExperienceData("startDate", startDate)
+              }
+            />
+            <Input
+              label="Окончание учебы"
+              inputValue={experienceData.endDate}
+              placeholder="Дата окончания учебы..."
+              saveInputValue={(endDate) =>
+                handleSetExperienceData("endDate", endDate)
+              }
+            />
+            <Button text="Сохранить" handleClick={handleSaveExperience} />
+          </CreateExperienceWrapper>
+        ) : null}
+        {cvData?.experience?.length ? (
+          <ExperienceListWrapper>
+            {cvData.experience.map((experience: IExperienceItem) => (
+              <ExperienceItem key={experience.id}>
+                <p>{experience?.company}</p>
+                <p>{experience?.role}</p>
+                <p>{experience?.duties}</p>
+                <p>{experience?.startDate}</p>
+                <p>{experience?.endDate}</p>
+                <Button
+                  text="Удалить"
+                  handleClick={() =>
+                    handleDeleteExperience(experience.id as number)
+                  }
+                />
+              </ExperienceItem>
+            ))}
+          </ExperienceListWrapper>
+        ) : null}
+      </ExperienceSection>
       <TechSection>
         <Select
           label="Языки"
@@ -177,7 +405,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
           />
         ))}
       </TechList>
-      {/* <Button text="Generate CV" handleClick={saveDocument} /> */}
+      <Button text="Generate CV" handleClick={saveDocument} />
     </Wrapper>
   )
 }
