@@ -64,7 +64,12 @@ export const ImageWithPreview: FC<IImageWithPreview> = ({
         {!!image ? (
           <Preview $img={`url(${image})`} />
         ) : (
-          <ThumbnailWrapper>Drag&drop or click to upload</ThumbnailWrapper>
+          <ThumbnailWrapper>
+            Перетащите, <br />
+            или нажмите,
+            <br />
+            чтобы загрузить
+          </ThumbnailWrapper>
         )}
         <input {...getInputProps()} />
       </FIleDrop>

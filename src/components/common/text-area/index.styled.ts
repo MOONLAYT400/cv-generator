@@ -41,7 +41,7 @@ export const InputWrapper = styled.div<IInputWrapper>`
   background: transparent;
   ${({ $focused }) =>
     $focused ? `border: 1px solid ${COLORS.TURQUOISE};` : ""};
-  box-shadow: 5px 5px 20px 1px ${COLORS.WHITE_24};
+  box-shadow: 2px 2px 10px 1px ${COLORS.WHITE_24};
   &:focus {
     border: 1px solid ${COLORS.TURQUOISE};
   }

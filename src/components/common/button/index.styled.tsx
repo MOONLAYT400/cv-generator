@@ -49,6 +49,7 @@ export const Wrapper = styled.button<ButtonStyles>`
 
   &:hover:enabled {
     opacity: 0.85;
+    cursor: pointer;
   }
 
   &:disabled {

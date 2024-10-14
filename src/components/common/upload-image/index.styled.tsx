@@ -36,7 +36,7 @@ export const FIleDrop = styled.div<IUploadLogo>`
   position: relative;
   align-items: center;
   justify-content: center;
-  box-shadow: 5px 5px 20px 1px ${COLORS.WHITE_24};
+  box-shadow: 2px 2px 10px 1px ${COLORS.WHITE_24};
   img {
     width: 100%;
     position: absolute;
