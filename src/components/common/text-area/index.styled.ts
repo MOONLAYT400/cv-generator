@@ -11,6 +11,7 @@ interface IInputWrapper {
 
 export const Wrapper = styled.div<IInputWrapper>`
   position: relative;
+  width: 100%;
 `
 
 export const Label = styled.p`
