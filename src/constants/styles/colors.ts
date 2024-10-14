@@ -25,3 +25,13 @@ export enum COLORS {
   SEMANTIC_ORANGE = "#FB9D11",
   SEMANTIC_RED = "#DB353F"
 }
+
+export const techColors = {
+  languages: COLORS.LIGHT_VIOLET,
+  fe: COLORS.VIOLET,
+  be: COLORS.PINK,
+  databases: COLORS.BLUE,
+  devops: COLORS.TURQUOISE,
+  test: COLORS.ORANGE,
+  additional: COLORS.SEMANTIC_GREEN
+}
