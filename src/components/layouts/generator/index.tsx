@@ -4,7 +4,11 @@ import { FC, useState } from "react"
 import { Badge } from "@/components/common/badge"
 import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
-import { CreateProjectModal } from "@/components/common/modal"
+import {
+  AddEducationModal,
+  AddExperienceModal,
+  CreateProjectModal
+} from "@/components/common/modal"
 import { Select } from "@/components/common/select"
 import { TextArea } from "@/components/common/text-area"
 import { ImageWithPreview } from "@/components/common/upload-image"
@@ -21,8 +25,6 @@ import { IStackData } from "@/types/stack-data"
 
 import {
   Buttons,
-  CreateEducationWrapper,
-  CreateExperienceWrapper,
   EducationItem,
   EducationSection,
   EducationsListWrapper,
@@ -56,23 +58,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     test: [],
     additional: [],
     projects: []
-  })
-  const [showAddEducation, setShowAddEducation] = useState<boolean>(false)
-  const [educationData, setEducationData] = useState({
-    university: "",
-    department: "",
-    field: "",
-    startDate: "",
-    endDate: ""
-  })
-
-  const [showAddExperience, setShowAddExperience] = useState<boolean>(false)
-  const [experienceData, setExperienceData] = useState({
-    company: "",
-    role: "",
-    duties: "",
-    startDate: "",
-    endDate: ""
   })
 
   const [modals, controlModals] = useState({
@@ -112,24 +97,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     }
   }
 
-  const handleAddEducation = () => {
-    if (showAddEducation) {
-      setEducationData({
-        university: "",
-        department: "",
-        field: "",
-        startDate: "",
-        endDate: ""
-      })
-    }
-    setShowAddEducation(!showAddEducation)
-  }
-
-  const handleSetEducationData = (key: string, value: any) => {
-    setEducationData({ ...educationData, [key]: value })
-  }
-
-  const handleSaveEducation = () => {
+  const handleSaveEducation = (educationData: IEducationItem) => {
     const education = { ...educationData, id: cvData.education.length + 1 }
 
     const updatedEducation = [...cvData.education, education]
@@ -142,24 +110,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     setSVData({ ...cvData, education: filtered })
   }
 
-  const handleAddExperience = () => {
-    if (showAddExperience) {
-      setExperienceData({
-        company: "",
-        role: "",
-        duties: "",
-        startDate: "",
-        endDate: ""
-      })
-    }
-    setShowAddExperience(!showAddExperience)
-  }
-
-  const handleSetExperienceData = (key: string, value: any) => {
-    setExperienceData({ ...experienceData, [key]: value })
-  }
-
-  const handleSaveExperience = () => {
+  const handleSaveExperience = (experienceData: IExperienceItem) => {
     const experience = { ...experienceData, id: cvData.experience.length + 1 }
 
     const updatedExperience = [...cvData.experience, experience]
@@ -191,6 +142,16 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         saveProject={handleAddProject}
         close={() => handleToggleModal("project", false)}
       />
+      <AddExperienceModal
+        isOpened={modals.experience}
+        saveExperience={handleSaveExperience}
+        close={() => handleToggleModal("experience", false)}
+      />
+      <AddEducationModal
+        isOpened={modals.education}
+        saveEducation={handleSaveEducation}
+        close={() => handleToggleModal("education", false)}
+      />
       <InfoSection>
         <ImageWithPreview
           label={"Фото"}
@@ -216,12 +177,12 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
             handleClick={() => handleToggleModal("project", true)}
           />
           <Button
-            text={showAddEducation ? "Закрыть" : "+ Образование"}
-            handleClick={handleAddEducation}
+            text={"+ Образование"}
+            handleClick={() => handleToggleModal("education", true)}
           />
           <Button
-            text={showAddExperience ? "Закрыть" : "+ Опыт работы"}
-            handleClick={handleAddExperience}
+            text={"+ Опыт работы"}
+            handleClick={() => handleToggleModal("experience", true)}
           />
         </Buttons>
         <Buttons>
@@ -230,49 +191,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         </Buttons>
       </InfoSection>
       <EducationSection>
-        {showAddEducation ? (
-          <CreateEducationWrapper>
-            <Input
-              label="Учебное заведение"
-              inputValue={educationData.university}
-              placeholder="Введите название заведения..."
-              saveInputValue={(university) =>
-                handleSetEducationData("university", university)
-              }
-            />
-            <Input
-              label="Кафедра"
-              inputValue={educationData.department}
-              placeholder="Введите название кафедры..."
-              saveInputValue={(department) =>
-                handleSetEducationData("department", department)
-              }
-            />
-            <Input
-              label="Направление"
-              inputValue={educationData.field}
-              placeholder="Введите направление..."
-              saveInputValue={(field) => handleSetEducationData("field", field)}
-            />
-            <Input
-              label="Начало учебы"
-              inputValue={educationData.startDate}
-              placeholder="Дата начала учебы..."
-              saveInputValue={(startDate) =>
-                handleSetEducationData("startDate", startDate)
-              }
-            />
-            <Input
-              label="Окончание учебы"
-              inputValue={educationData.endDate}
-              placeholder="Дата окончания учебы..."
-              saveInputValue={(endDate) =>
-                handleSetEducationData("endDate", endDate)
-              }
-            />
-            <Button text="Сохранить" handleClick={handleSaveEducation} />
-          </CreateEducationWrapper>
-        ) : null}
         {cvData?.education?.length ? (
           <EducationsListWrapper>
             {cvData.education.map((education: IEducationItem) => (
@@ -294,49 +212,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         ) : null}
       </EducationSection>
       <ExperienceSection>
-        {showAddExperience ? (
-          <CreateExperienceWrapper>
-            <Input
-              label="Учебное заведение"
-              inputValue={experienceData.company}
-              placeholder="Введите название заведения..."
-              saveInputValue={(company) =>
-                handleSetExperienceData("company", company)
-              }
-            />
-            <Input
-              label="Кафедра"
-              inputValue={experienceData.role}
-              placeholder="Введите название кафедры..."
-              saveInputValue={(role) => handleSetExperienceData("role", role)}
-            />
-            <Input
-              label="Направление"
-              inputValue={experienceData.duties}
-              placeholder="Введите направление..."
-              saveInputValue={(duties) =>
-                handleSetExperienceData("duties", duties)
-              }
-            />
-            <Input
-              label="Начало учебы"
-              inputValue={experienceData.startDate}
-              placeholder="Дата начала учебы..."
-              saveInputValue={(startDate) =>
-                handleSetExperienceData("startDate", startDate)
-              }
-            />
-            <Input
-              label="Окончание учебы"
-              inputValue={experienceData.endDate}
-              placeholder="Дата окончания учебы..."
-              saveInputValue={(endDate) =>
-                handleSetExperienceData("endDate", endDate)
-              }
-            />
-            <Button text="Сохранить" handleClick={handleSaveExperience} />
-          </CreateExperienceWrapper>
-        ) : null}
         {cvData?.experience?.length ? (
           <ExperienceListWrapper>
             {cvData.experience.map((experience: IExperienceItem) => (

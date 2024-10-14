@@ -48,13 +48,6 @@ export const EducationSection = styled.div`
   padding: 0 10px;
 `
 
-export const CreateEducationWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  align-items: end;
-  margin: 20px 0;
-`
-
 export const EducationsListWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -72,13 +65,6 @@ export const ExperienceSection = styled.div`
   width: 100%;
   margin-bottom: 20px;
   padding: 0 10px;
-`
-
-export const CreateExperienceWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  align-items: end;
-  margin: 20px 0;
 `
 
 export const ExperienceListWrapper = styled.div`

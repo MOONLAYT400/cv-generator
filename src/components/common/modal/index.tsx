@@ -3,12 +3,19 @@ import ReactDOM from "react-dom"
 
 import { MODALS } from "@/constants/modals/modals"
 import { useOnClickOutside } from "@/hooks/useOnclickOutside"
-import { ICreateProjectModal, IModalWrapper } from "@/types/modals"
+import {
+  IAddEducation,
+  IAddExperience,
+  ICreateProjectModal,
+  IModalWrapper
+} from "@/types/modals"
 
 import { CloseSystemIcon } from "../icons"
 
 import { CloseButton, Modal, Wrapper } from "./index.styled"
 import { CreateProject } from "./modal-children/create-project"
+import { AddExperience } from "./modal-children/add-experience"
+import { AddEducation } from "./modal-children/add-education"
 
 const ModalWrapper: FC<IModalWrapper> = ({
   id,
@@ -91,5 +98,25 @@ export const CreateProjectModal: FC<ICreateProjectModal> = ({
 }) => (
   <ModalWrapper close={close} isOpened={isOpened} id={MODALS.CREATE_PROJECT}>
     <CreateProject saveProject={saveProject} file={file} close={close} />
+  </ModalWrapper>
+)
+
+export const AddExperienceModal: FC<IAddExperience> = ({
+  isOpened,
+  close,
+  saveExperience
+}) => (
+  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.ADD_EXPERIENCE}>
+    <AddExperience saveExperience={saveExperience} close={close} />
+  </ModalWrapper>
+)
+
+export const AddEducationModal: FC<IAddEducation> = ({
+  isOpened,
+  close,
+  saveEducation
+}) => (
+  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.ADD_EXPERIENCE}>
+    <AddEducation saveEducation={saveEducation} close={close} />
   </ModalWrapper>
 )

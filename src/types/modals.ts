@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 
 import { IStackData } from "./stack-data"
-import { IProject } from "./cv-data"
+import { IEducationItem, IExperienceItem, IProject } from "./cv-data"
 
 export interface IModalWrapper {
   id: string
@@ -19,4 +19,12 @@ export interface IModal {
 export interface ICreateProjectModal extends IModal {
   file: IStackData
   saveProject: (project: IProject) => void
+}
+
+export interface IAddExperience extends IModal {
+  saveExperience: (experience: IExperienceItem) => void
+}
+
+export interface IAddEducation extends IModal {
+  saveEducation: (education: IEducationItem) => void
 }
