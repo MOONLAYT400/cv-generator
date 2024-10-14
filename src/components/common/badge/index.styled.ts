@@ -2,11 +2,15 @@ import { styled } from "styled-components"
 
 import { COLORS } from "@/constants/styles/colors"
 
-export const Wrapper = styled.div`
+interface IWrapper {
+  $color?: string
+}
+
+export const Wrapper = styled.div<IWrapper>`
   display: flex;
   gap: 5px;
   align-items: center;
-  background: ${COLORS.BLUE};
+  background: ${({ $color }) => $color ?? COLORS.BLUE};
   padding: 8px 10px;
   border-radius: 20px;
 `
