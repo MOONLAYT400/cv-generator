@@ -18,7 +18,15 @@ export const InfoInputs = styled.div`
   flex-direction: column;
   gap: 20px;
   width: 100%;
+  min-width: 500px;
 `
+export const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+`
+
 export const TechSection = styled.div`
   display: flex;
   gap: 50px;
@@ -85,3 +93,5 @@ export const ExperienceItem = styled.div`
   gap: 10px;
   align-items: center;
 `
+
+export const ProjectsWrapper = styled.div``

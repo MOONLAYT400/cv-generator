@@ -4,19 +4,23 @@ import { FC, useState } from "react"
 import { Badge } from "@/components/common/badge"
 import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
+import { CreateProjectModal } from "@/components/common/modal"
 import { Select } from "@/components/common/select"
 import { TextArea } from "@/components/common/text-area"
 import { ImageWithPreview } from "@/components/common/upload-image"
+import { techColors } from "@/constants/styles/colors"
 import { useCVGenerator } from "@/hooks/useCVGenerator"
 import {
   ICVParams,
   IEducationItem,
   IExperienceItem,
+  IProject,
   ITechItem
 } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
 
 import {
+  Buttons,
   CreateEducationWrapper,
   CreateExperienceWrapper,
   EducationItem,
@@ -27,6 +31,7 @@ import {
   ExperienceSection,
   InfoInputs,
   InfoSection,
+  ProjectsWrapper,
   TechList,
   TechSection,
   Wrapper
@@ -49,7 +54,8 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     databases: [],
     devops: [],
     test: [],
-    additional: []
+    additional: [],
+    projects: []
   })
   const [showAddEducation, setShowAddEducation] = useState<boolean>(false)
   const [educationData, setEducationData] = useState({
@@ -69,6 +75,12 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     endDate: ""
   })
 
+  const [modals, controlModals] = useState({
+    project: false,
+    education: false,
+    experience: false
+  })
+
   console.log(cvData)
 
   const updateCSVData = (key: string, value: any) => {
@@ -79,9 +91,11 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     const techArray = cvData[type as keyof typeof cvData]
 
     if (Array.isArray(techArray)) {
+      //@ts-expect-error - types included
       const existing = techArray.find((item) => item.name === name)
 
       if (!existing) {
+        //@ts-expect-error - types included
         techArray.push({ type, name })
         setSVData({ ...cvData, [type]: techArray })
       }
@@ -92,6 +106,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     const techArray = cvData[item.type as keyof typeof cvData]
 
     if (Array.isArray(techArray)) {
+      //@ts-expect-error - types included
       const filtered = techArray.filter((entry) => entry.name !== item.name)
       setSVData({ ...cvData, [item.type]: filtered })
     }
@@ -159,11 +174,26 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
 
   const saveDocument = useCVGenerator(cvData)
 
+  const handleToggleModal = (type: string, value: boolean) => {
+    controlModals({ ...modals, [type]: value })
+  }
+
+  const handleAddProject = (project: IProject) => {
+    const updatedProjects = [...cvData.projects, project]
+    setSVData({ ...cvData, projects: updatedProjects })
+  }
+
   return (
     <Wrapper>
+      <CreateProjectModal
+        file={file}
+        isOpened={modals.project}
+        saveProject={handleAddProject}
+        close={() => handleToggleModal("project", false)}
+      />
       <InfoSection>
         <ImageWithPreview
-          label={"Photo"}
+          label={"Фото"}
           imageSrc={cvData.photo}
           saveImage={(photo) => updateCSVData("photo", photo)}
         />
@@ -175,17 +205,31 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
             saveInputValue={(fullName) => updateCSVData("fullName", fullName)}
           />
           <TextArea
-            label="Short bio"
+            label="Биография"
             inputValue={cvData.shortBio}
             saveInputValue={(shortBio) => updateCSVData("shortBio", shortBio)}
           />
         </InfoInputs>
+        <Buttons>
+          <Button
+            text="+Проэкт"
+            handleClick={() => handleToggleModal("project", true)}
+          />
+          <Button
+            text={showAddEducation ? "Закрыть" : "+ Образование"}
+            handleClick={handleAddEducation}
+          />
+          <Button
+            text={showAddExperience ? "Закрыть" : "+ Опыт работы"}
+            handleClick={handleAddExperience}
+          />
+        </Buttons>
+        <Buttons>
+          <Button text="Создать резюме docx" handleClick={saveDocument} />
+          <Button text="Создать резюме pdf" handleClick={saveDocument} />
+        </Buttons>
       </InfoSection>
       <EducationSection>
-        <Button
-          text={showAddEducation ? "Закрыть" : "+ Образование"}
-          handleClick={handleAddEducation}
-        />
         {showAddEducation ? (
           <CreateEducationWrapper>
             <Input
@@ -250,10 +294,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         ) : null}
       </EducationSection>
       <ExperienceSection>
-        <Button
-          text={showAddExperience ? "Закрыть" : "+ Опыт работы"}
-          handleClick={handleAddExperience}
-        />
         {showAddExperience ? (
           <CreateExperienceWrapper>
             <Input
@@ -357,55 +397,61 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
       <TechList>
         {cvData.languages.map((language, index) => (
           <Badge
-            key={"languge_" + index}
             item={language}
+            key={"languge_" + index}
+            color={techColors.languages}
             removeWrapper={handleRemoveTech}
           />
         ))}
         {cvData.fe.map((fe, index) => (
           <Badge
-            key={"fe_" + index}
             item={fe}
+            key={"fe_" + index}
+            color={techColors.fe}
             removeWrapper={handleRemoveTech}
           />
         ))}
         {cvData.be.map((be, index) => (
           <Badge
-            key={"be_" + index}
             item={be}
+            key={"be_" + index}
+            color={techColors.be}
             removeWrapper={handleRemoveTech}
           />
         ))}
         {cvData.databases.map((database, index) => (
           <Badge
-            key={"databases_" + index}
             item={database}
+            key={"databases_" + index}
+            color={techColors.databases}
             removeWrapper={handleRemoveTech}
           />
         ))}
         {cvData.devops.map((devops, index) => (
           <Badge
-            key={"devops_" + index}
             item={devops}
+            key={"devops_" + index}
+            color={techColors.devops}
             removeWrapper={handleRemoveTech}
           />
         ))}
         {cvData.test.map((test, index) => (
           <Badge
-            key={"test_" + index}
             item={test}
+            key={"test_" + index}
+            color={techColors.test}
             removeWrapper={handleRemoveTech}
           />
         ))}
         {cvData.additional.map((additional, index) => (
           <Badge
-            key={"additional_" + index}
             item={additional}
+            key={"additiona l_" + index}
+            color={techColors.additional}
             removeWrapper={handleRemoveTech}
           />
         ))}
       </TechList>
-      <Button text="Generate CV" handleClick={saveDocument} />
     </Wrapper>
   )
 }
