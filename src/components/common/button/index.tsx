@@ -24,7 +24,11 @@ export const Button: FC<ICustomButton> = ({
   return (
     <Wrapper
       $buttonType={buttonType}
-      onClick={handleClick}
+      onClick={(e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        handleClick()
+      }}
       disabled={disabled}
       onKeyDown={handleKeyDown}
     >
