@@ -90,33 +90,49 @@ const ModalWrapper: FC<IModalWrapper> = ({
     : null
 }
 
-export const CreateProjectModal: FC<ICreateProjectModal> = ({
-  isOpened,
-  file,
-  close,
-  saveProject
-}) => (
-  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.CREATE_PROJECT}>
-    <CreateProject saveProject={saveProject} file={file} close={close} />
-  </ModalWrapper>
-)
-
-export const AddExperienceModal: FC<IAddExperience> = ({
-  isOpened,
-  close,
-  saveExperience
-}) => (
-  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.ADD_EXPERIENCE}>
-    <AddExperience saveExperience={saveExperience} close={close} />
-  </ModalWrapper>
-)
-
 export const AddEducationModal: FC<IAddEducation> = ({
+  education,
   isOpened,
   close,
   saveEducation
 }) => (
   <ModalWrapper close={close} isOpened={isOpened} id={MODALS.ADD_EXPERIENCE}>
-    <AddEducation saveEducation={saveEducation} close={close} />
+    <AddEducation
+      saveEducation={saveEducation}
+      close={close}
+      educationData={education}
+    />
+  </ModalWrapper>
+)
+
+export const AddExperienceModal: FC<IAddExperience> = ({
+  isOpened,
+  experience,
+  close,
+  saveExperience
+}) => (
+  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.ADD_EXPERIENCE}>
+    <AddExperience
+      saveExperience={saveExperience}
+      close={close}
+      experienceData={experience}
+    />
+  </ModalWrapper>
+)
+
+export const CreateProjectModal: FC<ICreateProjectModal> = ({
+  isOpened,
+  file,
+  project,
+  close,
+  saveProject
+}) => (
+  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.CREATE_PROJECT}>
+    <CreateProject
+      saveProject={saveProject}
+      file={file}
+      close={close}
+      projectData={project}
+    />
   </ModalWrapper>
 )

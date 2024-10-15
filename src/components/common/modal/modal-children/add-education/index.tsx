@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 
 import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
@@ -7,11 +7,16 @@ import { IEducationItem } from "@/types/cv-data"
 import { Buttons, Title, Wrapper } from "./index.styled"
 
 interface IAddEducation {
+  educationData: IEducationItem | null
   close: () => void
-  saveEducation: (education: IEducationItem) => void
+  saveEducation: (type: "create" | "update", education: IEducationItem) => void
 }
 
-export const AddEducation: FC<IAddEducation> = ({ close, saveEducation }) => {
+export const AddEducation: FC<IAddEducation> = ({
+  educationData,
+  close,
+  saveEducation
+}) => {
   const [education, updateEducation] = useState({
     university: "",
     department: "",
@@ -20,19 +25,21 @@ export const AddEducation: FC<IAddEducation> = ({ close, saveEducation }) => {
     endDate: ""
   })
 
+  useEffect(() => {
+    if (educationData && "university" in educationData)
+      updateEducation(educationData)
+  }, [])
+
   const handleUpdateEducation = (key: string, value: any) => {
     updateEducation({ ...education, [key]: value })
   }
 
-  const handleButtonClick = (type: "save" | "close") => {
-    if (type === "save") saveEducation(education)
-    updateEducation({
-      university: "",
-      department: "",
-      field: "",
-      startDate: "",
-      endDate: ""
-    })
+  const handleButtonClick = () => {
+    saveEducation(
+      educationData && "university" in educationData ? "update" : "create",
+      education
+    )
+
     close()
   }
 
@@ -77,13 +84,14 @@ export const AddEducation: FC<IAddEducation> = ({ close, saveEducation }) => {
       />
       <Buttons>
         <Button
-          text={"Добавить"}
-          handleClick={() => handleButtonClick("save")}
+          text={
+            educationData && "university" in educationData
+              ? "Обновить"
+              : "Добавить"
+          }
+          handleClick={handleButtonClick}
         />
-        <Button
-          text={"Отмена"}
-          handleClick={() => handleButtonClick("close")}
-        />
+        <Button text={"Отмена"} buttonType={"danger"} handleClick={close} />
       </Buttons>
     </Wrapper>
   )

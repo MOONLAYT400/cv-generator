@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 
 import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
@@ -7,11 +7,16 @@ import { IExperienceItem } from "@/types/cv-data"
 import { Buttons, Title, Wrapper } from "./index.styled"
 
 interface IAddExperience {
+  experienceData: IExperienceItem | null
   close: () => void
-  saveExperience: (experience: IExperienceItem) => void
+  saveExperience: (
+    type: "create" | "update",
+    experience: IExperienceItem
+  ) => void
 }
 
 export const AddExperience: FC<IAddExperience> = ({
+  experienceData,
   close,
   saveExperience
 }) => {
@@ -23,19 +28,21 @@ export const AddExperience: FC<IAddExperience> = ({
     endDate: ""
   })
 
+  useEffect(() => {
+    if (experienceData && "company" in experienceData) {
+      updateExperience(experienceData)
+    }
+  }, [])
+
   const handleUpdateExperience = (key: string, value: any) => {
     updateExperience({ ...experience, [key]: value })
   }
 
-  const handleButtonClick = (type: "save" | "close") => {
-    if (type === "save") saveExperience(experience)
-    updateExperience({
-      company: "",
-      role: "",
-      duties: "",
-      startDate: "",
-      endDate: ""
-    })
+  const handleButtonClick = () => {
+    saveExperience(
+      experienceData && "company" in experienceData ? "update" : "create",
+      experience
+    )
     close()
   }
 
@@ -76,13 +83,14 @@ export const AddExperience: FC<IAddExperience> = ({
       />
       <Buttons>
         <Button
-          text={"Добавить"}
-          handleClick={() => handleButtonClick("save")}
+          text={
+            experienceData && "company" in experienceData
+              ? "Обновить"
+              : "Добавить"
+          }
+          handleClick={handleButtonClick}
         />
-        <Button
-          text={"Отмена"}
-          handleClick={() => handleButtonClick("close")}
-        />
+        <Button text={"Отмена"} buttonType={"danger"} handleClick={close} />
       </Buttons>
     </Wrapper>
   )

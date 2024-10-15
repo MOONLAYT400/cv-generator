@@ -8,11 +8,13 @@ import { EducationItem, Wrapper, EducationsList } from "./index.styled"
 
 interface IEducationSection {
   educations: Array<IEducationItem>
+  updateEducation: (education: IEducationItem) => void
   deleteEducation: (id: number) => void
 }
 
 export const EducationsSection: FC<IEducationSection> = ({
   educations,
+  updateEducation,
   deleteEducation
 }) => {
   return (
@@ -20,7 +22,10 @@ export const EducationsSection: FC<IEducationSection> = ({
       <Accordion title="Образование">
         <EducationsList>
           {educations.map((education: IEducationItem) => (
-            <EducationItem key={education.id}>
+            <EducationItem
+              key={education.id}
+              onClick={() => updateEducation(education)}
+            >
               <p>{education?.university}</p>
               <p>{education?.department}</p>
               <p>{education?.field}</p>

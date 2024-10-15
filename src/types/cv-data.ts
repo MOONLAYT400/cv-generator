@@ -21,7 +21,8 @@ export interface IExperienceItem {
   endDate: string
 }
 
-export interface IProject {
+export interface IProjectItem {
+  id?: number
   name: string
   description: string
   role: string
@@ -47,5 +48,5 @@ export interface ICVParams {
   devops: Array<ITechItem>
   test: Array<ITechItem>
   additional: Array<ITechItem>
-  projects: Array<IProject>
+  projects: Array<IProjectItem>
 }

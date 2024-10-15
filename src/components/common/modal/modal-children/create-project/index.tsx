@@ -6,7 +6,7 @@ import { Input } from "@/components/common/input"
 import { Select } from "@/components/common/select"
 import { TextArea } from "@/components/common/text-area"
 import { techColors } from "@/constants/styles/colors"
-import { IProject, ITechItem } from "@/types/cv-data"
+import { IProjectItem, ITechItem } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
 
 import {
@@ -21,16 +21,18 @@ import {
 
 interface ICreateProject {
   file: IStackData
+  projectData: IProjectItem | null
   close: () => void
-  saveProject: (project: IProject) => void
+  saveProject: (type: "create" | "update", project: IProjectItem) => void
 }
 
 export const CreateProject: FC<ICreateProject> = ({
   file,
+  projectData,
   close,
   saveProject
 }) => {
-  const [project, updateProject] = useState<IProject>({
+  const [project, updateProject] = useState<IProjectItem>({
     name: "",
     description: "",
     role: "",
@@ -42,6 +44,12 @@ export const CreateProject: FC<ICreateProject> = ({
     test: [],
     additional: []
   })
+
+  useEffect(() => {
+    if (projectData && "name" in projectData) {
+      updateProject(projectData)
+    }
+  }, [])
 
   const handleUpdateProject = (field: string, value: string) =>
     updateProject({ ...project, [field]: value })
@@ -68,20 +76,11 @@ export const CreateProject: FC<ICreateProject> = ({
     }
   }
 
-  const handleButtonClick = (type: "save" | "close") => {
-    if (type === "save") saveProject(project)
-    updateProject({
-      name: "",
-      description: "",
-      role: "",
-      languages: [],
-      fe: [],
-      be: [],
-      databases: [],
-      devops: [],
-      test: [],
-      additional: []
-    })
+  const handleButtonClick = () => {
+    saveProject(
+      projectData && "name" in projectData ? "update" : "create",
+      project
+    )
     close()
   }
 
@@ -212,13 +211,10 @@ export const CreateProject: FC<ICreateProject> = ({
       </TechList>
       <Buttons>
         <Button
-          text={"Добавить"}
-          handleClick={() => handleButtonClick("save")}
+          text={projectData && "name" in projectData ? "Обновить" : "Добавить"}
+          handleClick={handleButtonClick}
         />
-        <Button
-          text={"Отмена"}
-          handleClick={() => handleButtonClick("close")}
-        />
+        <Button text={"Отмена"} buttonType={"danger"} handleClick={close} />
       </Buttons>
     </Wrapper>
   )

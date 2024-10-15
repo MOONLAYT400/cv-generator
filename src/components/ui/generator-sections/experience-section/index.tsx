@@ -8,11 +8,13 @@ import { ExperienceItem, Wrapper, ExperienceList } from "./index.styled"
 
 interface IExperienceSection {
   experiences: Array<IExperienceItem>
+  updateExperience: (education: IExperienceItem) => void
   deleteExperience: (id: number) => void
 }
 
 export const ExperienceSection: FC<IExperienceSection> = ({
   experiences,
+  updateExperience,
   deleteExperience
 }) => {
   return (
@@ -20,7 +22,10 @@ export const ExperienceSection: FC<IExperienceSection> = ({
       <Accordion title="Опыт работы">
         <ExperienceList>
           {experiences?.map((experience: IExperienceItem) => (
-            <ExperienceItem key={experience.id}>
+            <ExperienceItem
+              key={experience.id}
+              onClick={() => updateExperience(experience)}
+            >
               <p>{experience?.company}</p>
               <p>{experience?.role}</p>
               <p>{experience?.duties}</p>

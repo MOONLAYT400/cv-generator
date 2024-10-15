@@ -19,7 +19,7 @@ import {
   ICVParams,
   IEducationItem,
   IExperienceItem,
-  IProject,
+  IProjectItem,
   ITechItem
 } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
@@ -50,16 +50,18 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   const saveDocument = useCVGenerator(cvData)
 
   const [modals, controlModals] = useState({
-    project: false,
-    education: false,
-    experience: false
+    project: null,
+    education: null,
+    experience: null
   })
 
-  console.log(cvData)
+  // console.log(cvData)
 
   const updateCVData = (key: string, value: any) => {
     setSVData({ ...cvData, [key]: value })
   }
+
+  //tech control
 
   const updateTechArray = (type: string, name: string) => {
     const techArray = cvData[type as keyof typeof cvData]
@@ -86,12 +88,25 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     }
   }
 
-  const handleSaveEducation = (educationData: IEducationItem) => {
-    const education = { ...educationData, id: cvData.education.length + 1 }
+  // educations controls
+  const handleSaveEducation = (
+    type: "create" | "update",
+    educationData: IEducationItem
+  ) => {
+    if (type === "create") {
+      const education = { ...educationData, id: cvData.education.length + 1 }
+      const updatedEducations = [...cvData.education, education]
+      setSVData({ ...cvData, education: updatedEducations })
+      return
+    }
 
-    const updatedEducation = [...cvData.education, education]
-
-    setSVData({ ...cvData, education: updatedEducation })
+    const updatedEducations = cvData.education.map((education) => {
+      if (education.id === educationData.id) {
+        return educationData
+      }
+      return education
+    })
+    setSVData({ ...cvData, education: updatedEducations })
   }
 
   const handleDeleteEducation = (id: number) => {
@@ -99,11 +114,25 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     setSVData({ ...cvData, education: filtered })
   }
 
-  const handleSaveExperience = (experienceData: IExperienceItem) => {
-    const experience = { ...experienceData, id: cvData.experience.length + 1 }
+  // experience control
 
-    const updatedExperience = [...cvData.experience, experience]
+  const handleSaveExperience = (
+    type: "create" | "update",
+    experienceData: IExperienceItem
+  ) => {
+    if (type === "create") {
+      const experience = { ...experienceData, id: cvData.experience.length + 1 }
+      const updatedExperience = [...cvData.experience, experience]
+      setSVData({ ...cvData, experience: updatedExperience })
+      return
+    }
 
+    const updatedExperience = cvData.experience.map((experience) => {
+      if (experience.id === experienceData.id) {
+        return experienceData
+      }
+      return experience
+    })
     setSVData({ ...cvData, experience: updatedExperience })
   }
 
@@ -112,37 +141,61 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     setSVData({ ...cvData, experience: filtered })
   }
 
-  const handleToggleModal = (type: string, value: boolean) => {
-    controlModals({ ...modals, [type]: value })
-  }
+  // project control
 
-  const handleAddProject = (project: IProject) => {
-    const updatedProjects = [...cvData.projects, project]
+  const handleAddProject = (
+    type: "create" | "update",
+    projectData: IProjectItem
+  ) => {
+    if (type === "create") {
+      const project = { ...projectData, id: cvData.projects.length + 1 }
+      const updatedProjects = [...cvData.projects, project]
+      setSVData({ ...cvData, projects: updatedProjects })
+      return
+    }
+
+    const updatedProjects = cvData.projects.map((project) => {
+      if (project.id === projectData.id) {
+        return projectData
+      }
+      return project
+    })
     setSVData({ ...cvData, projects: updatedProjects })
   }
 
-  const handleDeleteProject = (project: IProject) => {
-    const filtered = cvData.projects.filter((p) => p.name !== project.name)
+  const handleDeleteProject = (project: IProjectItem) => {
+    const filtered = cvData.projects.filter((p) => p.id !== project.id)
     setSVData({ ...cvData, projects: filtered })
+  }
+
+  //modal controls
+  const handleToggleModal = (
+    type: string,
+    value: IProjectItem | IEducationItem | IExperienceItem | null
+  ) => {
+    controlModals({ ...modals, [type]: value })
   }
 
   return (
     <Wrapper>
-      <CreateProjectModal
-        file={file}
-        isOpened={modals.project}
-        saveProject={handleAddProject}
-        close={() => handleToggleModal("project", false)}
+      <AddEducationModal
+        education={modals.education}
+        isOpened={!!modals.education}
+        saveEducation={handleSaveEducation}
+        close={() => handleToggleModal("education", null)}
       />
       <AddExperienceModal
-        isOpened={modals.experience}
+        experience={modals.experience}
+        isOpened={!!modals.experience}
         saveExperience={handleSaveExperience}
-        close={() => handleToggleModal("experience", false)}
+        close={() => handleToggleModal("experience", null)}
       />
-      <AddEducationModal
-        isOpened={modals.education}
-        saveEducation={handleSaveEducation}
-        close={() => handleToggleModal("education", false)}
+      <CreateProjectModal
+        file={file}
+        project={modals.project}
+        isOpened={!!modals.project}
+        saveProject={handleAddProject}
+        close={() => handleToggleModal("project", null)}
       />
       <InfoSection>
         <ImageWithPreview
@@ -166,15 +219,19 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         <Buttons>
           <Button
             text={"+ Образование"}
-            handleClick={() => handleToggleModal("education", true)}
+            handleClick={() =>
+              handleToggleModal("education", {} as IEducationItem)
+            }
           />
           <Button
             text={"+ Опыт работы"}
-            handleClick={() => handleToggleModal("experience", true)}
+            handleClick={() =>
+              handleToggleModal("experience", {} as IExperienceItem)
+            }
           />
           <Button
             text="+Проэкт"
-            handleClick={() => handleToggleModal("project", true)}
+            handleClick={() => handleToggleModal("project", {} as IProjectItem)}
           />
         </Buttons>
         <Buttons>
@@ -190,14 +247,21 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
       />
       <EducationsSection
         educations={cvData.education}
+        updateEducation={(education) =>
+          handleToggleModal("education", education)
+        }
         deleteEducation={handleDeleteEducation}
       />
       <ExperienceSection
         experiences={cvData.experience}
+        updateExperience={(experience) =>
+          handleToggleModal("experience", experience)
+        }
         deleteExperience={handleDeleteExperience}
       />
       <ProjectsSection
         projects={cvData.projects}
+        updateProject={(project) => handleToggleModal("project", project)}
         deleteProject={handleDeleteProject}
       />
     </Wrapper>
