@@ -1,7 +1,6 @@
 "use client"
 import { FC, useState } from "react"
 
-import { Badge } from "@/components/common/badge"
 import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
 import {
@@ -9,10 +8,12 @@ import {
   AddExperienceModal,
   CreateProjectModal
 } from "@/components/common/modal"
-import { Select } from "@/components/common/select"
 import { TextArea } from "@/components/common/text-area"
 import { ImageWithPreview } from "@/components/common/upload-image"
-import { techColors } from "@/constants/styles/colors"
+import { EducationsSection } from "@/components/ui/generator-sections/education-section"
+import { ExperienceSection } from "@/components/ui/generator-sections/experience-section"
+import { ProjectsSection } from "@/components/ui/generator-sections/projects-section"
+import { TechSection } from "@/components/ui/generator-sections/tech-section"
 import { useCVGenerator } from "@/hooks/useCVGenerator"
 import {
   ICVParams,
@@ -23,21 +24,7 @@ import {
 } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
 
-import {
-  Buttons,
-  EducationItem,
-  EducationSection,
-  EducationsListWrapper,
-  ExperienceItem,
-  ExperienceListWrapper,
-  ExperienceSection,
-  InfoInputs,
-  InfoSection,
-  ProjectsWrapper,
-  TechList,
-  TechSection,
-  Wrapper
-} from "./index.styled"
+import { Buttons, InfoInputs, InfoSection, Wrapper } from "./index.styled"
 
 interface IGeneratorLayout {
   file: IStackData
@@ -60,6 +47,8 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     projects: []
   })
 
+  const saveDocument = useCVGenerator(cvData)
+
   const [modals, controlModals] = useState({
     project: false,
     education: false,
@@ -68,7 +57,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
 
   console.log(cvData)
 
-  const updateCSVData = (key: string, value: any) => {
+  const updateCVData = (key: string, value: any) => {
     setSVData({ ...cvData, [key]: value })
   }
 
@@ -123,8 +112,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     setSVData({ ...cvData, experience: filtered })
   }
 
-  const saveDocument = useCVGenerator(cvData)
-
   const handleToggleModal = (type: string, value: boolean) => {
     controlModals({ ...modals, [type]: value })
   }
@@ -156,19 +143,19 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         <ImageWithPreview
           label={"Фото"}
           imageSrc={cvData.photo}
-          saveImage={(photo) => updateCSVData("photo", photo)}
+          saveImage={(photo) => updateCVData("photo", photo)}
         />
         <InfoInputs>
           <Input
             label="ФИО"
             placeholder="Иванов Иван Иванович"
             inputValue={cvData.fullName}
-            saveInputValue={(fullName) => updateCSVData("fullName", fullName)}
+            saveInputValue={(fullName) => updateCVData("fullName", fullName)}
           />
           <TextArea
             label="Биография"
             inputValue={cvData.shortBio}
-            saveInputValue={(shortBio) => updateCSVData("shortBio", shortBio)}
+            saveInputValue={(shortBio) => updateCVData("shortBio", shortBio)}
           />
         </InfoInputs>
         <Buttons>
@@ -190,143 +177,21 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
           <Button text="Создать резюме pdf" handleClick={saveDocument} />
         </Buttons>
       </InfoSection>
-      <EducationSection>
-        {cvData?.education?.length ? (
-          <EducationsListWrapper>
-            {cvData.education.map((education: IEducationItem) => (
-              <EducationItem key={education.id}>
-                <p>{education?.university}</p>
-                <p>{education?.department}</p>
-                <p>{education?.field}</p>
-                <p>{education?.startDate}</p>
-                <p>{education?.endDate}</p>
-                <Button
-                  text="Удалить"
-                  handleClick={() =>
-                    handleDeleteEducation(education.id as number)
-                  }
-                />
-              </EducationItem>
-            ))}
-          </EducationsListWrapper>
-        ) : null}
-      </EducationSection>
-      <ExperienceSection>
-        {cvData?.experience?.length ? (
-          <ExperienceListWrapper>
-            {cvData.experience.map((experience: IExperienceItem) => (
-              <ExperienceItem key={experience.id}>
-                <p>{experience?.company}</p>
-                <p>{experience?.role}</p>
-                <p>{experience?.duties}</p>
-                <p>{experience?.startDate}</p>
-                <p>{experience?.endDate}</p>
-                <Button
-                  text="Удалить"
-                  handleClick={() =>
-                    handleDeleteExperience(experience.id as number)
-                  }
-                />
-              </ExperienceItem>
-            ))}
-          </ExperienceListWrapper>
-        ) : null}
-      </ExperienceSection>
-      <TechSection>
-        <Select
-          label="Языки"
-          options={file.languages}
-          saveInputValue={(value) => updateTechArray("languages", value)}
-        />
-        <Select
-          label="Фронтенд"
-          options={file.fe}
-          saveInputValue={(value) => updateTechArray("fe", value)}
-        />
-        <Select
-          label="Бекенд"
-          options={file.be}
-          saveInputValue={(value) => updateTechArray("be", value)}
-        />
-        <Select
-          label="Базы данных"
-          options={file.databases}
-          saveInputValue={(value) => updateTechArray("databases", value)}
-        />
-        <Select
-          label="Девопс"
-          options={file.devops}
-          saveInputValue={(value) => updateTechArray("devops", value)}
-        />
-        <Select
-          label="Тесты"
-          options={file.test}
-          saveInputValue={(value) => updateTechArray("test", value)}
-        />
-        <Select
-          label="Дополнительно"
-          options={file.additional}
-          saveInputValue={(value) => updateTechArray("additional", value)}
-        />
-      </TechSection>
-      <TechList>
-        {cvData.languages.map((language, index) => (
-          <Badge
-            item={language}
-            key={"languge_" + index}
-            color={techColors.languages}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {cvData.fe.map((fe, index) => (
-          <Badge
-            item={fe}
-            key={"fe_" + index}
-            color={techColors.fe}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {cvData.be.map((be, index) => (
-          <Badge
-            item={be}
-            key={"be_" + index}
-            color={techColors.be}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {cvData.databases.map((database, index) => (
-          <Badge
-            item={database}
-            key={"databases_" + index}
-            color={techColors.databases}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {cvData.devops.map((devops, index) => (
-          <Badge
-            item={devops}
-            key={"devops_" + index}
-            color={techColors.devops}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {cvData.test.map((test, index) => (
-          <Badge
-            item={test}
-            key={"test_" + index}
-            color={techColors.test}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {cvData.additional.map((additional, index) => (
-          <Badge
-            item={additional}
-            key={"additiona l_" + index}
-            color={techColors.additional}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-      </TechList>
+      <TechSection
+        cvData={cvData}
+        techList={file}
+        handleRemoveTech={handleRemoveTech}
+        updateTechArray={updateTechArray}
+      />
+      <EducationsSection
+        educations={cvData.education}
+        deleteEducation={handleDeleteEducation}
+      />
+      <ExperienceSection
+        experiences={cvData.experience}
+        deleteExperience={handleDeleteExperience}
+      />
+      <ProjectsSection projects={cvData.projects} />
     </Wrapper>
   )
 }
