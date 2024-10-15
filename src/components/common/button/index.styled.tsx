@@ -12,6 +12,11 @@ const buttonStyles = {
     border: COLORS.VIOLET,
     background: COLORS.VIOLET,
     color: COLORS.WHITE
+  },
+  danger: {
+    border: COLORS.ORANGE,
+    background: COLORS.ORANGE,
+    color: COLORS.WHITE
   }
 }
 
