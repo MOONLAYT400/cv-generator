@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 20px;
   width: 100%;
+  min-width: 400px;
 `
 
 export const Title = styled.div`
