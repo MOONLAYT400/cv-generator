@@ -13,9 +13,9 @@ import {
 import { CloseSystemIcon } from "../icons"
 
 import { CloseButton, Modal, Wrapper } from "./index.styled"
-import { CreateProject } from "./modal-children/create-project"
-import { AddExperience } from "./modal-children/add-experience"
 import { AddEducation } from "./modal-children/add-education"
+import { AddExperience } from "./modal-children/add-experience"
+import { CreateProject } from "./modal-children/create-project"
 
 const ModalWrapper: FC<IModalWrapper> = ({
   id,
