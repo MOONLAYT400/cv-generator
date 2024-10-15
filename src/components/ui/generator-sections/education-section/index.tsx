@@ -27,6 +27,7 @@ export const EducationsSection: FC<IEducationSection> = ({
               <p>{education?.startDate}</p>
               <p>{education?.endDate}</p>
               <Button
+                buttonType={"danger"}
                 text="Удалить"
                 handleClick={() => deleteEducation(education.id as number)}
               />

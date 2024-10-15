@@ -27,6 +27,7 @@ export const ExperienceSection: FC<IExperienceSection> = ({
               <p>{experience?.startDate}</p>
               <p>{experience?.endDate}</p>
               <Button
+                buttonType="danger"
                 text="Удалить"
                 handleClick={() => deleteExperience(experience.id as number)}
               />

@@ -121,6 +121,11 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     setSVData({ ...cvData, projects: updatedProjects })
   }
 
+  const handleDeleteProject = (project: IProject) => {
+    const filtered = cvData.projects.filter((p) => p.name !== project.name)
+    setSVData({ ...cvData, projects: filtered })
+  }
+
   return (
     <Wrapper>
       <CreateProjectModal
@@ -160,16 +165,16 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         </InfoInputs>
         <Buttons>
           <Button
-            text="+Проэкт"
-            handleClick={() => handleToggleModal("project", true)}
-          />
-          <Button
             text={"+ Образование"}
             handleClick={() => handleToggleModal("education", true)}
           />
           <Button
             text={"+ Опыт работы"}
             handleClick={() => handleToggleModal("experience", true)}
+          />
+          <Button
+            text="+Проэкт"
+            handleClick={() => handleToggleModal("project", true)}
           />
         </Buttons>
         <Buttons>
@@ -191,7 +196,10 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         experiences={cvData.experience}
         deleteExperience={handleDeleteExperience}
       />
-      <ProjectsSection projects={cvData.projects} />
+      <ProjectsSection
+        projects={cvData.projects}
+        deleteProject={handleDeleteProject}
+      />
     </Wrapper>
   )
 }
