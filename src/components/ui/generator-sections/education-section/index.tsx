@@ -19,7 +19,7 @@ export const EducationsSection: FC<IEducationSection> = ({
 }) => {
   return (
     <Wrapper>
-      <Accordion title="Образование">
+      <Accordion title="Образование" isActiveDefault>
         <EducationsList>
           {educations.map((education: IEducationItem) => (
             <EducationItem

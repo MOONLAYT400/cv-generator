@@ -19,7 +19,7 @@ export const ExperienceSection: FC<IExperienceSection> = ({
 }) => {
   return (
     <Wrapper>
-      <Accordion title="Опыт работы">
+      <Accordion title="Опыт работы" isActiveDefault>
         <ExperienceList>
           {experiences?.map((experience: IExperienceItem) => (
             <ExperienceItem
