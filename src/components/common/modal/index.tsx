@@ -6,6 +6,7 @@ import { useOnClickOutside } from "@/hooks/useOnclickOutside"
 import {
   IAddEducation,
   IAddExperience,
+  ICompareTechModal,
   ICreateProjectModal,
   IModalWrapper
 } from "@/types/modals"
@@ -16,6 +17,7 @@ import { CloseButton, Modal, Wrapper } from "./index.styled"
 import { AddEducation } from "./modal-children/add-education"
 import { AddExperience } from "./modal-children/add-experience"
 import { CreateProject } from "./modal-children/create-project"
+import { CompareTech } from "./modal-children/missing-tech"
 
 const ModalWrapper: FC<IModalWrapper> = ({
   id,
@@ -134,5 +136,15 @@ export const CreateProjectModal: FC<ICreateProjectModal> = ({
       close={close}
       projectData={project}
     />
+  </ModalWrapper>
+)
+
+export const CompareTechModal: FC<ICompareTechModal> = ({
+  isOpened,
+  cvData,
+  close
+}) => (
+  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.CREATE_PROJECT}>
+    <CompareTech cvData={cvData} close={close} />
   </ModalWrapper>
 )

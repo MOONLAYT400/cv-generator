@@ -145,12 +145,12 @@ export const CreateProject: FC<ICreateProject> = ({
         />
       </TechSection>
       <TechList>
-        {project.technologies.map((language, index) => (
+        {project.technologies.map((tech, index) => (
           <Badge
-            item={language}
+            item={tech}
             key={"languge_" + index}
-            color={techColors[language.type as keyof typeof techColors]}
-            removeWrapper={handleRemoveTech}
+            color={techColors[tech.type as keyof typeof techColors]}
+            deleteHandler={handleRemoveTech}
           />
         ))}
       </TechList>

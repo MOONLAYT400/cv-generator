@@ -6,6 +6,7 @@ import { Input } from "@/components/common/input"
 import {
   AddEducationModal,
   AddExperienceModal,
+  CompareTechModal,
   CreateProjectModal
 } from "@/components/common/modal"
 import { TextArea } from "@/components/common/text-area"
@@ -15,7 +16,6 @@ import { ExperienceSection } from "@/components/ui/generator-sections/experience
 import { ProjectsSection } from "@/components/ui/generator-sections/projects-section"
 import { TechSection } from "@/components/ui/generator-sections/tech-section"
 import { useCVGenerator } from "@/hooks/useCVGenerator"
-import { useTechComparison } from "@/hooks/useTechComparison"
 import {
   ICVParams,
   IEducationItem,
@@ -43,12 +43,12 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   })
 
   const saveDocument = useCVGenerator(cvData)
-  const {} = useTechComparison(cvData)
 
   const [modals, controlModals] = useState({
     project: null,
     education: null,
-    experience: null
+    experience: null,
+    techComparison: null
   })
 
   const updateCVData = (key: string, value: any) => {
@@ -166,8 +166,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     controlModals({ ...modals, [type]: value })
   }
 
-  const compareTechnologies = () => {}
-
   return (
     <Wrapper>
       <AddEducationModal
@@ -188,6 +186,11 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         isOpened={!!modals.project}
         saveProject={handleAddProject}
         close={() => handleToggleModal("project", null)}
+      />
+      <CompareTechModal
+        cvData={cvData}
+        isOpened={!!modals.techComparison}
+        close={() => handleToggleModal("techComparison", null)}
       />
       <InfoSection>
         <ImageWithPreview
@@ -229,7 +232,9 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         <Buttons>
           <Button
             text="Сравнить технологии"
-            handleClick={compareTechnologies}
+            handleClick={() =>
+              handleToggleModal("techComparison", {} as IEducationItem)
+            }
           />
           <Button text="Создать резюме docx" handleClick={saveDocument} />
           <Button text="Создать резюме pdf" handleClick={saveDocument} />

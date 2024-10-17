@@ -66,7 +66,7 @@ export const TechSection: FC<ITechSection> = ({
             item={language}
             key={"languge_" + index}
             color={techColors[language.type as keyof typeof techColors]}
-            removeWrapper={handleRemoveTech}
+            deleteHandler={handleRemoveTech}
           />
         ))}
       </TechList>

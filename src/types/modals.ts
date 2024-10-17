@@ -1,6 +1,11 @@
 import { ReactNode } from "react"
 
-import { IEducationItem, IExperienceItem, IProjectItem } from "./cv-data"
+import {
+  ICVParams,
+  IEducationItem,
+  IExperienceItem,
+  IProjectItem
+} from "./cv-data"
 import { IStackData } from "./stack-data"
 
 export interface IModalWrapper {
@@ -33,4 +38,8 @@ export interface ICreateProjectModal extends IModal {
   file: IStackData
   project: IProjectItem | null
   saveProject: (type: "create" | "update", project: IProjectItem) => void
+}
+
+export interface ICompareTechModal extends IModal {
+  cvData: ICVParams
 }

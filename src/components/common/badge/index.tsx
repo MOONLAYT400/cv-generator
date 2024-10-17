@@ -9,18 +9,20 @@ import { Remove, Wrapper } from "./index.styled"
 interface IBadge {
   color?: string
   item: ITechItem
-  removeWrapper: (item: ITechItem) => void
+  deleteHandler?: (item: ITechItem) => void
 }
 
-export const Badge: FC<IBadge> = ({ color, item, removeWrapper }) => {
-  const removeHandler = () => removeWrapper(item)
+export const Badge: FC<IBadge> = ({ color, item, deleteHandler }) => {
+  const removeHandler = () => deleteHandler?.(item)
 
   return (
     <Wrapper $color={color}>
       {item.name}
-      <Remove onClick={removeHandler}>
-        <CloseSystemIcon />
-      </Remove>
+      {deleteHandler ? (
+        <Remove onClick={removeHandler}>
+          <CloseSystemIcon />
+        </Remove>
+      ) : null}
     </Wrapper>
   )
 }
