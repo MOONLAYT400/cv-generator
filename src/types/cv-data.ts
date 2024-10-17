@@ -26,13 +26,15 @@ export interface IProjectItem {
   name: string
   description: string
   role: string
-  languages: Array<ITechItem>
-  fe: Array<ITechItem>
-  be: Array<ITechItem>
-  databases: Array<ITechItem>
-  devops: Array<ITechItem>
-  test: Array<ITechItem>
-  additional: Array<ITechItem>
+  technologies: {
+    languages: Array<ITechItem>
+    fe: Array<ITechItem>
+    be: Array<ITechItem>
+    databases: Array<ITechItem>
+    devops: Array<ITechItem>
+    test: Array<ITechItem>
+    additional: Array<ITechItem>
+  }
 }
 
 export interface ICVParams {
@@ -41,12 +43,14 @@ export interface ICVParams {
   shortBio: string
   education: Array<IEducationItem>
   experience: Array<IExperienceItem>
-  languages: Array<ITechItem>
-  fe: Array<ITechItem>
-  be: Array<ITechItem>
-  databases: Array<ITechItem>
-  devops: Array<ITechItem>
-  test: Array<ITechItem>
-  additional: Array<ITechItem>
+  technologies: {
+    languages: Array<ITechItem>
+    fe: Array<ITechItem>
+    be: Array<ITechItem>
+    databases: Array<ITechItem>
+    devops: Array<ITechItem>
+    test: Array<ITechItem>
+    additional: Array<ITechItem>
+  }
   projects: Array<IProjectItem>
 }

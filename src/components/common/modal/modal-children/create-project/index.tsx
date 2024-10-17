@@ -36,13 +36,15 @@ export const CreateProject: FC<ICreateProject> = ({
     name: "",
     description: "",
     role: "",
-    languages: [],
-    fe: [],
-    be: [],
-    databases: [],
-    devops: [],
-    test: [],
-    additional: []
+    technologies: {
+      languages: [],
+      fe: [],
+      be: [],
+      databases: [],
+      devops: [],
+      test: [],
+      additional: []
+    }
   })
 
   useEffect(() => {
@@ -55,24 +57,32 @@ export const CreateProject: FC<ICreateProject> = ({
     updateProject({ ...project, [field]: value })
 
   const updateTechArray = (type: string, name: string) => {
-    const techArray = project[type as keyof typeof project]
+    const techArray =
+      project.technologies[type as keyof typeof project.technologies]
 
     if (Array.isArray(techArray)) {
       const existing = techArray.find((item) => item.name === name)
 
       if (!existing) {
         techArray.push({ type, name })
-        updateProject({ ...project, [type]: techArray })
+        updateProject({
+          ...project,
+          technologies: { ...project.technologies, [type]: techArray }
+        })
       }
     }
   }
 
   const handleRemoveTech = (item: ITechItem) => {
-    const techArray = project[item.type as keyof typeof project]
+    const techArray =
+      project.technologies[item.type as keyof typeof project.technologies]
 
     if (Array.isArray(techArray)) {
       const filtered = techArray.filter((entry) => entry.name !== item.name)
-      updateProject({ ...project, [item.type]: filtered })
+      updateProject({
+        ...project,
+        technologies: { ...project.technologies, [item.type]: filtered }
+      })
     }
   }
 
@@ -152,7 +162,7 @@ export const CreateProject: FC<ICreateProject> = ({
         />
       </TechSection>
       <TechList>
-        {project.languages.map((language, index) => (
+        {project.technologies.languages.map((language, index) => (
           <Badge
             item={language}
             key={"languge_" + index}
@@ -160,7 +170,7 @@ export const CreateProject: FC<ICreateProject> = ({
             removeWrapper={handleRemoveTech}
           />
         ))}
-        {project.fe.map((fe, index) => (
+        {project.technologies.fe.map((fe, index) => (
           <Badge
             item={fe}
             key={"fe_" + index}
@@ -168,7 +178,7 @@ export const CreateProject: FC<ICreateProject> = ({
             removeWrapper={handleRemoveTech}
           />
         ))}
-        {project.be.map((be, index) => (
+        {project.technologies.be.map((be, index) => (
           <Badge
             item={be}
             key={"be_" + index}
@@ -176,7 +186,7 @@ export const CreateProject: FC<ICreateProject> = ({
             removeWrapper={handleRemoveTech}
           />
         ))}
-        {project.databases.map((database, index) => (
+        {project.technologies.databases.map((database, index) => (
           <Badge
             item={database}
             key={"databases_" + index}
@@ -184,7 +194,7 @@ export const CreateProject: FC<ICreateProject> = ({
             removeWrapper={handleRemoveTech}
           />
         ))}
-        {project.devops.map((devops, index) => (
+        {project.technologies.devops.map((devops, index) => (
           <Badge
             item={devops}
             key={"devops_" + index}
@@ -192,7 +202,7 @@ export const CreateProject: FC<ICreateProject> = ({
             removeWrapper={handleRemoveTech}
           />
         ))}
-        {project.test.map((test, index) => (
+        {project.technologies.test.map((test, index) => (
           <Badge
             item={test}
             key={"test_" + index}
@@ -200,7 +210,7 @@ export const CreateProject: FC<ICreateProject> = ({
             removeWrapper={handleRemoveTech}
           />
         ))}
-        {project.additional.map((additional, index) => (
+        {project.technologies.additional.map((additional, index) => (
           <Badge
             item={additional}
             key={"additional_" + index}

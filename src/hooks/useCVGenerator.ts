@@ -1,6 +1,7 @@
-import { ICVParams } from "@/types/cv-data"
 import { Document, HeadingLevel, Packer, Paragraph } from "docx"
 import { saveAs } from "file-saver"
+
+import { ICVParams } from "@/types/cv-data"
 
 export const useCVGenerator = (params: ICVParams): (() => void) => {
   const { fullName } = params

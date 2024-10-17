@@ -3,20 +3,22 @@ import { FC } from "react"
 import { Badge } from "@/components/common/badge"
 import { Select } from "@/components/common/select"
 import { techColors } from "@/constants/styles/colors"
-import { ICVParams, ITechItem } from "@/types/cv-data"
+import { ITechItem } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
 
 import { TechList, TechSelects, Wrapper } from "./index.styled"
 
 interface ITechSection {
   techList: IStackData
-  cvData: ICVParams
+  technologies: {
+    [key: string]: Array<ITechItem>
+  }
   updateTechArray: (name: string, value: string) => void
   handleRemoveTech: (item: ITechItem) => void
 }
 
 export const TechSection: FC<ITechSection> = ({
-  cvData,
+  technologies,
   techList,
   updateTechArray,
   handleRemoveTech
@@ -61,7 +63,7 @@ export const TechSection: FC<ITechSection> = ({
         />
       </TechSelects>
       <TechList>
-        {cvData.languages.map((language, index) => (
+        {technologies.languages.map((language, index) => (
           <Badge
             item={language}
             key={"languge_" + index}
@@ -69,7 +71,7 @@ export const TechSection: FC<ITechSection> = ({
             removeWrapper={handleRemoveTech}
           />
         ))}
-        {cvData.fe.map((fe, index) => (
+        {technologies.fe.map((fe, index) => (
           <Badge
             item={fe}
             key={"fe_" + index}
@@ -77,7 +79,7 @@ export const TechSection: FC<ITechSection> = ({
             removeWrapper={handleRemoveTech}
           />
         ))}
-        {cvData.be.map((be, index) => (
+        {technologies.be.map((be, index) => (
           <Badge
             item={be}
             key={"be_" + index}
@@ -85,7 +87,7 @@ export const TechSection: FC<ITechSection> = ({
             removeWrapper={handleRemoveTech}
           />
         ))}
-        {cvData.databases.map((database, index) => (
+        {technologies.databases.map((database, index) => (
           <Badge
             item={database}
             key={"databases_" + index}
@@ -93,7 +95,7 @@ export const TechSection: FC<ITechSection> = ({
             removeWrapper={handleRemoveTech}
           />
         ))}
-        {cvData.devops.map((devops, index) => (
+        {technologies.devops.map((devops, index) => (
           <Badge
             item={devops}
             key={"devops_" + index}
@@ -101,7 +103,7 @@ export const TechSection: FC<ITechSection> = ({
             removeWrapper={handleRemoveTech}
           />
         ))}
-        {cvData.test.map((test, index) => (
+        {technologies.test.map((test, index) => (
           <Badge
             item={test}
             key={"test_" + index}
@@ -109,7 +111,7 @@ export const TechSection: FC<ITechSection> = ({
             removeWrapper={handleRemoveTech}
           />
         ))}
-        {cvData.additional.map((additional, index) => (
+        {technologies.additional.map((additional, index) => (
           <Badge
             item={additional}
             key={"additiona l_" + index}

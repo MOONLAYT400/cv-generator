@@ -15,6 +15,7 @@ import { ExperienceSection } from "@/components/ui/generator-sections/experience
 import { ProjectsSection } from "@/components/ui/generator-sections/projects-section"
 import { TechSection } from "@/components/ui/generator-sections/tech-section"
 import { useCVGenerator } from "@/hooks/useCVGenerator"
+import { useTechComparison } from "@/hooks/useTechComparison"
 import {
   ICVParams,
   IEducationItem,
@@ -31,23 +32,26 @@ interface IGeneratorLayout {
 }
 
 export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
-  const [cvData, setSVData] = useState<ICVParams>({
+  const [cvData, setCVData] = useState<ICVParams>({
     fullName: "",
     shortBio: "",
     photo: "",
     education: [],
     experience: [],
-    languages: [],
-    fe: [],
-    be: [],
-    databases: [],
-    devops: [],
-    test: [],
-    additional: [],
-    projects: []
+    projects: [],
+    technologies: {
+      languages: [],
+      fe: [],
+      be: [],
+      databases: [],
+      devops: [],
+      test: [],
+      additional: []
+    }
   })
 
   const saveDocument = useCVGenerator(cvData)
+  const {} = useTechComparison(cvData)
 
   const [modals, controlModals] = useState({
     project: null,
@@ -55,36 +59,39 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     experience: null
   })
 
-  // console.log(cvData)
-
   const updateCVData = (key: string, value: any) => {
-    setSVData({ ...cvData, [key]: value })
+    setCVData({ ...cvData, [key]: value })
   }
 
   //tech control
 
   const updateTechArray = (type: string, name: string) => {
-    const techArray = cvData[type as keyof typeof cvData]
+    const techArray =
+      cvData.technologies[type as keyof typeof cvData.technologies]
 
     if (Array.isArray(techArray)) {
-      //@ts-expect-error - types included
       const existing = techArray.find((item) => item.name === name)
 
       if (!existing) {
-        //@ts-expect-error - types included
         techArray.push({ type, name })
-        setSVData({ ...cvData, [type]: techArray })
+        setCVData({
+          ...cvData,
+          technologies: { ...cvData.technologies, [type]: techArray }
+        })
       }
     }
   }
 
   const handleRemoveTech = (item: ITechItem) => {
-    const techArray = cvData[item.type as keyof typeof cvData]
+    const techArray =
+      cvData.technologies[item.type as keyof typeof cvData.technologies]
 
     if (Array.isArray(techArray)) {
-      //@ts-expect-error - types included
       const filtered = techArray.filter((entry) => entry.name !== item.name)
-      setSVData({ ...cvData, [item.type]: filtered })
+      setCVData({
+        ...cvData,
+        technologies: { ...cvData.technologies, [item.type]: filtered }
+      })
     }
   }
 
@@ -96,7 +103,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     if (type === "create") {
       const education = { ...educationData, id: cvData.education.length + 1 }
       const updatedEducations = [...cvData.education, education]
-      setSVData({ ...cvData, education: updatedEducations })
+      setCVData({ ...cvData, education: updatedEducations })
       return
     }
 
@@ -106,12 +113,12 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
       }
       return education
     })
-    setSVData({ ...cvData, education: updatedEducations })
+    setCVData({ ...cvData, education: updatedEducations })
   }
 
   const handleDeleteEducation = (id: number) => {
     const filtered = cvData.education.filter((ed) => ed.id !== id)
-    setSVData({ ...cvData, education: filtered })
+    setCVData({ ...cvData, education: filtered })
   }
 
   // experience control
@@ -123,7 +130,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     if (type === "create") {
       const experience = { ...experienceData, id: cvData.experience.length + 1 }
       const updatedExperience = [...cvData.experience, experience]
-      setSVData({ ...cvData, experience: updatedExperience })
+      setCVData({ ...cvData, experience: updatedExperience })
       return
     }
 
@@ -133,12 +140,12 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
       }
       return experience
     })
-    setSVData({ ...cvData, experience: updatedExperience })
+    setCVData({ ...cvData, experience: updatedExperience })
   }
 
   const handleDeleteExperience = (id: number) => {
     const filtered = cvData.experience.filter((exp) => exp.id !== id)
-    setSVData({ ...cvData, experience: filtered })
+    setCVData({ ...cvData, experience: filtered })
   }
 
   // project control
@@ -150,7 +157,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     if (type === "create") {
       const project = { ...projectData, id: cvData.projects.length + 1 }
       const updatedProjects = [...cvData.projects, project]
-      setSVData({ ...cvData, projects: updatedProjects })
+      setCVData({ ...cvData, projects: updatedProjects })
       return
     }
 
@@ -160,12 +167,12 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
       }
       return project
     })
-    setSVData({ ...cvData, projects: updatedProjects })
+    setCVData({ ...cvData, projects: updatedProjects })
   }
 
   const handleDeleteProject = (project: IProjectItem) => {
     const filtered = cvData.projects.filter((p) => p.id !== project.id)
-    setSVData({ ...cvData, projects: filtered })
+    setCVData({ ...cvData, projects: filtered })
   }
 
   //modal controls
@@ -175,6 +182,8 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   ) => {
     controlModals({ ...modals, [type]: value })
   }
+
+  const compareTechnologies = () => {}
 
   return (
     <Wrapper>
@@ -235,12 +244,16 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
           />
         </Buttons>
         <Buttons>
+          <Button
+            text="Сравнить технологии"
+            handleClick={compareTechnologies}
+          />
           <Button text="Создать резюме docx" handleClick={saveDocument} />
           <Button text="Создать резюме pdf" handleClick={saveDocument} />
         </Buttons>
       </InfoSection>
       <TechSection
-        cvData={cvData}
+        technologies={cvData.technologies}
         techList={file}
         handleRemoveTech={handleRemoveTech}
         updateTechArray={updateTechArray}
