@@ -43,6 +43,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   })
 
   const saveDocument = useCVGenerator(cvData)
+  // TODO Implement onboarding with layout effect
 
   const [modals, controlModals] = useState({
     project: null,
@@ -236,8 +237,16 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
               handleToggleModal("techComparison", {} as IEducationItem)
             }
           />
-          <Button text="Создать резюме docx" handleClick={saveDocument} />
-          <Button text="Создать резюме pdf" handleClick={saveDocument} />
+          <Button
+            text="Создать резюме docx"
+            handleClick={saveDocument}
+            disabled
+          />
+          <Button
+            text="Создать резюме pdf"
+            handleClick={saveDocument}
+            disabled
+          />
         </Buttons>
       </InfoSection>
       <TechSection

@@ -6,6 +6,8 @@ import { ICVParams } from "@/types/cv-data"
 export const useCVGenerator = (params: ICVParams): (() => void) => {
   const { fullName } = params
 
+  // TODO implement file structure
+
   const doc = new Document({
     sections: [
       {
