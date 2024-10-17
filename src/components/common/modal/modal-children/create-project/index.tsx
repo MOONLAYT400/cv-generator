@@ -36,15 +36,7 @@ export const CreateProject: FC<ICreateProject> = ({
     name: "",
     description: "",
     role: "",
-    technologies: {
-      languages: [],
-      fe: [],
-      be: [],
-      databases: [],
-      devops: [],
-      test: [],
-      additional: []
-    }
+    technologies: []
   })
 
   useEffect(() => {
@@ -57,33 +49,24 @@ export const CreateProject: FC<ICreateProject> = ({
     updateProject({ ...project, [field]: value })
 
   const updateTechArray = (type: string, name: string) => {
-    const techArray =
-      project.technologies[type as keyof typeof project.technologies]
+    const existing = project.technologies.find((item) => item.name === name)
 
-    if (Array.isArray(techArray)) {
-      const existing = techArray.find((item) => item.name === name)
-
-      if (!existing) {
-        techArray.push({ type, name })
-        updateProject({
-          ...project,
-          technologies: { ...project.technologies, [type]: techArray }
-        })
-      }
+    if (!existing) {
+      updateProject({
+        ...project,
+        technologies: [...project.technologies, { type, name }]
+      })
     }
   }
 
   const handleRemoveTech = (item: ITechItem) => {
-    const techArray =
-      project.technologies[item.type as keyof typeof project.technologies]
-
-    if (Array.isArray(techArray)) {
-      const filtered = techArray.filter((entry) => entry.name !== item.name)
-      updateProject({
-        ...project,
-        technologies: { ...project.technologies, [item.type]: filtered }
-      })
-    }
+    const filtered = project.technologies.filter(
+      (entry) => entry.name !== item.name
+    )
+    updateProject({
+      ...project,
+      technologies: filtered
+    })
   }
 
   const handleButtonClick = () => {
@@ -162,59 +145,11 @@ export const CreateProject: FC<ICreateProject> = ({
         />
       </TechSection>
       <TechList>
-        {project.technologies.languages.map((language, index) => (
+        {project.technologies.map((language, index) => (
           <Badge
             item={language}
             key={"languge_" + index}
-            color={techColors.languages}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {project.technologies.fe.map((fe, index) => (
-          <Badge
-            item={fe}
-            key={"fe_" + index}
-            color={techColors.fe}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {project.technologies.be.map((be, index) => (
-          <Badge
-            item={be}
-            key={"be_" + index}
-            color={techColors.be}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {project.technologies.databases.map((database, index) => (
-          <Badge
-            item={database}
-            key={"databases_" + index}
-            color={techColors.databases}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {project.technologies.devops.map((devops, index) => (
-          <Badge
-            item={devops}
-            key={"devops_" + index}
-            color={techColors.devops}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {project.technologies.test.map((test, index) => (
-          <Badge
-            item={test}
-            key={"test_" + index}
-            color={techColors.test}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {project.technologies.additional.map((additional, index) => (
-          <Badge
-            item={additional}
-            key={"additional_" + index}
-            color={techColors.additional}
+            color={techColors[language.type as keyof typeof techColors]}
             removeWrapper={handleRemoveTech}
           />
         ))}

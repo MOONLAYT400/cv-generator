@@ -10,9 +10,7 @@ import { TechList, TechSelects, Wrapper } from "./index.styled"
 
 interface ITechSection {
   techList: IStackData
-  technologies: {
-    [key: string]: Array<ITechItem>
-  }
+  technologies: Array<ITechItem>
   updateTechArray: (name: string, value: string) => void
   handleRemoveTech: (item: ITechItem) => void
 }
@@ -63,59 +61,11 @@ export const TechSection: FC<ITechSection> = ({
         />
       </TechSelects>
       <TechList>
-        {technologies.languages.map((language, index) => (
+        {technologies.map((language, index) => (
           <Badge
             item={language}
             key={"languge_" + index}
-            color={techColors.languages}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {technologies.fe.map((fe, index) => (
-          <Badge
-            item={fe}
-            key={"fe_" + index}
-            color={techColors.fe}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {technologies.be.map((be, index) => (
-          <Badge
-            item={be}
-            key={"be_" + index}
-            color={techColors.be}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {technologies.databases.map((database, index) => (
-          <Badge
-            item={database}
-            key={"databases_" + index}
-            color={techColors.databases}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {technologies.devops.map((devops, index) => (
-          <Badge
-            item={devops}
-            key={"devops_" + index}
-            color={techColors.devops}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {technologies.test.map((test, index) => (
-          <Badge
-            item={test}
-            key={"test_" + index}
-            color={techColors.test}
-            removeWrapper={handleRemoveTech}
-          />
-        ))}
-        {technologies.additional.map((additional, index) => (
-          <Badge
-            item={additional}
-            key={"additiona l_" + index}
-            color={techColors.additional}
+            color={techColors[language.type as keyof typeof techColors]}
             removeWrapper={handleRemoveTech}
           />
         ))}

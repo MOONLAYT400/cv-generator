@@ -39,15 +39,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     education: [],
     experience: [],
     projects: [],
-    technologies: {
-      languages: [],
-      fe: [],
-      be: [],
-      databases: [],
-      devops: [],
-      test: [],
-      additional: []
-    }
+    technologies: []
   })
 
   const saveDocument = useCVGenerator(cvData)
@@ -66,33 +58,24 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   //tech control
 
   const updateTechArray = (type: string, name: string) => {
-    const techArray =
-      cvData.technologies[type as keyof typeof cvData.technologies]
+    const existing = cvData.technologies.find((item) => item.name === name)
 
-    if (Array.isArray(techArray)) {
-      const existing = techArray.find((item) => item.name === name)
-
-      if (!existing) {
-        techArray.push({ type, name })
-        setCVData({
-          ...cvData,
-          technologies: { ...cvData.technologies, [type]: techArray }
-        })
-      }
+    if (!existing) {
+      setCVData({
+        ...cvData,
+        technologies: [...cvData.technologies, { type, name }]
+      })
     }
   }
 
   const handleRemoveTech = (item: ITechItem) => {
-    const techArray =
-      cvData.technologies[item.type as keyof typeof cvData.technologies]
-
-    if (Array.isArray(techArray)) {
-      const filtered = techArray.filter((entry) => entry.name !== item.name)
-      setCVData({
-        ...cvData,
-        technologies: { ...cvData.technologies, [item.type]: filtered }
-      })
-    }
+    const filtered = cvData.technologies.filter(
+      (entry) => entry.name !== item.name
+    )
+    setCVData({
+      ...cvData,
+      technologies: filtered
+    })
   }
 
   // educations controls
