@@ -18,7 +18,7 @@ export const EducationsSection: FC<IEducationSection> = ({
   deleteEducation
 }) => {
   return (
-    <Wrapper>
+    <Wrapper className="education">
       <Accordion title="Образование" isActiveDefault>
         <EducationsList>
           {educations.map((education: IEducationItem) => (

@@ -18,7 +18,7 @@ export const ExperienceSection: FC<IExperienceSection> = ({
   deleteExperience
 }) => {
   return (
-    <Wrapper>
+    <Wrapper className="experience">
       <Accordion title="Опыт работы" isActiveDefault>
         <ExperienceList>
           {experiences?.map((experience: IExperienceItem) => (

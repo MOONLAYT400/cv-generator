@@ -22,7 +22,7 @@ export const TechSection: FC<ITechSection> = ({
   handleRemoveTech
 }) => {
   return (
-    <Wrapper>
+    <Wrapper className="tech">
       <TechSelects>
         <Select
           label="Языки"

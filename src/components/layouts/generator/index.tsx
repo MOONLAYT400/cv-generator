@@ -1,5 +1,7 @@
 "use client"
-import { FC, useState } from "react"
+import dynamic from "next/dynamic"
+import { FC, useLayoutEffect, useState } from "react"
+import { STATUS } from "react-joyride"
 
 import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
@@ -9,6 +11,7 @@ import {
   CompareTechModal,
   CreateProjectModal
 } from "@/components/common/modal"
+import { OnboardingTooltip } from "@/components/common/onboarding-tooltip"
 import { TextArea } from "@/components/common/text-area"
 import { ImageWithPreview } from "@/components/common/upload-image"
 import { EducationsSection } from "@/components/ui/generator-sections/education-section"
@@ -26,6 +29,8 @@ import {
 import { IStackData } from "@/types/stack-data"
 
 import { Buttons, InfoInputs, InfoSection, Wrapper } from "./index.styled"
+
+const JoyRideNoSSR = dynamic(() => import("react-joyride"), { ssr: false })
 
 interface IGeneratorLayout {
   file: IStackData
@@ -51,6 +56,11 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     experience: null,
     techComparison: null
   })
+  const [run, setRun] = useState(false)
+
+  useLayoutEffect(() => {
+    setRun(true)
+  }, [])
 
   const updateCVData = (key: string, value: any) => {
     setCVData({ ...cvData, [key]: value })
@@ -167,8 +177,146 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     controlModals({ ...modals, [type]: value })
   }
 
+  const handleJoyrideCallback = (data: any) => {
+    const { status } = data
+
+    const finishedStatuses: string[] = [STATUS.FINISHED, STATUS.SKIPPED]
+
+    if (finishedStatuses.includes(status)) {
+      setRun(false)
+      // const params = onboarding
+      //   ? { ...JSON.parse(onboarding), app: true }
+      //   : { app: true }
+      // const onboardingString = params
+      // handleSetOnboarding(onboardingString)
+    }
+  }
+
+  const onboardingSteps = [
+    {
+      title: "Генератор резюме",
+      content: "Добро пожаловать в генератор резюме",
+      disableBeacon: true,
+      placement: "center" as const,
+      target: "body",
+      showSkipButton: true
+    },
+    {
+      title: "Основная информация",
+      content: "Основная информация о соискателе",
+      target: ".info",
+      disableBeacon: true,
+      floaterProps: {
+        disableAnimation: true
+      },
+      spotlightPadding: 1
+    },
+    {
+      title: "Контент",
+      content:
+        "Здесь можно добавить информацию о соискателе - образование, данные об опыте работы и проекты, в которых соискатель принимал участие",
+      target: ".content",
+      disableBeacon: true,
+      floaterProps: {
+        disableAnimation: true
+      },
+      spotlightPadding: 1
+    },
+    {
+      title: "Секция загрузки",
+      content:
+        "Здесь можно сравнить общий стек с автоматически суммированным стеком из проектов, а так же скачать себе готовые файлы резюме в разных форматах",
+      target: ".downloads",
+      disableBeacon: true,
+      floaterProps: {
+        disableAnimation: true
+      },
+      spotlightPadding: 1
+    },
+    {
+      title: "Секция стека",
+      content: "Здесь можно добавить технологии в общий стек соискателя.",
+      target: ".tech",
+      disableBeacon: true,
+      floaterProps: {
+        disableAnimation: true
+      },
+      spotlightPadding: 1
+    },
+    {
+      title: "Секция образования",
+      content:
+        "Здесь будут отображаться этапы образования, добавленные ранее. Так же есть возможность редактировать ранее добавленные этапы",
+      target: ".education",
+      disableBeacon: true,
+      floaterProps: {
+        disableAnimation: true
+      },
+      spotlightPadding: 1
+    },
+    {
+      title: "Секция опыта работы",
+      content:
+        "Здесь будет отображаться информация об опыте работы. Так же есть возможность редактировать ранее добавленные этапы",
+      target: ".experience",
+      disableBeacon: true,
+      floaterProps: {
+        disableAnimation: true
+      },
+      spotlightPadding: 1
+    },
+    {
+      title: "Секция опыта работы",
+      content:
+        "Здесь будет отображаться информация о добавленных проектах. Так же есть возможность редактировать ранее добавленные проекты",
+      target: ".projects",
+      disableBeacon: true,
+      floaterProps: {
+        disableAnimation: true
+      },
+      spotlightPadding: 1
+    },
+    {
+      title: "Удачи",
+      content: "Спасибо за использование",
+      disableBeacon: true,
+      placement: "center" as const,
+      target: "body",
+      showSkipButton: false
+    }
+  ]
+
+  const onboardingStyleOptions = {
+    arrowColor: "#fff",
+    backgroundColor: "#fff",
+    beaconSize: 36,
+    overlayColor: "rgba(0, 0, 0, 0.5)",
+    primaryColor: "#7852FB",
+    borderRadius: 10,
+    spotlightShadow: "0 0 15px rgba(0, 0, 0, 0.5)",
+    textColor: "#141414",
+    fontFamily: "Inter",
+    width: 450,
+    zIndex: 10000
+  }
+
   return (
     <Wrapper>
+      <JoyRideNoSSR
+        callback={handleJoyrideCallback}
+        steps={onboardingSteps}
+        run={run}
+        continuous
+        disableScrolling
+        hideCloseButton
+        showProgress
+        showSkipButton
+        scrollToFirstStep
+        tooltipComponent={OnboardingTooltip}
+        styles={{
+          options: onboardingStyleOptions
+        }}
+      />
       <AddEducationModal
         education={modals.education}
         isOpened={!!modals.education}
@@ -199,7 +347,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
           imageSrc={cvData.photo}
           saveImage={(photo) => updateCVData("photo", photo)}
         />
-        <InfoInputs>
+        <InfoInputs className="info">
           <Input
             label="ФИО"
             placeholder="Иванов Иван Иванович"
@@ -212,7 +360,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
             saveInputValue={(shortBio) => updateCVData("shortBio", shortBio)}
           />
         </InfoInputs>
-        <Buttons>
+        <Buttons className="content">
           <Button
             text={"+ Образование"}
             handleClick={() =>
@@ -230,7 +378,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
             handleClick={() => handleToggleModal("project", {} as IProjectItem)}
           />
         </Buttons>
-        <Buttons>
+        <Buttons className="downloads">
           <Button
             text="Сравнить технологии"
             handleClick={() =>

@@ -18,7 +18,7 @@ export const ProjectsSection: FC<IProjectItemsSection> = ({
   deleteProject
 }) => {
   return (
-    <Wrapper>
+    <Wrapper className="projects">
       <Accordion title="Проэкты" isActiveDefault>
         <ProjectList>
           {projects.map((project: IProjectItem, index: number) => (
