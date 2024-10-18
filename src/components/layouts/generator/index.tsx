@@ -18,7 +18,10 @@ import { EducationsSection } from "@/components/ui/generator-sections/education-
 import { ExperienceSection } from "@/components/ui/generator-sections/experience-section"
 import { ProjectsSection } from "@/components/ui/generator-sections/projects-section"
 import { TechSection } from "@/components/ui/generator-sections/tech-section"
+import { onboardingSteps } from "@/constants/onboarding/steps"
+import { onboardingStyleOptions } from "@/constants/onboarding/styles"
 import { useCVGenerator } from "@/hooks/useCVGenerator"
+import { useLocalStorage } from "@/hooks/useLocalStorage"
 import {
   ICVParams,
   IEducationItem,
@@ -37,6 +40,8 @@ interface IGeneratorLayout {
 }
 
 export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
+  const [onboarding, handleSetOnboarding] = useLocalStorage("onboarding")
+
   const [cvData, setCVData] = useState<ICVParams>({
     fullName: "",
     shortBio: "",
@@ -59,8 +64,13 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   const [run, setRun] = useState(false)
 
   useLayoutEffect(() => {
-    setRun(true)
-  }, [])
+    if (typeof window === "undefined") return
+    const localOnboarding = localStorage.getItem("onboarding")
+    const parsedOnboarding = JSON.parse(localOnboarding ?? "false")
+    if (!parsedOnboarding) {
+      setRun(true)
+    }
+  }, [onboarding])
 
   const updateCVData = (key: string, value: any) => {
     setCVData({ ...cvData, [key]: value })
@@ -184,120 +194,8 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
 
     if (finishedStatuses.includes(status)) {
       setRun(false)
-      // const params = onboarding
-      //   ? { ...JSON.parse(onboarding), app: true }
-      //   : { app: true }
-      // const onboardingString = params
-      // handleSetOnboarding(onboardingString)
+      handleSetOnboarding(true)
     }
-  }
-
-  const onboardingSteps = [
-    {
-      title: "Генератор резюме",
-      content: "Добро пожаловать в генератор резюме",
-      disableBeacon: true,
-      placement: "center" as const,
-      target: "body",
-      showSkipButton: true
-    },
-    {
-      title: "Основная информация",
-      content: "Основная информация о соискателе",
-      target: ".info",
-      disableBeacon: true,
-      floaterProps: {
-        disableAnimation: true
-      },
-      spotlightPadding: 1
-    },
-    {
-      title: "Контент",
-      content:
-        "Здесь можно добавить информацию о соискателе - образование, данные об опыте работы и проекты, в которых соискатель принимал участие",
-      target: ".content",
-      disableBeacon: true,
-      floaterProps: {
-        disableAnimation: true
-      },
-      spotlightPadding: 1
-    },
-    {
-      title: "Секция загрузки",
-      content:
-        "Здесь можно сравнить общий стек с автоматически суммированным стеком из проектов, а так же скачать себе готовые файлы резюме в разных форматах",
-      target: ".downloads",
-      disableBeacon: true,
-      floaterProps: {
-        disableAnimation: true
-      },
-      spotlightPadding: 1
-    },
-    {
-      title: "Секция стека",
-      content: "Здесь можно добавить технологии в общий стек соискателя.",
-      target: ".tech",
-      disableBeacon: true,
-      floaterProps: {
-        disableAnimation: true
-      },
-      spotlightPadding: 1
-    },
-    {
-      title: "Секция образования",
-      content:
-        "Здесь будут отображаться этапы образования, добавленные ранее. Так же есть возможность редактировать ранее добавленные этапы",
-      target: ".education",
-      disableBeacon: true,
-      floaterProps: {
-        disableAnimation: true
-      },
-      spotlightPadding: 1
-    },
-    {
-      title: "Секция опыта работы",
-      content:
-        "Здесь будет отображаться информация об опыте работы. Так же есть возможность редактировать ранее добавленные этапы",
-      target: ".experience",
-      disableBeacon: true,
-      floaterProps: {
-        disableAnimation: true
-      },
-      spotlightPadding: 1
-    },
-    {
-      title: "Секция опыта работы",
-      content:
-        "Здесь будет отображаться информация о добавленных проектах. Так же есть возможность редактировать ранее добавленные проекты",
-      target: ".projects",
-      disableBeacon: true,
-      floaterProps: {
-        disableAnimation: true
-      },
-      spotlightPadding: 1
-    },
-    {
-      title: "Удачи",
-      content: "Спасибо за использование",
-      disableBeacon: true,
-      placement: "center" as const,
-      target: "body",
-      showSkipButton: false
-    }
-  ]
-
-  const onboardingStyleOptions = {
-    arrowColor: "#fff",
-    backgroundColor: "#fff",
-    beaconSize: 36,
-    overlayColor: "rgba(0, 0, 0, 0.5)",
-    primaryColor: "#7852FB",
-    borderRadius: 10,
-    spotlightShadow: "0 0 15px rgba(0, 0, 0, 0.5)",
-    textColor: "#141414",
-    fontFamily: "Inter",
-    width: 450,
-    zIndex: 10000
   }
 
   return (
