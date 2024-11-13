@@ -1,7 +1,8 @@
 @import "../../public/fonts/stylesheet.css";
 
 :root {
-  --background: #ffffff;
+  --background: #130e27;
+  /* #ffffff; */
   --foreground: #171717;
 }
 
