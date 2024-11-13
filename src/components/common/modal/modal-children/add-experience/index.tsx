@@ -50,35 +50,35 @@ export const AddExperience: FC<IAddExperience> = ({
     <Wrapper>
       <Title>Опыт работы</Title>
       <Input
-        label="Учебное заведение"
+        label="Наименование компании"
         inputValue={experience.company}
-        placeholder="Введите название заведения..."
+        placeholder="Введите название компании..."
         saveInputValue={(company) => handleUpdateExperience("company", company)}
       />
       <Input
-        label="Кафедра"
+        label="Должность"
         inputValue={experience.role}
-        placeholder="Введите название кафедры..."
+        placeholder="Введите название должности..."
         saveInputValue={(role) => handleUpdateExperience("role", role)}
       />
       <Input
-        label="Направление"
+        label="Должностные обязанности"
         inputValue={experience.duties}
-        placeholder="Введите направление..."
+        placeholder="Введите должностные обязанности..."
         saveInputValue={(duties) => handleUpdateExperience("duties", duties)}
       />
       <Input
-        label="Начало учебы"
+        label="Начало работы"
         inputValue={experience.startDate}
-        placeholder="Дата начала учебы..."
+        placeholder="Дата начала работы..."
         saveInputValue={(startDate) =>
           handleUpdateExperience("startDate", startDate)
         }
       />
       <Input
-        label="Окончание учебы"
+        label="Окончание работы"
         inputValue={experience.endDate}
-        placeholder="Дата окончания учебы..."
+        placeholder="Дата окончания работы..."
         saveInputValue={(endDate) => handleUpdateExperience("endDate", endDate)}
       />
       <Buttons>
