@@ -19,7 +19,7 @@ export const ProjectsSection: FC<IProjectItemsSection> = ({
 }) => {
   return (
     <Wrapper className="projects">
-      <Accordion title="Проэкты" isActiveDefault>
+      <Accordion title="Проекты" isActiveDefault>
         <ProjectList>
           {projects.map((project: IProjectItem, index: number) => (
             <Project key={index} onClick={() => updateProject(project)}>

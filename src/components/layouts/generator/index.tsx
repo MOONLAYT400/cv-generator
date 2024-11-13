@@ -272,7 +272,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
             }
           />
           <Button
-            text="+Проэкт"
+            text="+Проект"
             handleClick={() => handleToggleModal("project", {} as IProjectItem)}
           />
         </Buttons>
