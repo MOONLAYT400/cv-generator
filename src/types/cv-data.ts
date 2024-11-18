@@ -12,11 +12,16 @@ export interface IEducationItem {
   endDate: string
 }
 
+export interface IDutyItem {
+  id: number
+  text: string | number
+}
+
 export interface IExperienceItem {
   id?: number
   company: string
   role: string
-  duties: string
+  duties:  Array<IDutyItem>
   startDate: string
   endDate: string
 }
