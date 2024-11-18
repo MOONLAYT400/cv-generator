@@ -28,7 +28,7 @@ export const ExperienceSection: FC<IExperienceSection> = ({
             >
               <p>{experience?.company}</p>
               <p>{experience?.role}</p>
-              <p>{experience?.duties}</p>
+              <div>{experience?.duties.map((item)=><p key={item.id}>{item.text}</p>)}</div>
               <p>{experience?.startDate}</p>
               <p>{experience?.endDate}</p>
               <Button
