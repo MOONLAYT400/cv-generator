@@ -31,3 +31,15 @@ export const Buttons = styled.div`
     flex-direction: column;
   }
 `
+export const Description = styled.ul`
+  width: 400px;
+  color: ${COLORS.WHITE_48};
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  overflow: auto;
+  max-height: 100px;
+  overflow-wrap: break-word;
+`

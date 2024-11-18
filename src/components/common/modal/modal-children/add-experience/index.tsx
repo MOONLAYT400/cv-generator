@@ -4,7 +4,8 @@ import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
 import { IExperienceItem } from "@/types/cv-data"
 
-import { Buttons, Title, Wrapper } from "./index.styled"
+import { Description, Buttons, Title, Wrapper } from "./index.styled"
+import { ListItem } from "./experienceItem"
 
 interface IAddExperience {
   experienceData: IExperienceItem | null
@@ -20,13 +21,15 @@ export const AddExperience: FC<IAddExperience> = ({
   close,
   saveExperience
 }) => {
-  const [experience, updateExperience] = useState({
+  const [experience, updateExperience] = useState<IExperienceItem>({
     company: "",
     role: "",
-    duties: "",
+    duties: [],
     startDate: "",
     endDate: ""
   })
+  const [dutiesValue, setDutiesValue] = useState <string | number>("");
+  const [updatedItem, setUpdatedItem] = useState <number | null>(null);
 
   useEffect(() => {
     if (experienceData && "company" in experienceData) {
@@ -38,6 +41,21 @@ export const AddExperience: FC<IAddExperience> = ({
     updateExperience({ ...experience, [key]: value })
   }
 
+  const handleUpdateDuties = (value: string | number, itemId?: number | undefined) => {
+    if (itemId) {
+      const updatedDuty = {
+        id: itemId,
+        text: value,
+      }
+      updateExperience({ ...experience, duties: [...experience.duties, updatedDuty] }) //!!!!!!!!!!
+    }
+      const newDuty = {
+        id: getDutyID(),
+        text: value,
+      }
+      updateExperience({ ...experience, duties: [...experience.duties, newDuty] })
+    }
+
   const handleButtonClick = () => {
     saveExperience(
       experienceData && "company" in experienceData ? "update" : "create",
@@ -45,6 +63,7 @@ export const AddExperience: FC<IAddExperience> = ({
     )
     close()
   }
+  const getDutyID = () => Math.floor(Math.random()*1000);
 
   return (
     <Wrapper>
@@ -61,12 +80,42 @@ export const AddExperience: FC<IAddExperience> = ({
         placeholder="Введите название должности..."
         saveInputValue={(role) => handleUpdateExperience("role", role)}
       />
-      <Input
-        label="Должностные обязанности"
-        inputValue={experience.duties}
-        placeholder="Введите должностные обязанности..."
-        saveInputValue={(duties) => handleUpdateExperience("duties", duties)}
-      />
+      {/* Группа должностных обязанностей */}
+      <>
+        {/* Группа УЖЕ ДОБАВЕННЫХ должностных обязанностей */}
+
+        {experience.duties.length > 0 &&
+          <Description>
+            {experience.duties.map((duty, index) => <>
+              <ListItem item={{id: duty.id , text: duty.text,} }
+              idx = {index}
+              setList = {updateExperience}
+              updatedItem = {updatedItem}
+              setUpdatedItem = {setUpdatedItem}
+              />
+            </>
+
+            )}
+          </Description>
+        }
+        <>
+          <Input
+            label="Должностные обязанности"
+            inputValue={dutiesValue}
+            placeholder="Введите должностные обязанности..."
+            // тут с этим нужно что-то сделать, чтобы из инпута тоже сохранялось
+            saveInputValue={setDutiesValue}
+          />
+          <Button
+            buttonType="primary"
+            text="Добавить"
+            handleClick={() => {
+              handleUpdateDuties(dutiesValue);
+              setDutiesValue("");
+            }}
+          />
+        </>
+      </>
       <Input
         label="Начало работы"
         inputValue={experience.startDate}
