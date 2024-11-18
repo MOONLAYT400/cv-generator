@@ -3,7 +3,8 @@
 :root {
   --background: #130e27;
   /* #ffffff; */
-  --foreground: #171717;
+  --foreground: #ededed;
+  /* #171717; */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,6 +38,10 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+ul {
+  color: #ededed;
 }
 
 @media (prefers-color-scheme: dark) {
