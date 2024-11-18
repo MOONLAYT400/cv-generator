@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { IExperienceItem } from "@/types/cv-data"
 
-import { Wrapper } from "./index.styled";
+import { Button, ButtonsGroup, ItemDescription, Wrapper } from "./index.styled";
 
 
 interface IExperienceDutyItem {
@@ -21,7 +21,7 @@ export const ListItem: FC<IExperienceDutyItem> = ({
 }) => {
   const isCurrentBeingUpdated = updatedItem === id;
 
-  const handleInputChange = ({ target: { value } }: {target: {value: string}}) => { // нельзя сделать отмену, изменения сразу сохраняются 
+  const handleInputChange = ({ target: { value } }: { target: { value: string } }) => { // нельзя сделать отмену, изменения сразу сохраняются 
     setList(
       (prevList: IExperienceItem) => {
         const newDuties = prevList.duties.map((item) =>
@@ -53,23 +53,25 @@ export const ListItem: FC<IExperienceDutyItem> = ({
 
   return (
     <Wrapper>
-      <div>
+      <ItemDescription>
         {idx + 1}. {renderTextOrInput()}
-      </div>
-      <div>
-        <button onClick={() => {
-          console.log('id ', id)
-          setUpdatedItem(isCurrentBeingUpdated ? null : id)
-        }
-        }>
-          {isCurrentBeingUpdated ? "Сохранить" : <>&#9999;</> }
-        </button>
-        {!isCurrentBeingUpdated
-          && <button
-          onClick={handleDelete}>
-            &#128465;
-          </button>}
-      </div>
+      </ItemDescription>
+      <ButtonsGroup>
+        
+          <Button onClick={() => {
+            console.log('id ', id)
+            setUpdatedItem(isCurrentBeingUpdated ? null : id)
+          }
+          }>
+            {isCurrentBeingUpdated ? "Сохранить" : <>&#9999;</>}
+          </Button>
+          {!isCurrentBeingUpdated
+            && <Button
+              onClick={handleDelete}>
+              &#128465;
+            </Button>}
+        
+      </ButtonsGroup>
 
 
     </Wrapper>
