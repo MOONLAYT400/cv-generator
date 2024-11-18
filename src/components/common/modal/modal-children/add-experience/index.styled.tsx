@@ -43,3 +43,14 @@ export const Description = styled.ul`
   max-height: 100px;
   overflow-wrap: break-word;
 `
+export const DutyInputsGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+`
+export const LableTitle = styled.p`
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  padding-left: 10px;
+`

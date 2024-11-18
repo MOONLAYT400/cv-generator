@@ -4,7 +4,7 @@ import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
 import { IExperienceItem } from "@/types/cv-data"
 
-import { Description, Buttons, Title, Wrapper } from "./index.styled"
+import { Description, Buttons, Title, Wrapper, DutyInputsGroup, LableTitle } from "./index.styled"
 import { ListItem } from "./experienceItem"
 
 interface IAddExperience {
@@ -85,7 +85,9 @@ export const AddExperience: FC<IAddExperience> = ({
         {/* Группа УЖЕ ДОБАВЕННЫХ должностных обязанностей */}
 
         {experience.duties.length > 0 &&
-          <Description>
+        <>
+        <LableTitle>Должностные обязанности</LableTitle> 
+        <Description>
             {experience.duties.map((duty, index) => <>
               <ListItem item={{id: duty.id , text: duty.text,} }
               idx = {index}
@@ -94,13 +96,13 @@ export const AddExperience: FC<IAddExperience> = ({
               setUpdatedItem = {setUpdatedItem}
               />
             </>
-
             )}
           </Description>
+        </>
         }
-        <>
+        <DutyInputsGroup>
           <Input
-            label="Должностные обязанности"
+            // label="Должностные обязанности"
             inputValue={dutiesValue}
             placeholder="Введите должностные обязанности..."
             // тут с этим нужно что-то сделать, чтобы из инпута тоже сохранялось
@@ -108,13 +110,13 @@ export const AddExperience: FC<IAddExperience> = ({
           />
           <Button
             buttonType="primary"
-            text="Добавить"
+            text="+"
             handleClick={() => {
               handleUpdateDuties(dutiesValue);
               setDutiesValue("");
             }}
           />
-        </>
+        </DutyInputsGroup>
       </>
       <Input
         label="Начало работы"
