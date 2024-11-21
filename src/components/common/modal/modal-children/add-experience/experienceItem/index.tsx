@@ -1,12 +1,12 @@
 import { FC } from "react"
 
-import { IExperienceItem } from "@/types/cv-data"
+import { IExperienceItem, IDutyItem } from "@/types/cv-data"
 
 import { Button, ButtonsGroup, ItemDescription, Wrapper } from "./index.styled"
 
 //Comment - перенести файл в папку common - оптом это может бть переиспользованно
 interface IExperienceDutyItem {
-  item: { id: number; text: string | number } // интерфейс есть
+  item: IDutyItem
   idx: number
   setList: (value: any) => void
   updatedItem: number | null
