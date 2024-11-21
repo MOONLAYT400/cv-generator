@@ -36,8 +36,12 @@ export const AddExperience: FC<IAddExperience> = ({
     endDate: ""
   })
   const [dutiesValue, setDutiesValue] = useState<string | number>("")
-  const [updatedItem, setUpdatedItem] = useState<number | null>(null) //Comment - почему этот стейт не внутри лист итема, и зачем мы рендерим весь список каждый раз при изменении этого статуса?
-  // Comment - ну и тут кроеться проблема не сохраняюзегося инпута помоему, если я правильно понял о чем ты, ну и вообще - такие штуки всегда нужно хранить у самого нижнего ребенка, если менно прямо не нужно обратное
+  const [updatedItem, setUpdatedItem] = useState<number | null>(null) //Comment 
+  // - почему этот стейт не внутри лист итема, и зачем мы рендерим весь список 
+  // каждый раз при изменении этого статуса?
+  // Comment - ну и тут кроеться проблема не сохраняюзегося инпута помоему, 
+  //если я правильно понял о чем ты, ну и вообще 
+  // - такие штуки всегда нужно хранить у самого нижнего ребенка, если менно прямо не нужно обратное
 
   useEffect(() => {
     if (experienceData && "company" in experienceData) {
