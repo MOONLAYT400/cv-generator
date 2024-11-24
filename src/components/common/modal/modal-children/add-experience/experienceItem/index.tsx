@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 
 import { IExperienceItem, IDutyItem } from "@/types/cv-data"
 
@@ -14,27 +14,32 @@ interface IExperienceDutyItem {
 }
 
 export const ListItem: FC<IExperienceDutyItem> = ({
-  item: { id, text }, // Comment - деструктурировать лучше уже внутри функции, ане в пропсах
+  item,
   idx,
   setList,
   updatedItem,
   setUpdatedItem
 }) => {
+  const { id, text } = item;
+  const [inputValue, setInputValue] = useState(text);
+
+
   const isCurrentBeingUpdated = updatedItem === id // Comment - а почему это не стейт, 
   // может путь все изменения варяться внутри этого компонента?)
 
   // Comment - какая то мудреная типизация))) 
   //- попробуй типизировать евент, без деструкта, 
   // а вообще -к огда ты передаешь тупо велью - то его и передавац сразу)
-  const handleInputChange = ({
-    target: { value }
-  }: {
-    target: { value: string }
-  }) => {
-    // нельзя сделать отмену, изменения сразу сохраняются
+const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+const value = e.target.value;
+setInputValue(value);
+}
+
+  const handleInputChange = () => {
+    // сделать отмену 
     setList((prevList: IExperienceItem) => {
       const newDuties = prevList.duties.map((item) =>
-        item.id === id ? { ...item, text: value } : item
+        item.id === id ? { ...item, text: inputValue } : item
       )
       return { ...prevList, duties: newDuties }
     })
@@ -52,7 +57,7 @@ export const ListItem: FC<IExperienceDutyItem> = ({
   const renderTextOrInput = () => {
     return isCurrentBeingUpdated ? (
       //Comment - еще момент с рендерами - как думаешь, что происходит когда ты меняешь этот текст?)
-      <input value={text} onChange={handleInputChange} />
+      <input value={inputValue} onChange={handleOnChange} /> // handleInputChange
     ) : (
       text
     )
@@ -68,6 +73,9 @@ export const ListItem: FC<IExperienceDutyItem> = ({
           onClick={() => {
             console.log("id ", id)
             setUpdatedItem(isCurrentBeingUpdated ? null : id)
+            if(isCurrentBeingUpdated) {
+              handleInputChange();
+            }
           }}
         >
           {isCurrentBeingUpdated ? "Сохранить" : <>&#9999;</>}
