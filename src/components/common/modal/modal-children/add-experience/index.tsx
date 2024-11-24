@@ -77,6 +77,13 @@ export const AddExperience: FC<IAddExperience> = ({
   }
   const getDutyID = () => Math.floor(Math.random() * 1000) //а повторение то все таки возможно)))
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>,
+    value: string | number) => {
+    if (event.code === 'Enter') {
+      handleUpdateDuties(value);
+    }
+  }
+
   return (
     <Wrapper>
       <Title>Опыт работы</Title>
@@ -114,6 +121,7 @@ export const AddExperience: FC<IAddExperience> = ({
             inputValue={dutiesValue}
             placeholder="Введите должностные обязанности..."
             saveInputValue={setDutiesValue}
+            handleKeyDown={handleKeyDown}
           />
           <Button
             buttonType="primary"
