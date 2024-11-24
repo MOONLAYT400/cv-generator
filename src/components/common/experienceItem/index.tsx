@@ -5,7 +5,6 @@ import { Button, ButtonsGroup, ItemDescription, Wrapper } from "./index.styled"
 import { IExperienceItem, IDutyItem } from "@/types/cv-data"
 
 
-//Comment - перенести файл в папку common - оптом это может бть переиспользованно
 interface IExperienceDutyItem {
   item: IDutyItem
   idx: number
@@ -27,7 +26,6 @@ export const ListItem: FC<IExperienceDutyItem> = ({
   }
 
   const saveNewItemText = () => {
-    // сделать отмену 
     setList((prevList: IExperienceItem) => {
       const newDuties = prevList.duties.map((item) =>
         item.id === id ? { ...item, text: inputValue } : item

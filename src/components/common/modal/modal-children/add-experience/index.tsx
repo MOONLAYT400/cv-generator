@@ -4,7 +4,7 @@ import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
 import { IExperienceItem } from "@/types/cv-data"
 
-import { ListItem } from "./experienceItem"
+import { ListItem } from "../../../experienceItem"
 import {
   Description,
   Buttons,
