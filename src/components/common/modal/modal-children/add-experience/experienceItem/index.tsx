@@ -19,12 +19,12 @@ export const ListItem: FC<IExperienceDutyItem> = ({
 }) => {
   const { id, text } = item;
   const [inputValue, setInputValue] = useState(text);
-  const [updatedItem, setUpdatedItem] = useState<boolean>(false) 
+  const [updatedItem, setUpdatedItem] = useState<boolean>(false) // назвать isItemUpdated?
 
-const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-const value = e.target.value;
-setInputValue(value);
-}
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputValue(value);
+  }
 
   const saveNewItemText = () => {
     // сделать отмену 
@@ -43,26 +43,22 @@ setInputValue(value);
     })
   }
 
-  // Comment - есил уже используешь такой кондишнл рендеринг - то делай его в верстке. 
-  // оно будет там нативно понятнее, ты же не свич-кейс модуль на несколько элементов пишешь
-  const renderTextOrInput = () => {
-    return updatedItem ? (
-      <input value={inputValue} onChange={handleOnChange} />
-    ) : (
-      text
-    )
-  }
-
   return (
     <Wrapper>
       <ItemDescription>
-        {idx + 1}. {renderTextOrInput()}
+        {idx + 1}. {
+          updatedItem ? (
+            <input value={inputValue} onChange={handleOnChange} />
+          ) : (
+            text
+          )
+        }
       </ItemDescription>
       <ButtonsGroup>
         <Button
           onClick={() => {
             console.log("id ", id)
-            if(updatedItem) {
+            if (updatedItem) {
               saveNewItemText();
             }
             setUpdatedItem(!updatedItem)
