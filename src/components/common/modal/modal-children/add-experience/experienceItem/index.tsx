@@ -43,12 +43,23 @@ export const ListItem: FC<IExperienceDutyItem> = ({
     })
   }
 
+  const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if(e.code === 'Enter') {
+      saveNewItemText();
+      setUpdatedItem(false);
+    }
+  }
+
+  const handleCancel = () => {
+    setUpdatedItem(false);
+  }
+
   return (
     <Wrapper>
       <ItemDescription>
         {idx + 1}. {
           updatedItem ? (
-            <input value={inputValue} onChange={handleOnChange} />
+            <input value={inputValue} onChange={handleOnChange} onKeyDown={handleOnKeyDown}/>
           ) : (
             text
           )
@@ -57,7 +68,6 @@ export const ListItem: FC<IExperienceDutyItem> = ({
       <ButtonsGroup>
         <Button
           onClick={() => {
-            console.log("id ", id)
             if (updatedItem) {
               saveNewItemText();
             }
@@ -66,9 +76,9 @@ export const ListItem: FC<IExperienceDutyItem> = ({
         >
           {updatedItem ? "Сохранить" : <>&#9999;</>}
         </Button>
-        {!updatedItem && (
-          <Button onClick={handleDelete}>&#128465;</Button>
-        )}
+        {updatedItem ? <Button onClick={handleCancel}>Отмена</Button>
+          : <Button onClick={handleDelete}>&#128465;</Button>
+        }
       </ButtonsGroup>
     </Wrapper>
   )
