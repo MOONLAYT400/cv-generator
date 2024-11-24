@@ -1,41 +1,32 @@
 import { FC, useState } from "react"
 
+import { Button, ButtonsGroup, ItemDescription, Wrapper } from "./index.styled"
+
 import { IExperienceItem, IDutyItem } from "@/types/cv-data"
 
-import { Button, ButtonsGroup, ItemDescription, Wrapper } from "./index.styled"
 
 //Comment - перенести файл в папку common - оптом это может бть переиспользованно
 interface IExperienceDutyItem {
   item: IDutyItem
   idx: number
   setList: (value: any) => void
-  updatedItem: number | null
-  setUpdatedItem: (value: number | null) => void
 }
 
 export const ListItem: FC<IExperienceDutyItem> = ({
   item,
   idx,
   setList,
-  updatedItem,
-  setUpdatedItem
 }) => {
   const { id, text } = item;
   const [inputValue, setInputValue] = useState(text);
+  const [updatedItem, setUpdatedItem] = useState<boolean>(false) 
 
-
-  const isCurrentBeingUpdated = updatedItem === id // Comment - а почему это не стейт, 
-  // может путь все изменения варяться внутри этого компонента?)
-
-  // Comment - какая то мудреная типизация))) 
-  //- попробуй типизировать евент, без деструкта, 
-  // а вообще -к огда ты передаешь тупо велью - то его и передавац сразу)
 const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 const value = e.target.value;
 setInputValue(value);
 }
 
-  const handleInputChange = () => {
+  const saveNewItemText = () => {
     // сделать отмену 
     setList((prevList: IExperienceItem) => {
       const newDuties = prevList.duties.map((item) =>
@@ -55,9 +46,8 @@ setInputValue(value);
   // Comment - есил уже используешь такой кондишнл рендеринг - то делай его в верстке. 
   // оно будет там нативно понятнее, ты же не свич-кейс модуль на несколько элементов пишешь
   const renderTextOrInput = () => {
-    return isCurrentBeingUpdated ? (
-      //Comment - еще момент с рендерами - как думаешь, что происходит когда ты меняешь этот текст?)
-      <input value={inputValue} onChange={handleOnChange} /> // handleInputChange
+    return updatedItem ? (
+      <input value={inputValue} onChange={handleOnChange} />
     ) : (
       text
     )
@@ -72,15 +62,15 @@ setInputValue(value);
         <Button
           onClick={() => {
             console.log("id ", id)
-            setUpdatedItem(isCurrentBeingUpdated ? null : id)
-            if(isCurrentBeingUpdated) {
-              handleInputChange();
+            if(updatedItem) {
+              saveNewItemText();
             }
+            setUpdatedItem(!updatedItem)
           }}
         >
-          {isCurrentBeingUpdated ? "Сохранить" : <>&#9999;</>}
+          {updatedItem ? "Сохранить" : <>&#9999;</>}
         </Button>
-        {!isCurrentBeingUpdated && (
+        {!updatedItem && (
           <Button onClick={handleDelete}>&#128465;</Button>
         )}
       </ButtonsGroup>
