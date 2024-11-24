@@ -59,7 +59,7 @@ export const AddExperience: FC<IAddExperience> = ({
       updateExperience({
         ...experience,
         duties: [...experience.duties, updatedDuty]
-      }) //!!!!!!!!!!
+      })
     }
     const newDuty = {
       id: getDutyID(),
@@ -92,10 +92,7 @@ export const AddExperience: FC<IAddExperience> = ({
         placeholder="Введите название должности..."
         saveInputValue={(role) => handleUpdateExperience("role", role)}
       />
-      {/* Группа должностных обязанностей */}
       <>
-        {/* Группа УЖЕ ДОБАВЕННЫХ должностных обязанностей */}
-
         {experience.duties.length > 0 && (
           <>
             <LableTitle>Должностные обязанности</LableTitle>
@@ -114,10 +111,8 @@ export const AddExperience: FC<IAddExperience> = ({
         )}
         <DutyInputsGroup>
           <Input
-            // label="Должностные обязанности"
             inputValue={dutiesValue}
             placeholder="Введите должностные обязанности..."
-            // тут с этим нужно что-то сделать, чтобы из инпута тоже сохранялось
             saveInputValue={setDutiesValue}
           />
           <Button
