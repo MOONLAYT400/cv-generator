@@ -198,6 +198,21 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     }
   }
 
+  const downloadJSON = (obj: ICVParams) => { // J.= нужно ли эту функцию вынести в отдельный модуль?
+    const name = obj.fullName;
+    const dataUri = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
+    const anchorElement = document.createElement('a');
+    anchorElement.href = dataUri;
+    anchorElement.download = `${name}.json`;
+    document.body.appendChild(anchorElement);
+    anchorElement.click();
+    document.body.removeChild(anchorElement);
+  }
+  
+  const handleExportFile = () => { //J. TS не прописан
+    downloadJSON(cvData);
+  }
+
   return (
     <Wrapper>
       <JoyRideNoSSR
@@ -239,6 +254,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         isOpened={!!modals.techComparison}
         close={() => handleToggleModal("techComparison", null)}
       />
+      <button onClick={handleExportFile}>выгрузить файл</button>
       <InfoSection>
         <ImageWithPreview
           label={"Фото"}
@@ -272,7 +288,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
             }
           />
           <Button
-            text="+Проект"
+            text="+ Проект"
             handleClick={() => handleToggleModal("project", {} as IProjectItem)}
           />
         </Buttons>
