@@ -223,7 +223,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     const reader = new FileReader()
     reader.readAsText(file);
     reader.onload = function () {
-      const data = JSON.parse(reader.result as string);
+      const data: ICVParams = JSON.parse(reader.result as string); //J.= обработать если не тот формат json
       setCVData(data);
     };
 
