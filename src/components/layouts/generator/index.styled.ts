@@ -26,3 +26,20 @@ export const Buttons = styled.div`
   gap: 10px;
   padding: 20px;
 `
+
+export const ButtonsGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 20px;
+`
+
+export const FileInputs = styled.div`
+  opacity: 0;
+  height: 0;
+  width: 0;
+  line-height: 0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+`

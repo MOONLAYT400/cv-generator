@@ -31,7 +31,7 @@ import {
 } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
 
-import { Buttons, InfoInputs, InfoSection, Wrapper } from "./index.styled"
+import { Buttons, InfoInputs, InfoSection, Wrapper, FileInputs, ButtonsGroup } from "./index.styled"
 
 const JoyRideNoSSR = dynamic(() => import("react-joyride"), { ssr: false })
 
@@ -274,11 +274,20 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         isOpened={!!modals.techComparison}
         close={() => handleToggleModal("techComparison", null)}
       />
-      <button onClick={handleExportFile}>выгрузить файл</button>
-      <label>
-        <input type="file" onChange={handleChange} accept=".json" ref={filePicker}/>
-      </label>
-      <button onClick={handlePick}>загрузить файл</button>
+      <ButtonsGroup>
+        <Button
+          text={"Выгрузить файл"}
+          handleClick={handleExportFile}
+        />
+        <FileInputs>
+          <input type="file" onChange={handleChange} accept=".json" ref={filePicker} />
+        </FileInputs>
+        <Button
+          text={"Загрузить файл"}
+          handleClick={handlePick}
+        />
+      </ButtonsGroup>
+      
       <InfoSection>
         <ImageWithPreview
           label={"Фото"}
