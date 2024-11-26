@@ -1,6 +1,6 @@
 "use client"
 import dynamic from "next/dynamic"
-import { FC, useLayoutEffect, useState } from "react"
+import { FC, useLayoutEffect, useRef, useState } from "react"
 import { STATUS } from "react-joyride"
 
 import { Button } from "@/components/common/button"
@@ -213,6 +213,26 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     downloadJSON(cvData);
   }
 
+  const filePicker = useRef<HTMLInputElement>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target?.files?.[0] //J.= что то мне кажется это какая -то фигня) сделала чтобы TS не ругался на null
+    if (!file) {
+      return
+    }
+    const reader = new FileReader()
+    reader.readAsText(file);
+    reader.onload = function () {
+      const data = JSON.parse(reader.result as string);
+      setCVData(data);
+    };
+
+  }
+
+  const handlePick = () => {
+      filePicker?.current?.click();
+  }
+
   return (
     <Wrapper>
       <JoyRideNoSSR
@@ -255,6 +275,10 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         close={() => handleToggleModal("techComparison", null)}
       />
       <button onClick={handleExportFile}>выгрузить файл</button>
+      <label>
+        <input type="file" onChange={handleChange} accept=".json" ref={filePicker}/>
+      </label>
+      <button onClick={handlePick}>загрузить файл</button>
       <InfoSection>
         <ImageWithPreview
           label={"Фото"}
