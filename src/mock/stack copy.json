@@ -1,0 +1,550 @@
+{
+  "languages": [
+    {
+      "name": "Javascript(Typescript)",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Java",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Python",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Rust",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Ruby",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Swift",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Kotlin",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Flutter/Dart",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    }
+  ],
+  "fe": [
+    {
+      "name": "HTML",
+      "description": "HTML: Это язык разметки для создания веб-страниц. Он структурирует контент, определяя элементы, такие как заголовки, абзацы и изображения.",
+      "alternative": [
+        "Это база для фронтенда"
+      ]
+    },
+    {
+      "name": "CSS",
+      "description": "CSS: Это язык стилевой разметки, который описывает внешний вид HTML-документов. CSS управляет цветами, шрифтами, размерами и расположением элементов.",
+      "alternative": [
+        "Это база для фронтенда"
+      ]
+    },
+    {
+      "name": "SASS/LESS",
+      "description": "SASS/LESS: Это препроцессоры CSS, добавляющие возможности переменных, вложенности и функций, облегчая организацию и управление стилями в крупных проектах.",
+      "alternative": [
+        "SCSS (Sassy CSS)", "Stylus", "PostCSS"
+      ]
+    },
+    {
+      "name": "Bootstrap",
+      "description": "Bootstrap: Это фреймворк для создания адаптивных интерфейсов, предлагающий готовые компоненты и сетку, что ускоряет разработку современных веб-приложений.",
+      "alternative": [
+        "Flexbox Grid , PureCSS, Zimit, Tailwind, Bulma, Uikit, HTML KickStart, Materialize, Bootstrap, Material-UI, Foundation, Shadcn UI, Catalyst UI, Ant Design, Chakra UI, React Bootstrap, styled-components"
+      ]
+    },
+    {
+      "name": "Tailwind CSS",
+      "description": "Tailwind CSS: Это утилитарный CSS-фреймворк, который позволяет быстро создавать адаптивные интерфейсы, используя классы для стилей напрямую в HTML.",
+      "alternative": [
+        "Flexbox Grid , PureCSS, Zimit, Tailwind, Bulma, Uikit, HTML KickStart, Materialize, Bootstrap, Material-UI, Foundation, Shadcn UI, Catalyst UI, Ant Design, Chakra UI, React Bootstrap, styled-components"
+      ]
+    },
+    {
+      "name": "React",
+      "description": "React: Это библиотека JavaScript для построения пользовательских интерфейсов. Она основана на компонентном подходе и эффективном управлении состоянием.",
+      "alternative": [
+        "React, Angular, Vue, Svelte, HTMX, Solid.js, Astro, Qwik"
+      ]
+    },
+    {
+      "name": "React Native",
+      "description": "React Native: Фреймворк для разработки мобильных приложений с использованием React. Он позволяет создавать нативные приложения для iOS и Android с общим кодом.",
+      "alternative": [
+        "Flutter", "Cordova", "Xamarin", "Ionic", "Framework"
+      ]
+    },
+    {
+      "name": "NextJS",
+      "description": "NextJS: Это фреймворк для React, позволяющий создавать серверные рендеринг приложения. Он обеспечивает улучшенную SEO-оптимизацию и быструю загрузку страниц.",
+      "alternative": [
+        "Gatsby", "Remix", "Eleventy (11ty)", "Astro", "Nuxt.js для Vue", "SvelteKit для Svelte", "Preact", "Sapper"
+      ]
+    },
+    {
+      "name": "React Router",
+      "description": "React Router: Библиотека для управления маршрутизацией в React-приложениях. Она позволяет создавать SPA и управлять переходами между компонентами.",
+      "alternative": [
+        "TanStack/Router"
+      ]
+    },
+    {
+      "name": "React Query",
+      "description": "React Query: Библиотека для управления состоянием сервера в React-приложениях. Она упрощает получение, кэширование и синхронизацию данных из API.",
+      "alternative": [
+        "RTK query"
+      ]
+    },
+    {
+      "name": "Redux",
+      "description": "Redux: Это библиотека для управления состоянием в JavaScript-приложениях. Она использует единый хранилище и концепцию 'действий' для отслеживания изменений.",
+      "alternative": [
+        "Redux", "React Context API", "MobX", "Recoil", "Zustand", "Redux Toolkit", "Effector"
+      ]
+    },
+    {
+      "name": "Redux Toolkit",
+      "description": "Redux Toolkit: Набор инструментов для упрощения разработки с Redux. Он включает в себя облегченные методы создания редьюсеров и экшенов, улучшая код.",
+      "alternative": [
+        "Redux", "React Context API", "MobX", "Recoil", "Zustand", "Redux Toolkit", "Effector"
+      ]
+    },
+    {
+      "name": "Redux Saga",
+      "description": "Redux Saga: Библиотека для управления побочными эффектами в Redux-приложениях, используя генераторы. Она упрощает обработку асинхронных действий.",
+      "alternative": [
+        "redux-thunk"
+      ]
+    },
+    {
+      "name": "MobX",
+      "description": "MobX: Это библиотека для управления состоянием, основанная на реактивном программировании. MobX позволяет легко связывать состояние и интерфейс.",
+      "alternative": [
+        "Redux", "React Context API", "MobX", "Recoil", "Zustand", "Redux Toolkit", "Effector"
+      ]
+    },
+    {
+      "name": "Effector",
+      "description": "Effector: Библиотека для управления состоянием и реактивного программирования. Effector предлагает простые концепции для управления состоянием и событиями.",
+      "alternative": [
+        "Redux", "React Context API", "MobX", "Recoil", "Zustand", "Redux Toolkit", "Effector"
+      ]
+    },
+    {
+      "name": "styled-components",
+      "description": "styled-components: Библиотека для стилизации React-компонентов с использованием CSS-in-JS. Позволяет создавать динамические и переиспользуемые стили.",
+      "alternative": [
+        "Flexbox Grid , PureCSS, Zimit, Tailwind, Bulma, Uikit, HTML KickStart, Materialize, Bootstrap, Material-UI, Foundation, Shadcn UI, Catalyst UI, Ant Design, Chakra UI, React Bootstrap, styled-components"
+      ]
+    },
+    {
+      "name": "Ant Design",
+      "description": "Ant Design: UI-фреймворк, предлагающий набор разнообразных компонентов и решений для создания красивых и функциональных интерфейсов на React.",
+      "alternative": [
+        "Flexbox Grid , PureCSS, Zimit, Tailwind, Bulma, Uikit, HTML KickStart, Materialize, Bootstrap, Material-UI, Foundation, Shadcn UI, Catalyst UI, Ant Design, Chakra UI, React Bootstrap, styled-components"
+      ]
+    },
+    {
+      "name": "Material UI",
+      "description": "Material UI: Популярный фреймворк для React, основанный на принципах Material Design. Позволяет быстро разрабатывать адаптивные и эстетичные интерфейсы.",
+      "alternative": [
+        "Flexbox Grid , PureCSS, Zimit, Tailwind, Bulma, Uikit, HTML KickStart, Materialize, Bootstrap, Material-UI, Foundation, Shadcn UI, Catalyst UI, Ant Design, Chakra UI, React Bootstrap, styled-components"
+      ]
+    },
+    {
+      "name": "Chakra UI",
+      "description": "Chakra UI: Простая и модульная библиотека компонентов для React, предоставляющая доступные стили и возможности кастомизации для создания интерфейсов.",
+      "alternative": [
+        "Flexbox Grid , PureCSS, Zimit, Tailwind, Bulma, Uikit, HTML KickStart, Materialize, Bootstrap, Material-UI, Foundation, Shadcn UI, Catalyst UI, Ant Design, Chakra UI, React Bootstrap, styled-components"
+      ]
+    },
+    {
+      "name": "Tailwind UI",
+      "description": "Tailwind UI: Набор компонентов на основе Tailwind CSS, предлагающий готовые шаблоны и утилитарные классы для быстрого создания адаптивных интерфейсов.",
+      "alternative": [
+        "Flexbox Grid , PureCSS, Zimit, Tailwind, Bulma, Uikit, HTML KickStart, Materialize, Bootstrap, Material-UI, Foundation, Shadcn UI, Catalyst UI, Ant Design, Chakra UI, React Bootstrap, styled-components"
+      ]
+    },
+    {
+      "name": "React Bootstrap",
+      "description": "React Bootstrap: Реализация компонентов Bootstrap для React, позволяющая интегрировать готовые стили и элементы Bootstrap в React-приложения.",
+      "alternative": [
+        "Flexbox Grid , PureCSS, Zimit, Tailwind, Bulma, Uikit, HTML KickStart, Materialize, Bootstrap, Material-UI, Foundation, Shadcn UI, Catalyst UI, Ant Design, Chakra UI, React Bootstrap, styled-components"
+      ]
+    },
+    {
+      "name": "WebRTC",
+      "description": "WebRTC: Технология для организации аудио- и видеосвязи в реальном времени прямо в браузере, без необходимости в плагинах или дополнительных приложениях.",
+      "alternative": [
+        "VideoSDK, Twilio Video, MirrorFly, Agora, Jitsi, Vonage, AWS Chime SDK, Enablex, Whereby, SignalWire"
+      ]
+    },
+    {
+      "name": "Websocket",
+      "description": "Websocket: Протокол для двусторонней связи между клиентом и сервером по постоянному соединению, обеспечивающий обмен данными в реальном времени.",
+      "alternative": [
+        "Server-Sent Events", "Long polling", "MQTT", "WebRTC", "WebTransport"
+      ]
+    },
+    {
+      "name": "Socket.io",
+      "description": "Socket.io: Библиотека, упрощающая использование веб-сокетов, предоставляя поддержку для различных транспортных протоколов и возможности для обработки событий.",
+      "alternative": [
+        "Azure SignalR Service", "Azure SignalR Service", "PubNub", "Pusher", "Microsoft Azure Web PubSub", "Ably"
+      ]
+    },
+    {
+      "name": "mediasoup-client",
+      "description": "mediasoup-client: Библиотека для реализации WebRTC в браузере. Обеспечивает работу со звуковыми и видео потоками, взаимодействуя с медиасервисами.",
+      "alternative": [
+        "Jitsi", "Kurento", "Slack", "Jira", "Trello", "G Suite", "Confluence", "Skype"
+      ]
+    },
+    {
+      "name": "Canvas",
+      "description": "Canvas: HTML-элемент, позволяющий графически рисовать в браузере с помощью JavaScript. Используется для создания динамичных графиков, анимаций и игр.",
+      "alternative": [
+        "SVG"
+      ]
+    },
+    {
+      "name": "Web3D",
+      "description": "Web3D: Разработка 3D-графики в веб-браузерах с использованием технологий, таких как WebGL и движков. Позволяет создавать интерактивные 3D-приложения.",
+      "alternative": [
+        "Web3D", "Blend4Web"," Three.js", "Playcanvas"
+      ]
+    },
+    {
+      "name": "Three.js",
+      "description": "Three.js: Библиотека для работы с 3D-графикой на WebGL. Упрощает создание и отображение 3D-сцен, моделей и анимаций в веб-браузерах.",
+      "alternative": [
+        "Web3D", "Blend4Web"," Three.js", "Playcanvas"
+      ]
+    },
+    {
+      "name": "Playcanvas",
+      "description": "Playcanvas: Платформа для разработки 3D-игр и приложений в браузере. Предлагает визуальный редактор и инструменты для оптимизации производительности.",
+      "alternative": [
+        "Web3D", "Blend4Web"," Three.js", "Playcanvas"
+      ]
+    },
+    {
+      "name": "D&D libs",
+      "description": "D&D libs: Библиотеки, которые предоставляют инструменты и ресурсы для создания игр на основе Dungeons & Dragons, включая правила, карты и персонажей.",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Stripe Client",
+      "description": "Stripe Client: JavaScript-библиотека для интеграции платежной системы Stripe в веб-приложения. Обеспечивает безопасные транзакции и управление платежами.",
+      "alternative": [
+        "Енот, Юkassa, CloudPayments, Robokassa, Интернет-эквайринг от Тинькофф Кассы, LIFE PAY, Юmoney, Orangepay, Оplat.im, PayMaster, LAVA, Net Pay, AINOX, PayOp, Payeer, Fondy, Payok, SoftPayMoney, Prodamus, «Модульбанк. Облачные чеки», MobiCash, QRService"
+      ]
+    },
+    {
+      "name": "JWT Auth",
+      "description": "JWT Auth: Аутентификация с помощью JSON Web Tokens. Позволяет безопасно передавать информацию о пользователях между клиентом и сервером.",
+      "alternative": [
+        "Google Auth", "PASETO", "Apple Auth", "Microsoft Auth"
+      ]
+    },
+    {
+      "name": "Google Auth",
+      "description": "Google Auth: API для интеграции аутентификации через учетные записи Google. Упрощает процесс входа и регистрации пользователей на веб-сайтах.",
+      "alternative": [
+        "Google Auth", "PASETO", "Apple Auth", "Microsoft Auth"
+      ]
+    },
+    {
+      "name": "Apple Auth",
+      "description": "Apple Auth: Инструмент для реализации аутентификации через Apple ID. Обеспечивает безопасность и анонимность, позволяя пользователям входить в приложения.",
+      "alternative": [
+        "Google Auth", "PASETO", "Apple Auth", "Microsoft Auth"
+      ]
+    },
+    {
+      "name": "Microsoft Auth",
+      "description": "Microsoft Auth: API для аутентификации через учетные записи Microsoft. Позволяет пользователям безопасно входить на веб-сайты и приложения, используя их учетные данные.",
+      "alternative": [
+        "Google Auth", "PASETO", "Apple Auth", "Microsoft Auth"
+      ]
+    },
+    {
+      "name": "Chart libs",
+      "description": "Chart libs: Библиотеки для построения графиков и визуализации данных в веб-приложениях. Популярные примеры: Chart.js, D3.js и Chartist.js.",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Apollo Client",
+      "description": "Apollo Client: Библиотека для работы с GraphQL в JavaScript-приложениях. Она упрощает загрузку, кэширование и управление состоянием данных из GraphQL API.",
+      "alternative": [
+        "Apidog", "Postman", "Insomnia", "GraphiQL", "Altair", "Hoppscotch", "Testfully", "Firecamp", "TestMace"
+      ]
+    },
+    {
+      "name": "GraphQL",
+      "description": "GraphQL: Язык запросов для API, разработанный Facebook. Обеспечивает более гибкий способ запроса данных, чем REST, позволяя запрашивать только необходимые поля.",
+      "alternative": [
+        "GraphQL", "REST API", "gRPC", "Falcor"
+      ]
+    },
+    {
+      "name": "VUE",
+      "description": "VUE: Прогрессивный JavaScript-фреймворк для создания пользовательских интерфейсов. Он предлагает реактивное программирование и компонентный подход к разработке.",
+      "alternative": [
+        "React, Angular, Vue, Svelte, HTMX, Solid.js, Astro, Qwik"
+      ]
+    },
+    {
+      "name": "Nuxt",
+      "description": "Nuxt: Фреймворк для разработки приложений на Vue.js, который поддерживает серверный рендеринг, маршрутизацию и управление состоянием, упрощая разработку.",
+      "alternative": [
+        "Gatsby", "Remix", "Eleventy (11ty)", "Astro", "Nuxt.js для Vue", "SvelteKit для Svelte", "Preact", "Sapper"
+      ]
+    },
+    {
+      "name": "Angular",
+      "description": "Angular: Комплексный фреймворк для создания веб-приложений, разработанный Google. Он поддерживает компоненты, маршрутизацию и управление состоянием для масштабируемости.",
+      "alternative": [
+        "React, Angular, Vue, Svelte, HTMX, Solid.js, Astro, Qwik"
+      ]
+    }
+  ],
+  "be": [
+    {
+      "name": "Express JS",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Electron",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Express JS",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "NestJS",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Meteor",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+
+    {
+      "name": "Sequelize",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+
+    {
+      "name": "TypeORM",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "KOA",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Socket.io",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Apollo Server",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "GraphQL",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Stripe Server",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Swagger",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "JWT Auth",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Google Auth",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Apple Auth",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Apache",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "gRPC",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Cors",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Passport",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "Mutler",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "mediasoup-server",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+    {
+      "name": "bcrypt",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    }
+  ],
+  "databases": [
+    {
+      "name": "",
+      "description": "",
+      "alternative": [
+        ""
+      ]
+    },
+
+    "PostgreSQL",
+    "MongoDB",
+    "MariaDB",
+    "AstraDb",
+    "Prisma"
+  ],
+  "test": [
+    "Jest",
+    "Mocha",
+    "Puppeteer",
+    "Vitest"
+  ],
+  "devops": [
+    "nginx",
+    "Jenkins",
+    "Gitlab",
+    "Github Actions",
+    "Kubernetes",
+    "Terraform",
+    "Kassandra"
+  ],
+  "additional": [
+    "Webpack",
+    "eslint",
+    "prettier",
+    "Vite"
+  ]
+}
