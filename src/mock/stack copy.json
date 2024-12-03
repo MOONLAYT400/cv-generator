@@ -2,56 +2,56 @@
   "languages": [
     {
       "name": "Javascript(Typescript)",
-      "description": "",
+      "description": "Язык для создания интерактивных веб-приложений. TypeScript — это надстройка над JavaScript со статической типизацией, упрощает масштабирование и поддержку кода.",
       "alternative": [
         ""
       ]
     },
     {
       "name": "Java",
-      "description": "",
+      "description": "Объектно-ориентированный язык для создания кроссплатформенных приложений. Широко используется в разработке серверного ПО, мобильных приложений (Android) и корпоративных систем.",
       "alternative": [
         ""
       ]
     },
     {
       "name": "Python",
-      "description": "",
+      "description": "Высокоуровневый язык, популярный из-за своей простоты и читаемости. Используется в веб-разработке, анализе данных, машинном обучении и автоматизации задач.",
       "alternative": [
         ""
       ]
     },
     {
       "name": "Rust",
-      "description": "",
+      "description": "Язык, ориентированный на безопасность и производительность. Используется в системном программировании, разработке веб-серверов и приложений, где важна скорость и управление памятью.",
       "alternative": [
         ""
       ]
     },
     {
       "name": "Ruby",
-      "description": "",
+      "description": "Объектно-ориентированный язык, известный простотой и элегантностью. Часто используется в веб-разработке, особенно с фреймворком Ruby on Rails, который ускоряет создание приложений.",
       "alternative": [
         ""
       ]
     },
     {
       "name": "Swift",
-      "description": "",
+      "description": "Язык, разработанный Apple для разработки приложений под iOS и macOS. Обеспечивает безопасность, высокую производительность и удобные инструменты для разработчиков.",
       "alternative": [
         ""
       ]
     },
     {
       "name": "Kotlin",
-      "description": "",
+      "description": "Современный язык для разработки Android-приложений, совместимый с Java. Упрощает кодирование благодаря лаконичному синтаксису и функциональным возможностям.",
       "alternative": [
         ""
       ]
     },
     {
       "name": "Flutter/Dart",
-      "description": "",
+      "description": "Flutter — фреймворк для создания кроссплатформенных мобильных приложений; Dart — его язык программирования. Предлагает богатый UI и высокую производительность на различных устройствах.",
       "alternative": [
         ""
       ]
@@ -76,7 +76,9 @@
       "name": "SASS/LESS",
       "description": "SASS/LESS: Это препроцессоры CSS, добавляющие возможности переменных, вложенности и функций, облегчая организацию и управление стилями в крупных проектах.",
       "alternative": [
-        "SCSS (Sassy CSS)", "Stylus", "PostCSS"
+        "SCSS (Sassy CSS)",
+        "Stylus",
+        "PostCSS"
       ]
     },
     {
@@ -104,14 +106,25 @@
       "name": "React Native",
       "description": "React Native: Фреймворк для разработки мобильных приложений с использованием React. Он позволяет создавать нативные приложения для iOS и Android с общим кодом.",
       "alternative": [
-        "Flutter", "Cordova", "Xamarin", "Ionic", "Framework"
+        "Flutter",
+        "Cordova",
+        "Xamarin",
+        "Ionic",
+        "Framework"
       ]
     },
     {
       "name": "NextJS",
       "description": "NextJS: Это фреймворк для React, позволяющий создавать серверные рендеринг приложения. Он обеспечивает улучшенную SEO-оптимизацию и быструю загрузку страниц.",
       "alternative": [
-        "Gatsby", "Remix", "Eleventy (11ty)", "Astro", "Nuxt.js для Vue", "SvelteKit для Svelte", "Preact", "Sapper"
+        "Gatsby",
+        "Remix",
+        "Eleventy (11ty)",
+        "Astro",
+        "Nuxt.js для Vue",
+        "SvelteKit для Svelte",
+        "Preact",
+        "Sapper"
       ]
     },
     {
@@ -132,14 +145,26 @@
       "name": "Redux",
       "description": "Redux: Это библиотека для управления состоянием в JavaScript-приложениях. Она использует единый хранилище и концепцию 'действий' для отслеживания изменений.",
       "alternative": [
-        "Redux", "React Context API", "MobX", "Recoil", "Zustand", "Redux Toolkit", "Effector"
+        "Redux",
+        "React Context API",
+        "MobX",
+        "Recoil",
+        "Zustand",
+        "Redux Toolkit",
+        "Effector"
       ]
     },
     {
       "name": "Redux Toolkit",
       "description": "Redux Toolkit: Набор инструментов для упрощения разработки с Redux. Он включает в себя облегченные методы создания редьюсеров и экшенов, улучшая код.",
       "alternative": [
-        "Redux", "React Context API", "MobX", "Recoil", "Zustand", "Redux Toolkit", "Effector"
+        "Redux",
+        "React Context API",
+        "MobX",
+        "Recoil",
+        "Zustand",
+        "Redux Toolkit",
+        "Effector"
       ]
     },
     {
@@ -153,14 +178,26 @@
       "name": "MobX",
       "description": "MobX: Это библиотека для управления состоянием, основанная на реактивном программировании. MobX позволяет легко связывать состояние и интерфейс.",
       "alternative": [
-        "Redux", "React Context API", "MobX", "Recoil", "Zustand", "Redux Toolkit", "Effector"
+        "Redux",
+        "React Context API",
+        "MobX",
+        "Recoil",
+        "Zustand",
+        "Redux Toolkit",
+        "Effector"
       ]
     },
     {
       "name": "Effector",
       "description": "Effector: Библиотека для управления состоянием и реактивного программирования. Effector предлагает простые концепции для управления состоянием и событиями.",
       "alternative": [
-        "Redux", "React Context API", "MobX", "Recoil", "Zustand", "Redux Toolkit", "Effector"
+        "Redux",
+        "React Context API",
+        "MobX",
+        "Recoil",
+        "Zustand",
+        "Redux Toolkit",
+        "Effector"
       ]
     },
     {
@@ -216,21 +253,37 @@
       "name": "Websocket",
       "description": "Websocket: Протокол для двусторонней связи между клиентом и сервером по постоянному соединению, обеспечивающий обмен данными в реальном времени.",
       "alternative": [
-        "Server-Sent Events", "Long polling", "MQTT", "WebRTC", "WebTransport"
+        "Server-Sent Events",
+        "Long polling",
+        "MQTT",
+        "WebRTC",
+        "WebTransport"
       ]
     },
     {
       "name": "Socket.io",
       "description": "Socket.io: Библиотека, упрощающая использование веб-сокетов, предоставляя поддержку для различных транспортных протоколов и возможности для обработки событий.",
       "alternative": [
-        "Azure SignalR Service", "Azure SignalR Service", "PubNub", "Pusher", "Microsoft Azure Web PubSub", "Ably"
+        "Azure SignalR Service",
+        "Azure SignalR Service",
+        "PubNub",
+        "Pusher",
+        "Microsoft Azure Web PubSub",
+        "Ably"
       ]
     },
     {
       "name": "mediasoup-client",
       "description": "mediasoup-client: Библиотека для реализации WebRTC в браузере. Обеспечивает работу со звуковыми и видео потоками, взаимодействуя с медиасервисами.",
       "alternative": [
-        "Jitsi", "Kurento", "Slack", "Jira", "Trello", "G Suite", "Confluence", "Skype"
+        "Jitsi",
+        "Kurento",
+        "Slack",
+        "Jira",
+        "Trello",
+        "G Suite",
+        "Confluence",
+        "Skype"
       ]
     },
     {
@@ -244,21 +297,30 @@
       "name": "Web3D",
       "description": "Web3D: Разработка 3D-графики в веб-браузерах с использованием технологий, таких как WebGL и движков. Позволяет создавать интерактивные 3D-приложения.",
       "alternative": [
-        "Web3D", "Blend4Web"," Three.js", "Playcanvas"
+        "Web3D",
+        "Blend4Web",
+        " Three.js",
+        "Playcanvas"
       ]
     },
     {
       "name": "Three.js",
       "description": "Three.js: Библиотека для работы с 3D-графикой на WebGL. Упрощает создание и отображение 3D-сцен, моделей и анимаций в веб-браузерах.",
       "alternative": [
-        "Web3D", "Blend4Web"," Three.js", "Playcanvas"
+        "Web3D",
+        "Blend4Web",
+        " Three.js",
+        "Playcanvas"
       ]
     },
     {
       "name": "Playcanvas",
       "description": "Playcanvas: Платформа для разработки 3D-игр и приложений в браузере. Предлагает визуальный редактор и инструменты для оптимизации производительности.",
       "alternative": [
-        "Web3D", "Blend4Web"," Three.js", "Playcanvas"
+        "Web3D",
+        "Blend4Web",
+        " Three.js",
+        "Playcanvas"
       ]
     },
     {
@@ -279,28 +341,40 @@
       "name": "JWT Auth",
       "description": "JWT Auth: Аутентификация с помощью JSON Web Tokens. Позволяет безопасно передавать информацию о пользователях между клиентом и сервером.",
       "alternative": [
-        "Google Auth", "PASETO", "Apple Auth", "Microsoft Auth"
+        "Google Auth",
+        "PASETO",
+        "Apple Auth",
+        "Microsoft Auth"
       ]
     },
     {
       "name": "Google Auth",
       "description": "Google Auth: API для интеграции аутентификации через учетные записи Google. Упрощает процесс входа и регистрации пользователей на веб-сайтах.",
       "alternative": [
-        "Google Auth", "PASETO", "Apple Auth", "Microsoft Auth"
+        "Google Auth",
+        "PASETO",
+        "Apple Auth",
+        "Microsoft Auth"
       ]
     },
     {
       "name": "Apple Auth",
       "description": "Apple Auth: Инструмент для реализации аутентификации через Apple ID. Обеспечивает безопасность и анонимность, позволяя пользователям входить в приложения.",
       "alternative": [
-        "Google Auth", "PASETO", "Apple Auth", "Microsoft Auth"
+        "Google Auth",
+        "PASETO",
+        "Apple Auth",
+        "Microsoft Auth"
       ]
     },
     {
       "name": "Microsoft Auth",
       "description": "Microsoft Auth: API для аутентификации через учетные записи Microsoft. Позволяет пользователям безопасно входить на веб-сайты и приложения, используя их учетные данные.",
       "alternative": [
-        "Google Auth", "PASETO", "Apple Auth", "Microsoft Auth"
+        "Google Auth",
+        "PASETO",
+        "Apple Auth",
+        "Microsoft Auth"
       ]
     },
     {
@@ -314,14 +388,25 @@
       "name": "Apollo Client",
       "description": "Apollo Client: Библиотека для работы с GraphQL в JavaScript-приложениях. Она упрощает загрузку, кэширование и управление состоянием данных из GraphQL API.",
       "alternative": [
-        "Apidog", "Postman", "Insomnia", "GraphiQL", "Altair", "Hoppscotch", "Testfully", "Firecamp", "TestMace"
+        "Apidog",
+        "Postman",
+        "Insomnia",
+        "GraphiQL",
+        "Altair",
+        "Hoppscotch",
+        "Testfully",
+        "Firecamp",
+        "TestMace"
       ]
     },
     {
       "name": "GraphQL",
       "description": "GraphQL: Язык запросов для API, разработанный Facebook. Обеспечивает более гибкий способ запроса данных, чем REST, позволяя запрашивать только необходимые поля.",
       "alternative": [
-        "GraphQL", "REST API", "gRPC", "Falcor"
+        "GraphQL",
+        "REST API",
+        "gRPC",
+        "Falcor"
       ]
     },
     {
@@ -335,7 +420,14 @@
       "name": "Nuxt",
       "description": "Nuxt: Фреймворк для разработки приложений на Vue.js, который поддерживает серверный рендеринг, маршрутизацию и управление состоянием, упрощая разработку.",
       "alternative": [
-        "Gatsby", "Remix", "Eleventy (11ty)", "Astro", "Nuxt.js для Vue", "SvelteKit для Svelte", "Preact", "Sapper"
+        "Gatsby",
+        "Remix",
+        "Eleventy (11ty)",
+        "Astro",
+        "Nuxt.js для Vue",
+        "SvelteKit для Svelte",
+        "Preact",
+        "Sapper"
       ]
     },
     {
@@ -349,202 +441,622 @@
   "be": [
     {
       "name": "Express JS",
-      "description": "",
+      "description": "Express JS — минималистичный и гибкий web-фреймворк для Node.js, обеспечивающий мощный набор функций для веб-приложений.",
       "alternative": [
-        ""
+        "Hapi.js",
+        "NestJS",
+        "Fastify",
+        "Koa.js",
+        "Sails.js",
+        "Total.js",
+        "Restify",
+        "Express.js"
       ]
     },
     {
       "name": "Electron",
-      "description": "",
+      "description": "Electron позволяет разработать кроссплатформенные настольные приложения с использованием JavaScript, HTML и CSS, объединяя веб и нативные технологии.",
       "alternative": [
-        ""
-      ]
-    },
-    {
-      "name": "Express JS",
-      "description": "",
-      "alternative": [
-        ""
+        "NW.js",
+        "Tauri",
+        "React Native (для мобильных/настольных приложений)",
+        "AppJS",
+        "Flutter (с использованием платформы desktop)"
       ]
     },
     {
       "name": "NestJS",
-      "description": "",
+      "description": "NestJS — фреймворк для разработки серверных приложений на Node.js с поддержкой TypeScript, вдохновленный Angular и концепцией модульности.",
       "alternative": [
-        ""
+        "AdonisJS",
+        "Sapper",
+        "LoopBack",
+        "Fastify",
+        "Hapi.js"
       ]
     },
     {
       "name": "Meteor",
-      "description": "",
+      "description": "Meteor — full-stack JavaScript-инструмент для создания веб-приложений в реальном времени, позволяющий быстро разрабатывать и развертывать проекты.",
       "alternative": [
-        ""
+        "Ruby on Rails (для полнофункциональных приложений)",
+        "Django (Python)",
+        "Rails",
+        "Laravel (PHP)",
+        "Spring Boot (Java)"
       ]
     },
-
     {
       "name": "Sequelize",
-      "description": "",
+      "description": "Sequelize — ORM для Node.js, поддерживающая множество баз данных. Упрощает работу с данными через удобный API для запросов",
       "alternative": [
-        ""
+        "Sequelize",
+        "TypeORM",
+        "Mongoose (для MongoDB)",
+        "Bookshelf.js",
+        "Objection.js",
+        "Waterline",
+        "MikroORM",
+        "Prisma",
+        "Knex.js"
       ]
     },
-
     {
       "name": "TypeORM",
-      "description": "",
+      "description": "TypeORM — ORM и инструмент миграции для TypeScript и JavaScript, поддерживающий различные базы данных, ускоряющий разработку приложений.",
       "alternative": [
-        ""
+        "Sequelize",
+        "TypeORM",
+        "Mongoose (для MongoDB)",
+        "Bookshelf.js",
+        "Objection.js",
+        "Waterline",
+        "MikroORM",
+        "Prisma",
+        "Knex.js"
       ]
     },
     {
       "name": "KOA",
-      "description": "",
+      "description": "KOA — веб-фреймворк от создателей Express, направленный на создание веб-приложений и API, использующий возможности async/await для упрощения кода.",
       "alternative": [
-        ""
+        "Hapi.js",
+        "Koa.js",
+        "Sails.js",
+        "Total.js",
+        "Restify",
+        "Express.js"
       ]
     },
     {
       "name": "Socket.io",
-      "description": "",
+      "description": "Socket.io обеспечивает би-directional связь между клиентом и сервером в реальном времени, идеально подходит для чатов и онлайн-игр.",
       "alternative": [
-        ""
+        "WS (WebSocket)",
+        "SockJS",
+        "Primus",
+        "Faye",
+        "Meteor DDP (для Meteor)"
       ]
     },
     {
       "name": "Apollo Server",
-      "description": "",
+      "description": "Apollo Server — зрелая платформа для работы с GraphQL, предлагающая мощные инструменты для интеграции и управления API.",
       "alternative": [
-        ""
+        "GraphQL Yoga",
+        "Hasura",
+        "PostGraphile",
+        "Relay",
+        "Prisma"
       ]
     },
     {
       "name": "GraphQL",
-      "description": "",
+      "description": "GraphQL — язык запросов для API, позволяющий получать только необходимые данные, снижая нагрузку на сеть и улучшая производительность приложения.",
       "alternative": [
-        ""
+        "GraphQL",
+        "gRPC",
+        "REST",
+        "Falcor",
+        "OData",
+        "JSON API",
+        "JSON-RPC",
+        "Thrift",
+        "Apache Avro"
       ]
     },
     {
       "name": "Stripe Server",
-      "description": "",
+      "description": "Stripe Server используется для интеграции платёжных систем и управления транзакциями, предлагая простой и безопасный способ приёма платежей.",
       "alternative": [
-        ""
+        "PayPal API",
+        "Braintree",
+        "Square",
+        "Razorpay",
+        "Authorize.Net"
       ]
     },
     {
       "name": "Swagger",
-      "description": "",
+      "description": "Swagger — набор инструментов для документирования API, обеспечивающий визуализацию, тестирование и планирование взаимодействия с серверами.",
       "alternative": [
-        ""
+        "OpenAPI",
+        "Postman",
+        "RAML",
+        "API Blueprint",
+        "Redoc"
       ]
     },
     {
       "name": "JWT Auth",
-      "description": "",
+      "description": "JWT Auth — метод аутентификации, использующий JSON Web Tokens для безопасного обмена данными между клиентом и сервером.",
       "alternative": [
-        ""
+        "OAuth 2.0",
+        "Session-based authentication",
+        "OpenID Connect",
+        "SAML (Security Assertion Markup Language)",
+        "Firebase Authentication"
       ]
     },
     {
       "name": "Google Auth",
-      "description": "",
+      "description": "Google Auth упрощает аутентификацию, позволяя пользователям входить в приложения с помощью учётной записи Google, обеспечивая безопасность и удобство.",
       "alternative": [
-        ""
+        "Apple Auth",
+        "Google Auth",
+        "Facebook Login",
+        "Twitter API",
+        "LinkedIn Login",
+        "GitHb Auuth",
+        "Microsoft Account"
       ]
     },
     {
       "name": "Apple Auth",
-      "description": "",
+      "description": "Apple Auth предлагает простой и безопасный способ аутентификации пользователей через учётную запись Apple, повышая уровень конфиденциальности.",
       "alternative": [
-        ""
+        "Apple Auth",
+        "Google Auth",
+        "Facebook Login",
+        "Twitter API",
+        "LinkedIn Login",
+        "GitHb Auuth",
+        "Microsoft Account"
       ]
     },
     {
       "name": "Apache",
-      "description": "",
+      "description": "Apache — мощный и популярный веб-сервер с богатым функционалом, поддерживающий множество модулей для развертывания веб-приложений.",
       "alternative": [
-        ""
+        "Nginx",
+        "Caddy",
+        "Lighttpd",
+        "Tomcat",
+        "IIS (Internet Information Services)"
       ]
     },
     {
       "name": "gRPC",
-      "description": "",
+      "description": " gRPC — фреймворк для Remote Procedure Call (RPC), использующий протокол HTTP/2 и Protocol Buffers для высокопроизводительной передачи данных.",
       "alternative": [
-        ""
+        "GraphQL",
+        "gRPC",
+        "REST",
+        "Falcor",
+        "OData",
+        "JSON API",
+        "JSON-RPC",
+        "Thrift",
+        "Apache Avro"
       ]
     },
     {
       "name": "Cors",
-      "description": "",
+      "description": "Cors (Cross-Origin Resource Sharing) — механизм безопасности в браузере, позволяющий контролировать доступ к ресурсам с разных доменов.",
       "alternative": [
-        ""
+        "Nginx",
+        "Caddy",
+        "Lighttpd",
+        "Tomcat",
+        "IIS (Internet Information Services)"
       ]
     },
     {
       "name": "Passport",
-      "description": "",
+      "description": "Passport — middleware для Node.js, предлагающий широкие возможности для аутентификации через различные социальные сети и методы.",
       "alternative": [
-        ""
+        "Auth0",
+        "Firebase Authentication",
+        "Okta",
+        "FirebaseUI",
+        "Stormpath"
       ]
     },
     {
       "name": "Mutler",
-      "description": "",
+      "description": "Multer — middleware для обработки multipart/form-data, используемый для загрузки файлов, упрощая работу с данными в Node.js приложениях.",
       "alternative": [
-        ""
+        "Busboy",
+        "formidable",
+        "connect-busboy",
+        "fileUpload",
+        "multiparty"
       ]
     },
     {
       "name": "mediasoup-server",
-      "description": "",
+      "description": "mediasoup-server — серверный компонент для разработки приложений, обеспечивающих передачи медиа в реальном времени через WebRTC.",
       "alternative": [
-        ""
+        "Janus WebRTC Server",
+        "Kurento",
+        "Jitsi",
+        "Pion",
+        "MediaEngine",
+        "Twilio Video",
+        "Agora.io",
+        "Ant Media Server"
       ]
     },
     {
       "name": "bcrypt",
-      "description": "",
+      "description": "Bcrypt — библиотека для хеширования паролей, обеспечивающая высокую защиту за счёт использования сложных алгоритмов и адаптивного времени обработки.",
       "alternative": [
-        ""
+        "Argon2",
+        "PBKDF2 (Password-Based Key Derivation Function 2)",
+        "scrypt",
+        "SHA-256 + Salting",
+        "SHA-3"
       ]
     }
   ],
   "databases": [
     {
-      "name": "",
-      "description": "",
+      "name": "PostgreSQL",
+      "description": "Мощная реляционная база данных с поддержкой расширенных типов данных и запросов. Известна стабильностью и соответствием стандартам SQL.",
       "alternative": [
-        ""
+        "PostgreSQL",
+        "MongoDB",
+        "MariaDB",
+        "AstraDb",
+        "Prisma"
       ]
     },
-
-    "PostgreSQL",
-    "MongoDB",
-    "MariaDB",
-    "AstraDb",
-    "Prisma"
+    {
+      "name": "MongoDB",
+      "description": "Документно-ориентированная NoSQL база данных, масштабируемая и гибкая. Позволяет хранить данные в формате JSON, подходит для быстрого прототипирования.",
+      "alternative": [
+        "PostgreSQL",
+        "MongoDB",
+        "MariaDB",
+        "AstraDb",
+        "Prisma"
+      ]
+    },
+    {
+      "name": "MariaDB",
+      "description": "Ответвление MySQL, ориентированное на производительность и безопасность. Поддерживает дополнительные функции и имеет широкую совместимость с MySQL",
+      "alternative": [
+        "PostgreSQL",
+        "MongoDB",
+        "MariaDB",
+        "AstraDb",
+        "Prisma"
+      ]
+    },
+    {
+      "name": "AstraDb",
+      "description": "Услуга баз данных от DataStax, основанная на Apache Cassandra. Обеспечивает глобальную масштабируемость и высокую доступность данных в облаке.",
+      "alternative": [
+        "PostgreSQL",
+        "MongoDB",
+        "MariaDB",
+        "AstraDb",
+        "Prisma"
+      ]
+    },
+    {
+      "name": "Prisma",
+      "description": "ORM для Node.js и TypeScript, упрощает взаимодействие с базами данных. Предоставляет простую декларативную работу с моделями и миграциями.",
+      "alternative": [
+        "PostgreSQL",
+        "MongoDB",
+        "MariaDB",
+        "AstraDb",
+        "Prisma"
+      ]
+    }
   ],
   "test": [
-    "Jest",
-    "Mocha",
-    "Puppeteer",
-    "Vitest"
+    {
+      "name": "Jest",
+      "description": "Мощный тестовый фреймворк от Facebook с поддержкой моков, асинхронного тестирования и встроенной настройки для React.",
+      "alternative": [
+        "Jest",
+        "Mocha",
+        "Chai",
+        "Jasmine",
+        "Karma",
+        "Puppeteer",
+        "Cypress",
+        "Vitest",
+        "Testing Library",
+        "AVA",
+        "TestCafe"
+      ]
+    },
+    {
+      "name": "Mocha",
+      "description": "Гибкий тестовый фреймворк, который позволяет использовать разные стили тестирования и интегрируется с библиотеками утверждений и моков.",
+      "alternative": [
+        "Jest",
+        "Mocha",
+        "Chai",
+        "Jasmine",
+        "Karma",
+        "Puppeteer",
+        "Cypress",
+        "Vitest",
+        "Testing Library",
+        "AVA",
+        "TestCafe"
+      ]
+    },
+    {
+      "name": "Chai",
+      "description": "Библиотека утверждений, которая часто используется вместе с Mocha. Поддерживает различные стили написания утверждений (BDD/TDD).",
+      "alternative": [
+        "Jest",
+        "Mocha",
+        "Chai",
+        "Jasmine",
+        "Karma",
+        "Puppeteer",
+        "Cypress",
+        "Vitest",
+        "Testing Library",
+        "AVA",
+        "TestCafe"
+      ]
+    },
+    {
+      "name": "Jasmine",
+      "description": "Поведенческий тестовый фреймворк для JavaScript, который позволяет писать тесты с использованием описательных утверждений.",
+      "alternative": [
+        "Jest",
+        "Mocha",
+        "Chai",
+        "Jasmine",
+        "Karma",
+        "Puppeteer",
+        "Cypress",
+        "Vitest",
+        "Testing Library",
+        "AVA",
+        "TestCafe"
+      ]
+    },
+    {
+      "name": "Karma",
+      "description": "Тестовый раннер для JavaScript, который запускает тесты в различных браузерах. Чаще всего используется в связке с другими фреймворками (например, Jasmine, Mocha).",
+      "alternative": [
+        "Jest",
+        "Mocha",
+        "Chai",
+        "Jasmine",
+        "Karma",
+        "Puppeteer",
+        "Cypress",
+        "Vitest",
+        "Testing Library",
+        "AVA",
+        "TestCafe"
+      ]
+    },
+    {
+      "name": "Puppeteer",
+      "description": "Библиотека для автоматизации браузера Chrome. Используется для тестирования интерфейсов, генерации скриншотов и веб-скрейпинга.",
+      "alternative": [
+        "Jest",
+        "Mocha",
+        "Chai",
+        "Jasmine",
+        "Karma",
+        "Puppeteer",
+        "Cypress",
+        "Vitest",
+        "Testing Library",
+        "AVA",
+        "TestCafe"
+      ]
+    },
+    {
+      "name": "Cypress",
+      "description": "Инструмент для тестирования end-to-end, который обеспечивает интерактивный интерфейс и быструю настройку для тестирования веб-приложений.",
+      "alternative": [
+        "Jest",
+        "Mocha",
+        "Chai",
+        "Jasmine",
+        "Karma",
+        "Puppeteer",
+        "Cypress",
+        "Vitest",
+        "Testing Library",
+        "AVA",
+        "TestCafe"
+      ]
+    },
+    {
+      "name": "Vitest",
+      "description": "Тестовый фреймворк, оптимизированный для Vite, с высокой производительностью и совместимостью с Jest.",
+      "alternative": [
+        "Jest",
+        "Mocha",
+        "Chai",
+        "Jasmine",
+        "Karma",
+        "Puppeteer",
+        "Cypress",
+        "Vitest",
+        "Testing Library",
+        "AVA",
+        "TestCafe"
+      ]
+    },
+    {
+      "name": "Testing Library",
+      "description": "Набор инструментов, ориентированных на тестирование пользовательских интерфейсов. Работает с React, Vue, Angular и другими библиотеками.",
+      "alternative": [
+        "Jest",
+        "Mocha",
+        "Chai",
+        "Jasmine",
+        "Karma",
+        "Puppeteer",
+        "Cypress",
+        "Vitest",
+        "Testing Library",
+        "AVA",
+        "TestCafe"
+      ]
+    },
+    {
+      "name": "AVA",
+      "description": "Минималистичный тестовый фреймворк, который поддерживает параллельное выполнение тестов и имеет простую настройку.",
+      "alternative": [
+        "Jest",
+        "Mocha",
+        "Chai",
+        "Jasmine",
+        "Karma",
+        "Puppeteer",
+        "Cypress",
+        "Vitest",
+        "Testing Library",
+        "AVA",
+        "TestCafe"
+      ]
+    },
+    {
+      "name": "TestCafe",
+      "description": "Инструмент для тестирования веб-приложений, который не требует установки браузера. Поддерживает тестирование на различных устройствах.",
+      "alternative": [
+        "Jest",
+        "Mocha",
+        "Chai",
+        "Jasmine",
+        "Karma",
+        "Puppeteer",
+        "Cypress",
+        "Vitest",
+        "Testing Library",
+        "AVA",
+        "TestCafe"
+      ]
+    }
   ],
   "devops": [
-    "nginx",
-    "Jenkins",
-    "Gitlab",
-    "Github Actions",
-    "Kubernetes",
-    "Terraform",
-    "Kassandra"
+    {
+      "name": "Nginx",
+      "description": "Высокопроизводительный веб-сервер и реверс-прокси, известный своей способностью к обработке большого числа соединений и масштабируемостью.",
+      "alternative": [
+        "Apache HTTP Server",
+        "Caddy",
+        "LiteSpeed"
+      ]
+    },
+    {
+      "name": "Jenkins",
+      "description": "Популярный инструмент для интеграции и доставки непрерывной разработки, позволяющий автоматизировать сборки и тестирование проектов.",
+      "alternative": [
+        "GitLab CI/CD",
+        "CircleCI",
+        "Travis CI"
+      ]
+    },
+    {
+      "name": "GitLab",
+      "description": "Платформа для управления репозиториями Git, предлагающая CI/CD, управление проектами и коллаборацию в рамках одной экосистемы.",
+      "alternative": [
+        "GitHub",
+        "Bitbucket",
+        "Azure DevOps"
+      ]
+    },
+    {
+      "name": "GitHub Actions",
+      "description": "Инструмент для автоматизации рабочих процессов CI/CD, интегрированный в GitHub, позволяющий запускать действия при изменениях в репозиториях.",
+      "alternative": [
+        "GitLab CI/CD",
+        "CircleCI",
+        "Travis CI"
+      ]
+    },
+    {
+      "name": "Kubernetes",
+      "description": "Система для автоматизации развертывания, масштабирования и управления контейнеризированными приложениями, обеспечивающая высокую доступность.",
+      "alternative": [
+        "Apache Mesos",
+        "Docker Swarm"
+      ]
+    },
+    {
+      "name": "Terraform",
+      "description": "Инструмент для управления инфраструктурой как кодом. Позволяет описывать ресурсы в конфигурационных файлах для их автоматизированного создания.",
+      "alternative": [
+        "AWS CloudFormation",
+        "Pulumi",
+        "Azure Resource Manager (ARM Templates)"
+      ]
+    },
+    {
+      "name": "Cassandra",
+      "description": "Распределенная NoSQL база данных, обеспечивающая высокую доступность и масштабируемость, идеально подходит для работы с большими объемами данных.",
+      "alternative": [
+        "MongoDB",
+        "Apache HBase",
+        "Amazon DynamoDB"
+      ]
+    }
   ],
   "additional": [
-    "Webpack",
-    "eslint",
-    "prettier",
-    "Vite"
+    {
+      "name": "Webpack",
+      "description": "Мощный сборщик модулей для JavaScript-приложений. Упрощает управление зависимостями и оптимизацию ресурсов.",
+      "alternative": [
+        "Rollup",
+        "Parcel",
+        "Snowpack"
+      ]
+    },
+    {
+      "name": "ESLint",
+      "description": "Инструмент для статического анализа кода JavaScript. Помогает находить и устранять ошибки, а также поддерживать единый стиль кода.",
+      "alternative": [
+        "JSHint",
+        "TSLint",
+        "Prettier",
+        "Stylelint"
+      ]
+    },
+    {
+      "name": "Prettier",
+      "description": "Автоматический форматировщик кода, который обеспечивает единообразный стиль. Работает с различными языками и интегрируется с редакторами.",
+      "alternative": [
+        "ESLint",
+        "JSHint",
+        "TSLint",
+        "Stylelint"
+      ]
+    },
+    {
+      "name": "Vite",
+      "description": "Современный инструмент для разработки, обеспечивающий мгновенную загрузку и обновление модулей. Оптимизирует сборку для быстрого рендеринга.",
+      "alternative": [
+        "Webpack",
+        "Parcel",
+        "Snowpack"
+      ]
+    }
   ]
 }
