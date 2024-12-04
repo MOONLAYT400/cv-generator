@@ -49,17 +49,9 @@ export const AddExperience: FC<IAddExperience> = ({
 
   const handleUpdateDuties = (
     value: string | number,
-    itemId?: number | undefined
   ) => {
-    if (itemId) {
-      const updatedDuty = {
-        id: itemId,
-        text: value
-      }
-      updateExperience({
-        ...experience,
-        duties: [...experience.duties, updatedDuty]
-      })
+    if (value === "") {
+      return
     }
     const newDuty = {
       id: getDutyID(),
@@ -105,13 +97,12 @@ export const AddExperience: FC<IAddExperience> = ({
             <LableTitle>Должностные обязанности</LableTitle>
             <Description>
               {experience.duties.map((duty, index) => (
-                <>
                   <ListItem
                     item={{ id: duty.id, text: duty.text }}
                     idx={index}
                     setList={updateExperience}
+                    key={duty.id}
                   />
-                </>
               ))}
             </Description>
           </>

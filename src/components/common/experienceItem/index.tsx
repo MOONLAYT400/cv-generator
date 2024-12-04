@@ -59,7 +59,7 @@ export const ListItem: FC<IExperienceDutyItem> = ({
           updatedItem ? (
             <input value={inputValue} onChange={handleOnChange} onKeyDown={handleOnKeyDown}/>
           ) : (
-            text
+           <div onDoubleClick={()=>setUpdatedItem(true)}>{text}</div> 
           )
         }
       </ItemDescription>
