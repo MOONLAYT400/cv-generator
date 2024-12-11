@@ -335,7 +335,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
           <Button
             text="Создать резюме docx"
             handleClick={saveDocument}
-            disabled
+            // disabled
           />
           <Button
             text="Создать резюме pdf"
