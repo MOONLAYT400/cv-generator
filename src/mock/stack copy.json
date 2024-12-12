@@ -1,7 +1,7 @@
 {
   "languages": [
     {
-      "name": "Javascript(Typescript)",
+      "name": "Javascript (Typescript)",
       "description": "Язык для создания интерактивных веб-приложений. TypeScript — это надстройка над JavaScript со статической типизацией, упрощает масштабирование и поддержку кода.",
       "alternative": [
         ""
