@@ -31,6 +31,7 @@ export interface ICustomInput {
   inputValue: string | number
   withDebounce?: boolean
   cancelAction?: boolean
+  allowClearValue?: boolean
   actionHandler?: (value: string | number) => void
   cancelActionHandler?: () => void
   handleDropError?: () => void
@@ -57,6 +58,7 @@ export const Input: FC<ICustomInput> = ({
   actionInput = false,
   cancelAction,
   withDebounce = false,
+  allowClearValue = false,
   actionHandler,
   handleKeyDown,
   saveInputValue,
@@ -86,7 +88,7 @@ export const Input: FC<ICustomInput> = ({
   }, [errorText])
 
   useEffect(() => {
-    if (inputValue) setValue(inputValue)
+    if (allowClearValue || inputValue) setValue(inputValue)
   }, [inputValue])
 
   const handleBlur = () => {

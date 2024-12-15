@@ -5,6 +5,7 @@ import { Input } from "@/components/common/input"
 import { IExperienceItem } from "@/types/cv-data"
 
 import { ListItem } from "../../../experienceItem"
+
 import {
   Description,
   Buttons,
@@ -47,9 +48,7 @@ export const AddExperience: FC<IAddExperience> = ({
     updateExperience({ ...experience, [key]: value })
   }
 
-  const handleUpdateDuties = (
-    value: string | number,
-  ) => {
+  const handleUpdateDuties = (value: string | number) => {
     if (value === "") {
       return
     }
@@ -58,9 +57,10 @@ export const AddExperience: FC<IAddExperience> = ({
       text: value
     }
     updateExperience({ ...experience, duties: [...experience.duties, newDuty] })
+    setDutiesValue("")
   }
 
-  const handleButtonClick = () => {
+  const handleSave = () => {
     saveExperience(
       experienceData && "company" in experienceData ? "update" : "create",
       experience
@@ -69,10 +69,12 @@ export const AddExperience: FC<IAddExperience> = ({
   }
   const getDutyID = () => Math.floor(Math.random() * 1000) //а повторение то все таки возможно)))
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>,
-    value: string | number) => {
-    if (event.code === 'Enter') {
-      handleUpdateDuties(value);
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLElement>,
+    value: string | number
+  ) => {
+    if (event.code === "Enter") {
+      handleUpdateDuties(value)
     }
   }
 
@@ -97,18 +99,19 @@ export const AddExperience: FC<IAddExperience> = ({
             <LableTitle>Должностные обязанности</LableTitle>
             <Description>
               {experience.duties.map((duty, index) => (
-                  <ListItem
-                    item={{ id: duty.id, text: duty.text }}
-                    idx={index}
-                    setList={updateExperience}
-                    key={duty.id}
-                  />
+                <ListItem
+                  item={{ id: duty.id, text: duty.text }}
+                  idx={index}
+                  setList={updateExperience}
+                  key={duty.id}
+                />
               ))}
             </Description>
           </>
         )}
         <DutyInputsGroup>
           <Input
+            allowClearValue
             inputValue={dutiesValue}
             placeholder="Введите должностные обязанности..."
             saveInputValue={setDutiesValue}
@@ -119,7 +122,6 @@ export const AddExperience: FC<IAddExperience> = ({
             text="+"
             handleClick={() => {
               handleUpdateDuties(dutiesValue)
-              setDutiesValue("")
             }}
           />
         </DutyInputsGroup>
@@ -145,7 +147,7 @@ export const AddExperience: FC<IAddExperience> = ({
               ? "Обновить"
               : "Добавить"
           }
-          handleClick={handleButtonClick}
+          handleClick={handleSave}
         />
         <Button text={"Отмена"} buttonType={"danger"} handleClick={close} />
       </Buttons>
