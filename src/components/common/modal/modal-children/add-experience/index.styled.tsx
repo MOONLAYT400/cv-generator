@@ -48,7 +48,7 @@ export const DutyInputsGroup = styled.div`
   flex-direction: row;
   gap: 5px;
 `
-export const LableTitle = styled.p`
+export const LabelTitle = styled.p`
   font-size: 16px;
   font-style: normal;
   font-weight: 400;

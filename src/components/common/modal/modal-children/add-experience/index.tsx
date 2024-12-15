@@ -12,7 +12,7 @@ import {
   Title,
   Wrapper,
   DutyInputsGroup,
-  LableTitle
+  LabelTitle
 } from "./index.styled"
 
 interface IAddExperience {
@@ -49,9 +49,13 @@ export const AddExperience: FC<IAddExperience> = ({
   }
 
   const handleUpdateDuties = (value: string | number) => {
-    if (value === "") {
-      return
-    }
+    // if (value === "") {
+    //   return
+    // }
+    //  лучше писать вот так
+    // if (!value)
+    //  но лучше вообще реализовать это так, как я сделал внутри самого компонента инпута
+    // и поставь расширение - Spell checker если его нет
     const newDuty = {
       id: getDutyID(),
       text: value
@@ -67,7 +71,7 @@ export const AddExperience: FC<IAddExperience> = ({
     )
     close()
   }
-  const getDutyID = () => Math.floor(Math.random() * 1000) //а повторение то все таки возможно)))
+  const getDutyID = () => Math.floor(Math.random() * 1000)
 
   const handleKeyDown = (
     event: React.KeyboardEvent<HTMLElement>,
@@ -96,7 +100,7 @@ export const AddExperience: FC<IAddExperience> = ({
       <>
         {experience.duties.length > 0 && (
           <>
-            <LableTitle>Должностные обязанности</LableTitle>
+            <LabelTitle>Должностные обязанности</LabelTitle>
             <Description>
               {experience.duties.map((duty, index) => (
                 <ListItem

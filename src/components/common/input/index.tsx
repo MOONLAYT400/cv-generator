@@ -92,6 +92,7 @@ export const Input: FC<ICustomInput> = ({
   }, [inputValue])
 
   const handleBlur = () => {
+    if (!value) return // вот таким вот образом
     setFocused(false)
     if (type === "number") {
       saveInputValue(+value)
