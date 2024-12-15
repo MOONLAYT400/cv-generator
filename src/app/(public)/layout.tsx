@@ -1,5 +1,6 @@
 "use client"
 
+import { NavWrapper } from "@/components/features/nav-wrapper"
 import { Header } from "@/components/ui/header"
 
 import { ChildrenWrapper, Wrapper } from "./layout.styled"
@@ -11,8 +12,10 @@ export default function PublicLayout({
 }>) {
   return (
     <Wrapper>
-      <Header />
-      <ChildrenWrapper>{children}</ChildrenWrapper>
+      <NavWrapper>
+        <Header />
+        <ChildrenWrapper>{children}</ChildrenWrapper>
+      </NavWrapper>
     </Wrapper>
   )
 }

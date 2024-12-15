@@ -43,7 +43,7 @@ export const Wrapper = styled.button<ButtonStyles>`
   outline: none;
   font-size: 14px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 16px;
   white-space: nowrap;
   transition: all 0.2s ease;
