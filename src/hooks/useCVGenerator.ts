@@ -61,7 +61,7 @@ const getExperienceDescription = (experience: Array<IExperienceItem>): Paragraph
       new TextRun({ text: `${itemExperiense.role}`, break: 1 }),
       new TextRun({ text: `даты: ${itemExperiense.startDate}-${itemExperiense.endDate}`, break: 1 }),
       new TextRun({ text: "Должностные обязанности:", break: 1 }),
-      new TextRun({ text: itemExperiense.duties.join(", "), break: 1 })
+      new TextRun({ text: itemExperiense.duties.map((duty)=>duty.text).join(", "), break: 1 })
       ],
     })
   });
