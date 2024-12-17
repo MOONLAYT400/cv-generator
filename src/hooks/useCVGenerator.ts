@@ -61,7 +61,7 @@ const getExperienceDescription = (experience: Array<IExperienceItem>): Paragraph
       new TextRun({ text: `${itemExperiense.role}`, break: 1 }),
       new TextRun({ text: `даты: ${itemExperiense.startDate}-${itemExperiense.endDate}`, break: 1 }),
       new TextRun({ text: "Должностные обязанности:", break: 1 }),
-      new TextRun({ text: `${itemExperiense.duties.map((duty) => duty.text)}`, break: 1 })
+      new TextRun({ text: itemExperiense.duties.join(", "), break: 1 })
       ],
     })
   });
@@ -82,10 +82,10 @@ const getProjectDescription = (projects: Array<IProjectItem>): Paragraph[] => {
   const projectsDescriptionArr = projects.map((project) => {
     console.log(project);
     const projectDescriptionParagraph = [];
-    const progectName = new Paragraph(project.name);
+    const progectName = new Paragraph({ text: project.name, heading: "Heading2"});
     const projectDescription = new Paragraph(project.description);
     const technologies = project.technologies.map((technology) => technology.name);
-    const projectTechnologies = new Paragraph({ children: [new TextRun('Стек: '), new TextRun(technologies.toString())] });
+    const projectTechnologies = new Paragraph({ children: [new TextRun('Стек: '), new TextRun(technologies.join(", "))] });
     projectDescriptionParagraph.push(progectName, projectDescription, projectTechnologies)
     return projectDescriptionParagraph;
   })
