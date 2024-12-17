@@ -3,8 +3,47 @@ import { saveAs } from "file-saver"
 
 import { ICVParams } from "@/types/cv-data"
 
+
+const getExperienceDescription = (params: ICVParams): Paragraph[] => {
+  return params.experience.map((itemExperiense) => {
+    return new Paragraph({
+      children: [new TextRun({ text: `${itemExperiense.company}`, break: 0 }),
+      new TextRun({ text: `${itemExperiense.role}`, break: 1 }),
+      new TextRun({ text: `даты: ${itemExperiense.startDate}-${itemExperiense.endDate}`, break: 1 }),
+      new TextRun({ text: "Должностные обязанности:", break: 1 }),
+      new TextRun({ text: `${itemExperiense.duties.map((duty) => duty.text)}`, break: 1 })
+      ],
+    })
+  });
+}
+
+const getEducationDescription = (params: ICVParams): Paragraph[] => {
+  return params.education.map((education) => {
+    return new Paragraph({
+      children: [new TextRun({ text: `${education.university}`, break: 0 }),
+      new TextRun({ text: `${education.field}`, break: 1 }),
+      new TextRun({ text: `даты: ${education.startDate || ''}-${education.endDate || ''}`, break: 1 }),
+      ],
+    })
+  });
+}
+
+const getProjectDescription = (params: ICVParams): Paragraph[] => {
+  const projectsDescriptionArr = params.projects.map((project) => {
+    console.log(project);
+    const projectDescriptionParagraph = [];
+    const progectName = new Paragraph(project.name);
+    const projectDescription = new Paragraph(project.description);
+    const technologies = project.technologies.map((technology) => technology.name);
+    const projectTechnologies = new Paragraph({ children: [new TextRun('Стек: '), new TextRun(technologies.toString())] });
+    projectDescriptionParagraph.push(progectName, projectDescription, projectTechnologies)
+    return projectDescriptionParagraph;
+  })
+  return projectsDescriptionArr.flat(1);
+}
+
 export const useCVGenerator = (params: ICVParams): (() => void) => {
-  const { fullName, technologies, experience, education } = params;
+  const { fullName, technologies } = params;
 
   const technologiesString = technologies.map((item) => {
     return ` ${item.name.toString()}`;
@@ -19,26 +58,10 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
   // projects: Array<IProjectItem>
 
   // TODO implement file structure
-  const experienceDescription = experience.map((itemExperiense) => {
-    return new Paragraph({
-      children: [new TextRun({ text: `${itemExperiense.company}`, break: 0 }),
-      new TextRun({ text: `${itemExperiense.role}`, break: 1 }),
-      new TextRun({ text: `даты: ${itemExperiense.startDate}-${itemExperiense.endDate}`, break: 1 }),
-      new TextRun({ text: "Должностные обязанности:", break: 1 }),
-      new TextRun({ text: `${itemExperiense.duties.map((duty) => duty.text)}`, break: 1 })
-      ],
-    })
-  });
+  const experienceDescription = getExperienceDescription(params);
+  const educationDescription = getEducationDescription(params);
 
-  const educationDescription = education.map((education) => {
-    return new Paragraph({
-      children: [new TextRun({ text: `${education.university}`, break: 0 }),
-      new TextRun({ text: `${education.field}`, break: 1 }),
-      new TextRun({ text: `даты: ${education.startDate || ''}-${education.endDate || ''}`, break: 1 }),
-      ],
-    })
-  });
-
+  const projectsDescription = getProjectDescription(params);
 
   const doc = new Document({
     sections: [
@@ -82,7 +105,7 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
                   }),
                   new TableCell({
                     children: [
-                      new Paragraph({text: "Опыт работы"}),
+                      new Paragraph({ text: "Опыт работы" }),
                       ...experienceDescription,// заменить копирование на что-то более элегантное, на объединение массивов?
                       new Paragraph("Образование"),
                       ...educationDescription,
@@ -102,6 +125,7 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
               }),
             ],
           }),
+          ...projectsDescription,
         ]
       }
     ]
