@@ -1,8 +1,58 @@
-import { Document, HeadingLevel, Packer, Paragraph, Table, TableRow, TableCell, WidthType, BorderStyle, TextRun } from "docx"
+import { Document, HeadingLevel, Packer, Paragraph, Table, TableRow, TableCell, WidthType, BorderStyle, TextRun, PageBreak, UnderlineType, AlignmentType, convertInchesToTwip } from "docx"
 import { saveAs } from "file-saver"
 
 import { ICVParams } from "@/types/cv-data"
 
+const styleForDocument = {
+  default: {
+    heading1: {
+        run: {
+            size: "45pt",
+            bold: true,
+            italics: false,
+            color: "548ab7",
+        },
+        paragraph: {
+            spacing: {
+                after: 120,
+            },
+            alignment: AlignmentType.RIGHT,
+        },
+    },
+    heading2: {
+        run: {
+            size: 26,
+            bold: true,
+            color: "548ab7",
+            underline: {
+                type: UnderlineType.DOUBLE,
+                color: "548ab7",
+            },
+        },
+        paragraph: {
+            spacing: {
+                before: 240,
+                after: 120,
+            },
+        },
+    },
+    listParagraph: {
+        run: {
+            color: "#FF0000",
+        },
+    },
+    document: {
+        run: {
+            size: "12pt",
+            font: "Century Gothic",
+            color: "000000",
+        },
+        paragraph: {
+            alignment: AlignmentType.LEFT,
+        },
+    },
+}
+};
 
 const getExperienceDescription = (params: ICVParams): Paragraph[] => {
   return params.experience.map((itemExperiense) => {
@@ -64,12 +114,14 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
   const projectsDescription = getProjectDescription(params);
 
   const doc = new Document({
+    styles: styleForDocument,
     sections: [
       {
         children: [
           new Paragraph({
-            text: fullName,
-            heading: HeadingLevel.TITLE
+            text: fullName.toUpperCase(),
+            heading: "Heading1",
+            //HeadingLevel.TITLE,
           }),
           // начало моих экспериментов
           new Table({
