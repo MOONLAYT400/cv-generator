@@ -1,7 +1,7 @@
 import { Document, HeadingLevel, Packer, Paragraph, Table, TableRow, TableCell, WidthType, BorderStyle, TextRun, PageBreak, UnderlineType, AlignmentType, convertInchesToTwip } from "docx"
 import { saveAs } from "file-saver"
 
-import { ICVParams } from "@/types/cv-data"
+import { ICVParams, IEducationItem, IExperienceItem, IProjectItem } from "@/types/cv-data"
 
 const styleForDocument = {
   default: {
@@ -54,8 +54,8 @@ const styleForDocument = {
 }
 };
 
-const getExperienceDescription = (params: ICVParams): Paragraph[] => {
-  return params.experience.map((itemExperiense) => {
+const getExperienceDescription = (experience: Array<IExperienceItem>): Paragraph[] => {
+  return experience.map((itemExperiense) => {
     return new Paragraph({
       children: [new TextRun({ text: `${itemExperiense.company}`, break: 0 }),
       new TextRun({ text: `${itemExperiense.role}`, break: 1 }),
@@ -67,8 +67,8 @@ const getExperienceDescription = (params: ICVParams): Paragraph[] => {
   });
 }
 
-const getEducationDescription = (params: ICVParams): Paragraph[] => {
-  return params.education.map((education) => {
+const getEducationDescription = (education: Array<IEducationItem>): Paragraph[] => {
+  return education.map((education) => {
     return new Paragraph({
       children: [new TextRun({ text: `${education.university}`, break: 0 }),
       new TextRun({ text: `${education.field}`, break: 1 }),
@@ -78,8 +78,8 @@ const getEducationDescription = (params: ICVParams): Paragraph[] => {
   });
 }
 
-const getProjectDescription = (params: ICVParams): Paragraph[] => {
-  const projectsDescriptionArr = params.projects.map((project) => {
+const getProjectDescription = (projects: Array<IProjectItem>): Paragraph[] => {
+  const projectsDescriptionArr = projects.map((project) => {
     console.log(project);
     const projectDescriptionParagraph = [];
     const progectName = new Paragraph(project.name);
@@ -93,7 +93,7 @@ const getProjectDescription = (params: ICVParams): Paragraph[] => {
 }
 
 export const useCVGenerator = (params: ICVParams): (() => void) => {
-  const { fullName, technologies } = params;
+  const { fullName, technologies, experience, education, projects } = params;
 
   const technologiesString = technologies.map((item) => {
     return ` ${item.name.toString()}`;
@@ -108,10 +108,9 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
   // projects: Array<IProjectItem>
 
   // TODO implement file structure
-  const experienceDescription = getExperienceDescription(params);
-  const educationDescription = getEducationDescription(params);
-
-  const projectsDescription = getProjectDescription(params);
+  const experienceDescription = getExperienceDescription(experience);
+  const educationDescription = getEducationDescription(education);
+  const projectsDescription = getProjectDescription(projects);
 
   const doc = new Document({
     styles: styleForDocument,
