@@ -43,11 +43,7 @@ export const Description = styled.ul`
   max-height: 100px;
   overflow-wrap: break-word;
 `
-export const DutyInputsGroup = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-`
+
 export const LabelTitle = styled.p`
   font-size: 16px;
   font-style: normal;

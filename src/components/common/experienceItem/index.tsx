@@ -1,9 +1,10 @@
 import { FC, useState } from "react"
 
-import { Button, ButtonsGroup, ItemDescription, Wrapper } from "./index.styled"
-
 import { IExperienceItem, IDutyItem } from "@/types/cv-data"
 
+import { Edit16Icon, Trash16Icon } from "../icons"
+
+import { Button, ButtonsGroup, ItemDescription, Wrapper } from "./index.styled"
 
 interface IExperienceDutyItem {
   item: IDutyItem
@@ -11,18 +12,14 @@ interface IExperienceDutyItem {
   setList: (value: any) => void
 }
 
-export const ListItem: FC<IExperienceDutyItem> = ({
-  item,
-  idx,
-  setList,
-}) => {
-  const { id, text } = item;
-  const [inputValue, setInputValue] = useState(text);
+export const ListItem: FC<IExperienceDutyItem> = ({ item, idx, setList }) => {
+  const { id, text } = item
+  const [inputValue, setInputValue] = useState(text)
   const [updatedItem, setUpdatedItem] = useState<boolean>(false) // назвать isItemUpdated?
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInputValue(value);
+    const value = e.target.value
+    setInputValue(value)
   }
 
   const saveNewItemText = () => {
@@ -42,41 +39,48 @@ export const ListItem: FC<IExperienceDutyItem> = ({
   }
 
   const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if(e.code === 'Enter') {
-      saveNewItemText();
-      setUpdatedItem(false);
+    if (e.code === "Enter") {
+      saveNewItemText()
+      setUpdatedItem(false)
     }
   }
 
   const handleCancel = () => {
-    setUpdatedItem(false);
+    setUpdatedItem(false)
   }
 
   return (
     <Wrapper>
       <ItemDescription>
-        {idx + 1}. {
-          updatedItem ? (
-            <input value={inputValue} onChange={handleOnChange} onKeyDown={handleOnKeyDown}/>
-          ) : (
-           <div onDoubleClick={()=>setUpdatedItem(true)}>{text}</div> 
-          )
-        }
+        {idx + 1}.&nbsp;
+        {updatedItem ? (
+          <input
+            value={inputValue}
+            onChange={handleOnChange}
+            onKeyDown={handleOnKeyDown}
+          />
+        ) : (
+          <div onDoubleClick={() => setUpdatedItem(true)}>{text}</div>
+        )}
       </ItemDescription>
       <ButtonsGroup>
         <Button
           onClick={() => {
             if (updatedItem) {
-              saveNewItemText();
+              saveNewItemText()
             }
             setUpdatedItem(!updatedItem)
           }}
         >
-          {updatedItem ? "Сохранить" : <>&#9999;</>}
+          {updatedItem ? "Сохранить" : <Edit16Icon />}
         </Button>
-        {updatedItem ? <Button onClick={handleCancel}>Отмена</Button>
-          : <Button onClick={handleDelete}>&#128465;</Button>
-        }
+        {updatedItem ? (
+          <Button onClick={handleCancel}>Отмена</Button>
+        ) : (
+          <Button onClick={handleDelete}>
+            <Trash16Icon />
+          </Button>
+        )}
       </ButtonsGroup>
     </Wrapper>
   )

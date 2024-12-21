@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react"
 
 import { Button } from "@/components/common/button"
+import { PlusSystemIcon } from "@/components/common/icons"
 import { Input } from "@/components/common/input"
 import { IExperienceItem } from "@/types/cv-data"
 
@@ -11,7 +12,6 @@ import {
   Buttons,
   Title,
   Wrapper,
-  DutyInputsGroup,
   LabelTitle
 } from "./index.styled"
 
@@ -49,13 +49,6 @@ export const AddExperience: FC<IAddExperience> = ({
   }
 
   const handleUpdateDuties = (value: string | number) => {
-    // if (value === "") {
-    //   return
-    // }
-    //  лучше писать вот так
-    // if (!value)
-    //  но лучше вообще реализовать это так, как я сделал внутри самого компонента инпута
-    // и поставь расширение - Spell checker если его нет
     const newDuty = {
       id: getDutyID(),
       text: value
@@ -74,12 +67,10 @@ export const AddExperience: FC<IAddExperience> = ({
   const getDutyID = () => Math.floor(Math.random() * 1000)
 
   const handleKeyDown = (
-    event: React.KeyboardEvent<HTMLElement>,
+    _event: React.KeyboardEvent<HTMLElement>,
     value: string | number
   ) => {
-    if (event.code === "Enter") {
-      handleUpdateDuties(value)
-    }
+    handleUpdateDuties(value)
   }
 
   return (
@@ -113,22 +104,17 @@ export const AddExperience: FC<IAddExperience> = ({
             </Description>
           </>
         )}
-        <DutyInputsGroup>
-          <Input
-            allowClearValue
-            inputValue={dutiesValue}
-            placeholder="Введите должностные обязанности..."
-            saveInputValue={setDutiesValue}
-            handleKeyDown={handleKeyDown}
-          />
-          <Button
-            buttonType="primary"
-            text="+"
-            handleClick={() => {
-              handleUpdateDuties(dutiesValue)
-            }}
-          />
-        </DutyInputsGroup>
+        <Input
+          actionInput
+          allowClearValue
+          clearAfterAction
+          inputValue={dutiesValue}
+          placeholder="Введите должностные обязанности..."
+          saveInputValue={setDutiesValue}
+          handleKeyDown={handleKeyDown}
+          icon={<PlusSystemIcon />}
+          actionHandler={() => handleUpdateDuties(dutiesValue)}
+        />
       </>
       <Input
         label="Начало работы"

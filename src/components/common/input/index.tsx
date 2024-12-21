@@ -32,6 +32,7 @@ export interface ICustomInput {
   withDebounce?: boolean
   cancelAction?: boolean
   allowClearValue?: boolean
+  clearAfterAction?: boolean
   actionHandler?: (value: string | number) => void
   cancelActionHandler?: () => void
   handleDropError?: () => void
@@ -59,6 +60,7 @@ export const Input: FC<ICustomInput> = ({
   cancelAction,
   withDebounce = false,
   allowClearValue = false,
+  clearAfterAction = false,
   actionHandler,
   handleKeyDown,
   saveInputValue,
@@ -92,8 +94,8 @@ export const Input: FC<ICustomInput> = ({
   }, [inputValue])
 
   const handleBlur = () => {
-    if (!value) return // вот таким вот образом
     setFocused(false)
+    if (!value) return
     if (type === "number") {
       saveInputValue(+value)
       return
@@ -106,6 +108,13 @@ export const Input: FC<ICustomInput> = ({
     if (error) {
       setError("")
       handleDropError?.()
+    }
+  }
+
+  const onKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.code === "Enter") {
+      handleKeyDown?.(event, value)
+      if (clearAfterAction) setValue("")
     }
   }
 
@@ -129,7 +138,7 @@ export const Input: FC<ICustomInput> = ({
           onBlur={handleBlur}
           $isError={!!error}
           type={type}
-          onKeyDown={(event) => handleKeyDown?.(event, value)}
+          onKeyDown={onKeyDown}
           autoFocus={autoFocus}
           placeholder={placeholder}
           step={settings?.step}
