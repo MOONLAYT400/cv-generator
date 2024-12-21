@@ -31,7 +31,14 @@ import {
 } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
 
-import { Buttons, InfoInputs, InfoSection, Wrapper, FileInputs, ButtonsGroup } from "./index.styled"
+import {
+  Buttons,
+  InfoInputs,
+  InfoSection,
+  Wrapper,
+  FileInputs,
+  ButtonsGroup
+} from "./index.styled"
 
 const JoyRideNoSSR = dynamic(() => import("react-joyride"), { ssr: false })
 
@@ -79,13 +86,15 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   //tech control
 
   const updateTechArray = (type: string, name: string) => {
-    const existing = cvData.technologies.find((item) => item.name === name)
+    const techArray = cvData.technologies
+    const existing = techArray.find((item) => item.name === name)
 
     if (!existing) {
-      setCVData({
-        ...cvData,
-        technologies: [...cvData.technologies, { type, name }]
-      })
+      const lastIndex = techArray.findLastIndex((item) => item.type === type)
+      if (lastIndex === -1) {
+        techArray.push({ type, name })
+      } else techArray.splice(lastIndex + 1, 0, { type, name })
+      setCVData({ ...cvData, technologies: techArray })
     }
   }
 
@@ -198,22 +207,25 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     }
   }
 
-  const downloadJSON = (obj: ICVParams) => { // J.= нужно ли эту функцию вынести в отдельный модуль?
-    const name = obj.fullName;
-    const dataUri = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
-    const anchorElement = document.createElement('a');
-    anchorElement.href = dataUri;
-    anchorElement.download = `${name}.json`;
-    document.body.appendChild(anchorElement);
-    anchorElement.click();
-    document.body.removeChild(anchorElement);
-  }
-  
-  const handleExportFile = () => { //J. TS не прописан
-    downloadJSON(cvData);
+  const downloadJSON = (obj: ICVParams) => {
+    // J.= нужно ли эту функцию вынести в отдельный модуль?
+    const name = obj.fullName
+    const dataUri =
+      "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj))
+    const anchorElement = document.createElement("a")
+    anchorElement.href = dataUri
+    anchorElement.download = `${name}.json`
+    document.body.appendChild(anchorElement)
+    anchorElement.click()
+    document.body.removeChild(anchorElement)
   }
 
-  const filePicker = useRef<HTMLInputElement>(null);
+  const handleExportFile = () => {
+    //J. TS не прописан
+    downloadJSON(cvData)
+  }
+
+  const filePicker = useRef<HTMLInputElement>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target?.files?.[0] //J.= что то мне кажется это какая -то фигня) сделала чтобы TS не ругался на null
@@ -221,16 +233,15 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
       return
     }
     const reader = new FileReader()
-    reader.readAsText(file);
+    reader.readAsText(file)
     reader.onload = function () {
-      const data: ICVParams = JSON.parse(reader.result as string); //J.= обработать если не тот формат json
-      setCVData(data);
-    };
-
+      const data: ICVParams = JSON.parse(reader.result as string) //J.= обработать если не тот формат json
+      setCVData(data)
+    }
   }
 
   const handlePick = () => {
-      filePicker?.current?.click();
+    filePicker?.current?.click()
   }
 
   return (
@@ -275,19 +286,18 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         close={() => handleToggleModal("techComparison", null)}
       />
       <ButtonsGroup>
-        <Button
-          text={"Выгрузить файл"}
-          handleClick={handleExportFile}
-        />
+        <Button text={"Выгрузить файл"} handleClick={handleExportFile} />
         <FileInputs>
-          <input type="file" onChange={handleChange} accept=".json" ref={filePicker} />
+          <input
+            type="file"
+            onChange={handleChange}
+            accept=".json"
+            ref={filePicker}
+          />
         </FileInputs>
-        <Button
-          text={"Загрузить файл"}
-          handleClick={handlePick}
-        />
+        <Button text={"Загрузить файл"} handleClick={handlePick} />
       </ButtonsGroup>
-      
+
       <InfoSection>
         <ImageWithPreview
           label={"Фото"}
