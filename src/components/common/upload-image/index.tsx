@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from "react"
+import { FC, useEffect, useMemo, useState } from "react"
 import { useDropzone } from "react-dropzone"
 
 import { FIleDrop, Preview, ThumbnailWrapper, Wrapper } from "./index.styled"
@@ -27,6 +27,10 @@ export const ImageWithPreview: FC<IImageWithPreview> = ({
   saveImage
 }) => {
   const [image, setImage] = useState(imageSrc)
+
+  useEffect(() => {
+    setImage(imageSrc)
+  }, [imageSrc])
 
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
     useDropzone({
