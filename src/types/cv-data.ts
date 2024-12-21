@@ -17,11 +17,13 @@ export interface IDutyItem {
   text: string | number
 }
 
+export interface IResponsibilityItem extends IDutyItem {}
+
 export interface IExperienceItem {
   id?: number
   company: string
   role: string
-  duties:  Array<IDutyItem>
+  duties: Array<IDutyItem>
   startDate: string
   endDate: string
 }
@@ -30,6 +32,7 @@ export interface IProjectItem {
   id?: number
   name: string
   description: string
+  responsibilities: Array<IResponsibilityItem>
   role: string
   technologies: Array<ITechItem>
 }

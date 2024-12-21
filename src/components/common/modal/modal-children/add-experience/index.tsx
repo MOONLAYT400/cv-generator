@@ -1,19 +1,11 @@
 import { FC, useEffect, useState } from "react"
 
 import { Button } from "@/components/common/button"
-import { PlusSystemIcon } from "@/components/common/icons"
 import { Input } from "@/components/common/input"
+import { ListInput } from "@/components/ui/input-with-list"
 import { IExperienceItem } from "@/types/cv-data"
 
-import { ListItem } from "../../../experienceItem"
-
-import {
-  Description,
-  Buttons,
-  Title,
-  Wrapper,
-  LabelTitle
-} from "./index.styled"
+import { Buttons, Title, Wrapper } from "./index.styled"
 
 interface IAddExperience {
   experienceData: IExperienceItem | null
@@ -36,7 +28,6 @@ export const AddExperience: FC<IAddExperience> = ({
     startDate: "",
     endDate: ""
   })
-  const [dutiesValue, setDutiesValue] = useState<string | number>("")
 
   useEffect(() => {
     if (experienceData && "company" in experienceData) {
@@ -54,7 +45,6 @@ export const AddExperience: FC<IAddExperience> = ({
       text: value
     }
     updateExperience({ ...experience, duties: [...experience.duties, newDuty] })
-    setDutiesValue("")
   }
 
   const handleSave = () => {
@@ -65,13 +55,6 @@ export const AddExperience: FC<IAddExperience> = ({
     close()
   }
   const getDutyID = () => Math.floor(Math.random() * 1000)
-
-  const handleKeyDown = (
-    _event: React.KeyboardEvent<HTMLElement>,
-    value: string | number
-  ) => {
-    handleUpdateDuties(value)
-  }
 
   return (
     <Wrapper>
@@ -88,34 +71,13 @@ export const AddExperience: FC<IAddExperience> = ({
         placeholder="Введите название должности..."
         saveInputValue={(role) => handleUpdateExperience("role", role)}
       />
-      <>
-        {experience.duties.length > 0 && (
-          <>
-            <LabelTitle>Должностные обязанности</LabelTitle>
-            <Description>
-              {experience.duties.map((duty, index) => (
-                <ListItem
-                  item={{ id: duty.id, text: duty.text }}
-                  idx={index}
-                  setList={updateExperience}
-                  key={duty.id}
-                />
-              ))}
-            </Description>
-          </>
-        )}
-        <Input
-          actionInput
-          allowClearValue
-          clearAfterAction
-          inputValue={dutiesValue}
-          placeholder="Введите должностные обязанности..."
-          saveInputValue={setDutiesValue}
-          handleKeyDown={handleKeyDown}
-          icon={<PlusSystemIcon />}
-          actionHandler={() => handleUpdateDuties(dutiesValue)}
-        />
-      </>
+      <ListInput
+        title={"Должностные обязанности"}
+        type={"duties"}
+        items={experience.duties}
+        saveItem={handleUpdateDuties}
+        updateItem={updateExperience}
+      />
       <Input
         label="Начало работы"
         inputValue={experience.startDate}

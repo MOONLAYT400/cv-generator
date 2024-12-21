@@ -5,6 +5,7 @@ import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
 import { Select } from "@/components/common/select"
 import { TextArea } from "@/components/common/text-area"
+import { ListInput } from "@/components/ui/input-with-list"
 import { techColors } from "@/constants/styles/colors"
 import { IProjectItem, ITechItem } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
@@ -36,7 +37,8 @@ export const CreateProject: FC<ICreateProject> = ({
     name: "",
     description: "",
     role: "",
-    technologies: []
+    technologies: [],
+    responsibilities: []
   })
 
   useEffect(() => {
@@ -77,6 +79,19 @@ export const CreateProject: FC<ICreateProject> = ({
     close()
   }
 
+  const handleUpdateResponsibilities = (value: string | number) => {
+    const newDuty = {
+      id: getDutyID(),
+      text: value
+    }
+    updateProject({
+      ...project,
+      responsibilities: [...project.responsibilities, newDuty]
+    })
+  }
+
+  const getDutyID = () => Math.floor(Math.random() * 1000)
+
   return (
     <Wrapper>
       <Title>Добавить проект</Title>
@@ -105,6 +120,13 @@ export const CreateProject: FC<ICreateProject> = ({
           }
         />
       </InputsSection>
+      <ListInput
+        title={"Над чем я работал"}
+        type={"responsibilities"}
+        items={project.responsibilities}
+        saveItem={handleUpdateResponsibilities}
+        updateItem={updateProject}
+      />
       <TechSection>
         <Select
           label="Языки"

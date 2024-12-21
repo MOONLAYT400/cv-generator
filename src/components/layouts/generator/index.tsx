@@ -60,7 +60,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   })
 
   const saveDocument = useCVGenerator(cvData)
-  // TODO Implement onboarding with layout effect
 
   const [modals, controlModals] = useState({
     project: null,

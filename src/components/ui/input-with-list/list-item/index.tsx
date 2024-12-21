@@ -1,22 +1,26 @@
 import { FC, useState } from "react"
 
+import { Edit16Icon, Trash16Icon } from "@/components/common/icons"
 import { IExperienceItem, IDutyItem } from "@/types/cv-data"
-
-import { Edit16Icon, Trash16Icon } from "../icons"
 
 import { Button, ButtonsGroup, ItemDescription, Wrapper } from "./index.styled"
 
 interface IExperienceDutyItem {
   item: IDutyItem
   idx: number
+  type: string
   setList: (value: any) => void
 }
 
-export const ListItem: FC<IExperienceDutyItem> = ({ item, idx, setList }) => {
+export const ListItem: FC<IExperienceDutyItem> = ({
+  item,
+  idx,
+  type,
+  setList
+}) => {
   const { id, text } = item
   const [inputValue, setInputValue] = useState(text)
-  const [updatedItem, setUpdatedItem] = useState<boolean>(false) // назвать isItemUpdated?
-
+  const [updatedItem, setUpdatedItem] = useState<boolean>(false)
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setInputValue(value)
@@ -24,17 +28,21 @@ export const ListItem: FC<IExperienceDutyItem> = ({ item, idx, setList }) => {
 
   const saveNewItemText = () => {
     setList((prevList: IExperienceItem) => {
-      const newDuties = prevList.duties.map((item) =>
+      //@ts-expect-error - normal
+      const newDuties = prevList[type as keyof typeof prevList]?.map((item) =>
         item.id === id ? { ...item, text: inputValue } : item
       )
-      return { ...prevList, duties: newDuties }
+      return { ...prevList, [type]: newDuties }
     })
   }
 
   const handleDelete = () => {
     setList((prevList: IExperienceItem) => {
-      const newDuties = prevList.duties.filter((item) => item.id !== id)
-      return { ...prevList, duties: newDuties }
+      //@ts-expect-error - normal
+      const newDuties = prevList[type as keyof typeof prevList]?.filter(
+        (item: any) => item.id !== id
+      )
+      return { ...prevList, [type]: newDuties }
     })
   }
 
