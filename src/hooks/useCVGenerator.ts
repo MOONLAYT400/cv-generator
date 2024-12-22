@@ -54,6 +54,14 @@ const styleForDocument = {
 }
 };
 
+const getAboutMe = (shortBio: string): Paragraph => {
+  return new Paragraph({
+    children: [new TextRun({ text: 'О себе', break: 0 }),
+    new TextRun({ text: `${shortBio}`, break: 1 }),
+    ],
+  })
+}
+
 const getExperienceDescription = (experience: Array<IExperienceItem>): Paragraph[] => {
   return experience.map((itemExperiense) => {
     return new Paragraph({
@@ -93,7 +101,7 @@ const getProjectDescription = (projects: Array<IProjectItem>): Paragraph[] => {
 }
 
 export const useCVGenerator = (params: ICVParams): (() => void) => {
-  const { fullName, technologies, experience, education, projects } = params;
+  const { fullName, shortBio, technologies, experience, education, projects } = params;
 
   const technologiesString = technologies.map((item) => {
     return ` ${item.name.toString()}`;
@@ -108,6 +116,7 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
   // projects: Array<IProjectItem>
 
   // TODO implement file structure
+  const aboutMe = getAboutMe(shortBio);
   const experienceDescription = getExperienceDescription(experience);
   const educationDescription = getEducationDescription(education);
   const projectsDescription = getProjectDescription(projects);
@@ -135,7 +144,9 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
               new TableRow({
                 children: [
                   new TableCell({
-                    children: [new Paragraph({
+                    children: [
+                      aboutMe,
+                      new Paragraph({
                       text: "Навыки",
                     }
                     ),
