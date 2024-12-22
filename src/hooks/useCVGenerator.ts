@@ -187,11 +187,6 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
     sections: [
       {
         children: [
-          new Paragraph({
-            text: fullName, //.toUpperCase(),
-            heading: "Heading1",
-            //HeadingLevel.TITLE,
-          }),
           // начало моих экспериментов
           new Table({
             columnWidths: [3000, 6000],
@@ -202,6 +197,46 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
               right: { style: BorderStyle.NONE },
             },
             rows: [
+              new TableRow({
+                children: [
+                  new TableCell({
+                    children: [
+                      new Paragraph({text: "тут будет фото"})
+                    ],
+                    width: {
+                      size: 3000,
+                      type: WidthType.DXA,
+                    },
+                    borders: {
+                      top: { style: BorderStyle.NONE },
+                      bottom: { style: BorderStyle.NONE },
+                      left: { style: BorderStyle.NONE },
+                      right: { style: BorderStyle.NONE },
+                    },
+
+                  }),
+                  new TableCell({
+                    children: [
+                      new Paragraph({
+                        text: fullName, //.toUpperCase(),
+                        heading: "Heading1",
+                        //HeadingLevel.TITLE,
+                      }),
+                                ],
+                    width: {
+                      size: 6000,
+                      type: WidthType.DXA,
+                    },
+                    borders: {
+                      top: { style: BorderStyle.NONE },
+                      bottom: { style: BorderStyle.NONE },
+                      left: { style: BorderStyle.NONE },
+                      right: { style: BorderStyle.NONE },
+                    },
+
+                  })
+                ]
+              }),
               new TableRow({
                 children: [
                   new TableCell({
