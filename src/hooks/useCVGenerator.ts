@@ -79,7 +79,8 @@ const styleForDocument: IStylesOptions = {
     heading6: {
       run: {
         size: "24pt",
-        bold: true
+        bold: true,
+        smallCaps: true,
       }
     },
 
