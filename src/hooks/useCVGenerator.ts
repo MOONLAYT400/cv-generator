@@ -99,7 +99,7 @@ const styleForDocument: IStylesOptions = {
         color: "000000",
       },
       paragraph: {
-        alignment: AlignmentType.LEFT,
+        alignment: AlignmentType.JUSTIFIED,
         spacing: {
           before: 1,
           after: 1,
