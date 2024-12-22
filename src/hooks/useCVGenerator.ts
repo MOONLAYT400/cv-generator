@@ -1,104 +1,134 @@
-import { Document, Packer, Paragraph, Table, TableRow, TableCell, WidthType, BorderStyle, TextRun, PageBreak, UnderlineType, AlignmentType, convertInchesToTwip } from "docx"
+import { Document, Packer, Paragraph, Table, TableRow, TableCell, WidthType, BorderStyle, TextRun, AlignmentType, IStylesOptions } from "docx"
 import { saveAs } from "file-saver"
 
 import { ICVParams, IEducationItem, IExperienceItem, IProjectItem } from "@/types/cv-data"
 
-const styleForDocument = {
+const styleForDocument: IStylesOptions = {
   default: {
     heading1: {
-        run: {
-            size: "45pt",
-            bold: true,
-            italics: false,
-            color: "548ab7",
-            smallCaps: true,
+      run: {
+        size: "47pt",
+        bold: true,
+        italics: false,
+        color: "000000", //"548ab7",
+        smallCaps: true,
+      },
+      paragraph: {
+        spacing: {
+          after: 120,
         },
-        paragraph: {
-            spacing: {
-                after: 120,
-            },
-            alignment: AlignmentType.RIGHT,
-        },
+        alignment: AlignmentType.RIGHT,
+      },
     },
     heading2: {
-        run: {
-            size: 26,
-            bold: true,
-            color: "548ab7",
-            underline: {
-                type: UnderlineType.DOUBLE,
-                color: "548ab7",
-            },
+      run: {
+        size: "12pt",
+        bold: true,
+        color: "548ab7",
+        // underline: {
+        //     type: UnderlineType.DOUBLE,
+        //     color: "548ab7",
+        // },
+      },
+      paragraph: {
+        spacing: {
+          before: 1.5,
+          after: 100,
         },
-        paragraph: {
-            spacing: {
-                before: 240,
-                after: 120,
-            },
-        },
+      },
     },
     heading3: {
       run: {
-          size: "13pt",
-          // bold: true,
-          color: "548ab7",
-          // underline: {
-          //     type: UnderlineType.DOUBLE,
-          //     color: "548ab7",
-          // },
+        size: "11pt",
+        bold: true,
+        color: "000000",
       },
-      // paragraph: {
-      //     spacing: {
-      //         before: 240,
-      //         after: 120,
-      //     },
-      // },
-  },
+      paragraph: {
+        spacing: {
+          before: 1.5,
+          after: 100,
+        },
+      },
+
+    },
+    heading4: {
+      run: {
+        size: "12pt",
+        bold: true,
+        color: "000000",
+      },
+      paragraph: {
+        spacing: {
+          before: 1,
+          after: 1,
+        },
+      },
+    },
+    heading5: {
+      run: {
+        size: "9pt",
+      },
+      paragraph: {
+        spacing: {
+          before: 1,
+          after: 1,
+        },
+      },
+
+    },
+    heading6: {
+      run: {
+        size: "24pt",
+        bold: true
+      }
+    },
+
 
     listParagraph: {
-        run: {
-          size: "12pt",
-          // bold: true,
-          color: "000000",
-          type: "hyphen",
-        },
+      run: {
+        size: "10pt",
+        color: "000000",
+      },
 
     },
     document: {
-        run: {
-            size: "12pt",
-            font: "Century Gothic",
-            color: "000000",
+      run: {
+        size: "12pt",
+        font: "Century Gothic",
+        color: "000000",
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT,
+        spacing: {
+          before: 1,
+          after: 1,
         },
-        paragraph: {
-            alignment: AlignmentType.LEFT,
-        },
+
+      },
     },
-}
+  }
 };
 
-const getAboutMe = (shortBio: string): Paragraph => {
-  return new Paragraph({
-    children: [new TextRun({ text: 'О себе', break: 0 }),
-    new TextRun({ text: `${shortBio}`, break: 1 }),
-    ],
-  })
+const getAboutMe = (shortBio: string): Paragraph[] => {
+  return [new Paragraph({ text: 'О себе', heading: "Heading2" }),
+  new Paragraph({ text: `${shortBio}` })
+  ]
 }
 
 const getExperienceDescription = (experience: Array<IExperienceItem>): Paragraph[] => {
   const experienceDescription = experience.map((itemExperiense) => {
     const itemExperienseDescription = [];
-    const companyName = new Paragraph({ text: itemExperiense.company, heading: "Heading2"});
-    const role = new Paragraph({ text: itemExperiense.role}); //, heading: "Heading2"
-    const workTime = new Paragraph({ text: `даты: ${itemExperiense.startDate}-${itemExperiense.endDate}`}); //, heading: "Heading2"
-    const dutiesTitle = new Paragraph({ text: "Должностные обязанности:", heading: "Heading2"});
+    const companyName = new Paragraph({ text: itemExperiense.company, heading: "Heading4" });
+    const role = new Paragraph({ text: itemExperiense.role, heading: "Heading4" });
+    const workTime = new Paragraph({ text: `даты: ${itemExperiense.startDate}-${itemExperiense.endDate}`, heading: "Heading5" });
+    // const dutiesTitle = new Paragraph({ text: "Должностные обязанности:", heading: "Heading2"});
     const dutiesColl = itemExperiense.duties.map((duty) => {
-      return new Paragraph({text: `${duty.text.toString().trim()};`, bullet: {level: 0 }, }); //, type: "hyphen"
+      return new Paragraph({ text: `${duty.text.toString().trim()};`, bullet: { level: 0 }, }); //, type: "hyphen"
     }
-     )
+    )
 
-    itemExperienseDescription.push(companyName, role, workTime, dutiesTitle, dutiesColl);
-    const newSome = itemExperienseDescription.flat(1); 
+    itemExperienseDescription.push(companyName, role, workTime, dutiesColl); //dutiesTitle, 
+    const newSome = itemExperienseDescription.flat(1);
     console.log("newSome", newSome);
     return newSome;
   });
@@ -112,6 +142,7 @@ const getEducationDescription = (education: Array<IEducationItem>): Paragraph[] 
       new TextRun({ text: `${education.field}`, break: 1 }),
       new TextRun({ text: `даты: ${education.startDate || ''}-${education.endDate || ''}`, break: 1 }),
       ],
+      heading: "Heading5"
     })
   });
 }
@@ -120,10 +151,10 @@ const getProjectDescription = (projects: Array<IProjectItem>): Paragraph[] => {
   const projectsDescriptionArr = projects.map((project) => {
     console.log(project);
     const projectDescriptionParagraph = [];
-    const progectName = new Paragraph({ text: project.name, heading: "Heading2"});
+    const progectName = new Paragraph({ text: project.name, heading: "Heading6" });
     const projectDescription = new Paragraph(project.description);
     const technologies = project.technologies.map((technology) => technology.name);
-    const projectTechnologies = new Paragraph({ children: [new TextRun('Стек: '), new TextRun(technologies.join(", "))] });
+    const projectTechnologies = new Paragraph({ children: [new TextRun({ text: 'Стек: ', bold: true }), new TextRun({ text: technologies.join(", "), bold: false })], heading: "Heading4" });
     projectDescriptionParagraph.push(progectName, projectDescription, projectTechnologies)
     return projectDescriptionParagraph;
   })
@@ -175,14 +206,14 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
                 children: [
                   new TableCell({
                     children: [
-                      aboutMe,
+                      ...aboutMe,
                       new Paragraph({
-                      text: "Навыки",
-                    }
-                    ),
-                    new Paragraph({
-                      text: technologiesString.toString(),
-                    })
+                        text: "Навыки", heading: "Heading2"
+                      }
+                      ),
+                      new Paragraph({
+                        text: technologiesString.toString(),
+                      })
                     ],
                     width: {
                       size: 3000,
@@ -197,9 +228,9 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
                   }),
                   new TableCell({
                     children: [
-                      new Paragraph({ text: "Опыт работы" }),
+                      new Paragraph({ text: "Опыт работы", heading: "Heading3" }),
                       ...experienceDescription,// заменить копирование на что-то более элегантное, на объединение массивов?
-                      new Paragraph("Образование"),
+                      new Paragraph({ text: "Образование", heading: "Heading3" }),
                       ...educationDescription,
                     ],
                     width: {
