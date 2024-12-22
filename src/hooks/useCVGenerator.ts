@@ -1,4 +1,4 @@
-import { Document, HeadingLevel, Packer, Paragraph, Table, TableRow, TableCell, WidthType, BorderStyle, TextRun, PageBreak, UnderlineType, AlignmentType, convertInchesToTwip } from "docx"
+import { Document, Packer, Paragraph, Table, TableRow, TableCell, WidthType, BorderStyle, TextRun, PageBreak, UnderlineType, AlignmentType, convertInchesToTwip } from "docx"
 import { saveAs } from "file-saver"
 
 import { ICVParams, IEducationItem, IExperienceItem, IProjectItem } from "@/types/cv-data"
@@ -11,6 +11,7 @@ const styleForDocument = {
             bold: true,
             italics: false,
             color: "548ab7",
+            smallCaps: true,
         },
         paragraph: {
             spacing: {
@@ -36,10 +37,32 @@ const styleForDocument = {
             },
         },
     },
+    heading3: {
+      run: {
+          size: "13pt",
+          // bold: true,
+          color: "548ab7",
+          // underline: {
+          //     type: UnderlineType.DOUBLE,
+          //     color: "548ab7",
+          // },
+      },
+      // paragraph: {
+      //     spacing: {
+      //         before: 240,
+      //         after: 120,
+      //     },
+      // },
+  },
+
     listParagraph: {
         run: {
-            color: "#FF0000",
+          size: "12pt",
+          // bold: true,
+          color: "000000",
+          type: "hyphen",
         },
+
     },
     document: {
         run: {
@@ -63,16 +86,23 @@ const getAboutMe = (shortBio: string): Paragraph => {
 }
 
 const getExperienceDescription = (experience: Array<IExperienceItem>): Paragraph[] => {
-  return experience.map((itemExperiense) => {
-    return new Paragraph({
-      children: [new TextRun({ text: `${itemExperiense.company}`, break: 0 }),
-      new TextRun({ text: `${itemExperiense.role}`, break: 1 }),
-      new TextRun({ text: `даты: ${itemExperiense.startDate}-${itemExperiense.endDate}`, break: 1 }),
-      new TextRun({ text: "Должностные обязанности:", break: 1 }),
-      new TextRun({ text: itemExperiense.duties.map((duty)=>duty.text).join(", "), break: 1 })
-      ],
-    })
+  const experienceDescription = experience.map((itemExperiense) => {
+    const itemExperienseDescription = [];
+    const companyName = new Paragraph({ text: itemExperiense.company, heading: "Heading2"});
+    const role = new Paragraph({ text: itemExperiense.role}); //, heading: "Heading2"
+    const workTime = new Paragraph({ text: `даты: ${itemExperiense.startDate}-${itemExperiense.endDate}`}); //, heading: "Heading2"
+    const dutiesTitle = new Paragraph({ text: "Должностные обязанности:", heading: "Heading2"});
+    const dutiesColl = itemExperiense.duties.map((duty) => {
+      return new Paragraph({text: `${duty.text.toString().trim()};`, bullet: {level: 0 }, }); //, type: "hyphen"
+    }
+     )
+
+    itemExperienseDescription.push(companyName, role, workTime, dutiesTitle, dutiesColl);
+    const newSome = itemExperienseDescription.flat(1); 
+    console.log("newSome", newSome);
+    return newSome;
   });
+  return experienceDescription.flat(1);
 }
 
 const getEducationDescription = (education: Array<IEducationItem>): Paragraph[] => {
@@ -127,7 +157,7 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
       {
         children: [
           new Paragraph({
-            text: fullName.toUpperCase(),
+            text: fullName, //.toUpperCase(),
             heading: "Heading1",
             //HeadingLevel.TITLE,
           }),
