@@ -151,7 +151,7 @@ const getProjectDescription = (projects: Array<IProjectItem>): Paragraph[] => {
   const projectsDescriptionArr = projects.map((project) => {
     console.log(project);
     const projectDescriptionParagraph = [];
-    const progectName = new Paragraph({ text: project.name, heading: "Heading6" });
+    const progectName = new Paragraph({ text: project.name, heading: "Heading6", pageBreakBefore: true, });
     const projectDescription = new Paragraph(project.description);
     const technologies = project.technologies.map((technology) => technology.name);
     const projectTechnologies = new Paragraph({ children: [new TextRun({ text: 'Стек: ', bold: true }), new TextRun({ text: technologies.join(", "), bold: false })], heading: "Heading4" });
