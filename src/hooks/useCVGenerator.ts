@@ -1,30 +1,52 @@
-import { Document, Packer, Paragraph, Table, TableRow, TableCell, WidthType, BorderStyle, TextRun, AlignmentType, IStylesOptions } from "docx"
+import {
+  Document,
+  Packer,
+  Paragraph,
+  Table,
+  TableRow,
+  TableCell,
+  WidthType,
+  BorderStyle,
+  TextRun,
+  AlignmentType,
+  IStylesOptions,
+  ImageRun,
+  Header,
+  HorizontalPositionRelativeFrom
+} from "docx"
 import { saveAs } from "file-saver"
 
-import { ICVParams, IEducationItem, IExperienceItem, IProjectItem } from "@/types/cv-data"
+import { documentTemplateImage } from "@/assets/images/document-template-image"
+import {
+  ICVParams,
+  IEducationItem,
+  IExperienceItem,
+  IProjectItem
+} from "@/types/cv-data"
 
 const styleForDocument: IStylesOptions = {
   default: {
     heading1: {
       run: {
-        size: "47pt",
-        bold: true,
+        size: "43pt",
+        bold: false,
         italics: false,
         color: "000000", //"548ab7",
         smallCaps: true,
+        font: "Century Gothic"
       },
       paragraph: {
         spacing: {
-          after: 120,
+          after: 120
         },
-        alignment: AlignmentType.RIGHT,
-      },
+        alignment: AlignmentType.LEFT
+      }
     },
     heading2: {
       run: {
         size: "12pt",
         bold: true,
-        color: "548ab7",
+        color: "548ab7"
         // underline: {
         //     type: UnderlineType.DOUBLE,
         //     color: "548ab7",
@@ -33,208 +55,303 @@ const styleForDocument: IStylesOptions = {
       paragraph: {
         spacing: {
           before: 1.5,
-          after: 100,
-        },
-      },
+          after: 100
+        }
+      }
     },
     heading3: {
       run: {
         size: "11pt",
         bold: true,
-        color: "000000",
+        color: "000000"
       },
       paragraph: {
         spacing: {
           before: 1.5,
-          after: 100,
-        },
-      },
-
+          after: 100
+        }
+      }
     },
     heading4: {
       run: {
         size: "12pt",
         bold: true,
-        color: "000000",
+        color: "000000"
       },
       paragraph: {
         spacing: {
           before: 1,
-          after: 1,
-        },
-      },
+          after: 1
+        }
+      }
     },
     heading5: {
       run: {
-        size: "9pt",
+        size: "9pt"
       },
       paragraph: {
         spacing: {
           before: 1,
-          after: 1,
-        },
-      },
-
+          after: 1
+        }
+      }
     },
     heading6: {
       run: {
         size: "24pt",
         bold: true,
-        smallCaps: true,
+        smallCaps: true
       }
     },
-
-
     listParagraph: {
       run: {
         size: "10pt",
-        color: "000000",
-      },
-
+        color: "000000"
+      }
     },
     document: {
       run: {
         size: "12pt",
         font: "Century Gothic",
-        color: "000000",
+        color: "000000"
       },
       paragraph: {
         alignment: AlignmentType.JUSTIFIED,
         spacing: {
           before: 1,
-          after: 1,
-        },
-
-      },
-    },
+          after: 1
+        }
+      }
+    }
   }
-};
+}
 
 const getAboutMe = (shortBio: string): Paragraph[] => {
-  return [new Paragraph({ text: 'О себе', heading: "Heading2" }),
-  new Paragraph({ text: `${shortBio}` })
+  return [
+    new Paragraph({ text: "О себе", heading: "Heading2" }),
+    new Paragraph({ text: `${shortBio}` })
   ]
 }
 
-const getExperienceDescription = (experience: Array<IExperienceItem>): Paragraph[] => {
+const getExperienceDescription = (
+  experience: Array<IExperienceItem>
+): Paragraph[] => {
   const experienceDescription = experience.map((itemExperiense) => {
-    const itemExperienseDescription = [];
-    const companyName = new Paragraph({ text: itemExperiense.company, heading: "Heading4" });
-    const role = new Paragraph({ text: itemExperiense.role, heading: "Heading4" });
-    const workTime = new Paragraph({ text: `даты: ${itemExperiense.startDate}-${itemExperiense.endDate}`, heading: "Heading5" });
+    const itemExperienseDescription = []
+    const companyName = new Paragraph({
+      text: itemExperiense.company,
+      heading: "Heading4"
+    })
+    const role = new Paragraph({
+      text: itemExperiense.role,
+      heading: "Heading4"
+    })
+    const workTime = new Paragraph({
+      text: `даты: ${itemExperiense.startDate}-${itemExperiense.endDate}`,
+      heading: "Heading5"
+    })
     // const dutiesTitle = new Paragraph({ text: "Должностные обязанности:", heading: "Heading2"});
     const dutiesColl = itemExperiense.duties.map((duty) => {
-      return new Paragraph({ text: `${duty.text.toString().trim()};`, bullet: { level: 0 }, }); //, type: "hyphen"
-    }
-    )
+      return new Paragraph({
+        text: `${duty.text.toString().trim()};`,
+        bullet: { level: 0 }
+      }) //, type: "hyphen"
+    })
 
-    itemExperienseDescription.push(companyName, role, workTime, dutiesColl); //dutiesTitle, 
-    const newSome = itemExperienseDescription.flat(1);
-    console.log("newSome", newSome);
-    return newSome;
-  });
-  return experienceDescription.flat(1);
+    itemExperienseDescription.push(companyName, role, workTime, dutiesColl) //dutiesTitle,
+    const newSome = itemExperienseDescription.flat(1)
+    console.log("newSome", newSome)
+    return newSome
+  })
+  return experienceDescription.flat(1)
 }
 
-const getEducationDescription = (education: Array<IEducationItem>): Paragraph[] => {
+const getEducationDescription = (
+  education: Array<IEducationItem>
+): Paragraph[] => {
   return education.map((education) => {
     return new Paragraph({
-      children: [new TextRun({ text: `${education.university}`, break: 0 }),
-      new TextRun({ text: `${education.field}`, break: 1 }),
-      new TextRun({ text: `даты: ${education.startDate || ''}-${education.endDate || ''}`, break: 1 }),
+      children: [
+        new TextRun({ text: `${education.university}`, break: 0 }),
+        new TextRun({ text: `${education.field}`, break: 1 }),
+        new TextRun({
+          text: `даты: ${education.startDate || ""}-${education.endDate || ""}`,
+          break: 1
+        })
       ],
       heading: "Heading5"
     })
-  });
+  })
 }
 
 const getProjectDescription = (projects: Array<IProjectItem>): Paragraph[] => {
   const projectsDescriptionArr = projects.map((project) => {
-    console.log(project);
-    const projectDescriptionParagraph = [];
-    const progectName = new Paragraph({ text: project.name, heading: "Heading6", pageBreakBefore: true, });
-    const projectDescription = new Paragraph(project.description);
-    const technologies = project.technologies.map((technology) => technology.name);
-    const projectTechnologies = new Paragraph({ children: [new TextRun({ text: 'Стек: ', bold: true }), new TextRun({ text: technologies.join(", "), bold: false })], heading: "Heading4" });
-    projectDescriptionParagraph.push(progectName, projectDescription, projectTechnologies)
-    return projectDescriptionParagraph;
+    console.log(project)
+    const projectDescriptionParagraph = []
+    const progectName = new Paragraph({
+      text: project.name,
+      heading: "Heading6",
+      pageBreakBefore: true
+    })
+    const projectDescription = new Paragraph(project.description)
+    const technologies = project.technologies.map(
+      (technology) => technology.name
+    )
+    const projectTechnologies = new Paragraph({
+      children: [
+        new TextRun({ text: "Стек: ", bold: true }),
+        new TextRun({ text: technologies.join(", "), bold: false })
+      ],
+      heading: "Heading4"
+    })
+    projectDescriptionParagraph.push(
+      progectName,
+      projectDescription,
+      projectTechnologies
+    )
+    return projectDescriptionParagraph
   })
-  return projectsDescriptionArr.flat(1);
+  return projectsDescriptionArr.flat(1)
 }
 
 export const useCVGenerator = (params: ICVParams): (() => void) => {
-  const { fullName, shortBio, technologies, experience, education, projects } = params;
+  const {
+    fullName,
+    shortBio,
+    photo,
+    technologies,
+    experience,
+    education,
+    projects
+  } = params
+
+  const extractBase64Data = (base64String: string): string => {
+    if (!base64String) return ""
+    const base64Data = base64String.split(",")[1]
+    return base64Data
+  }
+
+  const base64ImageData = extractBase64Data(photo)
 
   const technologiesString = technologies.map((item) => {
-    return ` ${item.name.toString()}`;
+    return ` ${item.name.toString()}`
   })
-  // photo, shortBio, education, experience, technologies, projects
-  // fullName: string
-  // photo: string
-  // shortBio: string
-  // education: Array<IEducationItem>
-  // experience: Array<IExperienceItem>
-  // technologies: Array<ITechItem>
-  // projects: Array<IProjectItem>
 
-  // TODO implement file structure
-  const aboutMe = getAboutMe(shortBio);
-  const experienceDescription = getExperienceDescription(experience);
-  const educationDescription = getEducationDescription(education);
-  const projectsDescription = getProjectDescription(projects);
+  const aboutMe = getAboutMe(shortBio)
+  const experienceDescription = getExperienceDescription(experience)
+  const educationDescription = getEducationDescription(education)
+  const projectsDescription = getProjectDescription(projects)
 
   const doc = new Document({
     styles: styleForDocument,
     sections: [
       {
+        properties: {
+          page: {
+            margin: {
+              top: 900,
+              right: 702,
+              bottom: 709,
+              left: 702
+            }
+          }
+        },
+        headers: {
+          default: new Header({
+            children: [
+              new Paragraph({
+                children: [
+                  new ImageRun({
+                    data: Uint8Array.from(atob(documentTemplateImage), (c) =>
+                      c.charCodeAt(0)
+                    ),
+                    transformation: {
+                      width: 755,
+                      height: 1080
+                    },
+                    floating: {
+                      horizontalPosition: {
+                        relative: HorizontalPositionRelativeFrom.PAGE,
+                        offset: 200000
+                      },
+                      verticalPosition: {
+                        relative: HorizontalPositionRelativeFrom.PAGE,
+                        offset: 200000
+                      },
+                      behindDocument: true
+                    }
+                  })
+                ]
+              })
+            ]
+          })
+        },
         children: [
-          // начало моих экспериментов
           new Table({
             columnWidths: [3000, 6000],
             borders: {
               top: { style: BorderStyle.NONE },
               bottom: { style: BorderStyle.NONE },
               left: { style: BorderStyle.NONE },
-              right: { style: BorderStyle.NONE },
+              right: { style: BorderStyle.NONE }
             },
             rows: [
               new TableRow({
                 children: [
                   new TableCell({
                     children: [
-                      new Paragraph({text: "тут будет фото"})
+                      new Paragraph({
+                        children: [
+                          new ImageRun({
+                            data: Uint8Array.from(atob(base64ImageData), (c) =>
+                              c.charCodeAt(0)
+                            ),
+                            transformation: {
+                              width: 150,
+                              height: 150
+                            },
+                            floating: {
+                              horizontalPosition: {
+                                align: "center",
+                                offset: 0
+                              },
+                              verticalPosition: {
+                                align: "center",
+                                offset: 0
+                              }
+                            }
+                          })
+                        ]
+                      })
                     ],
                     width: {
                       size: 3000,
-                      type: WidthType.DXA,
+                      type: WidthType.DXA
                     },
                     borders: {
                       top: { style: BorderStyle.NONE },
                       bottom: { style: BorderStyle.NONE },
                       left: { style: BorderStyle.NONE },
-                      right: { style: BorderStyle.NONE },
-                    },
-
+                      right: { style: BorderStyle.NONE }
+                    }
                   }),
                   new TableCell({
                     children: [
                       new Paragraph({
-                        text: fullName, //.toUpperCase(),
-                        heading: "Heading1",
-                        //HeadingLevel.TITLE,
-                      }),
-                                ],
+                        text: fullName,
+                        heading: "Heading1"
+                      })
+                    ],
                     width: {
                       size: 6000,
-                      type: WidthType.DXA,
+                      type: WidthType.DXA
                     },
                     borders: {
                       top: { style: BorderStyle.NONE },
                       bottom: { style: BorderStyle.NONE },
                       left: { style: BorderStyle.NONE },
-                      right: { style: BorderStyle.NONE },
-                    },
-
+                      right: { style: BorderStyle.NONE }
+                    }
                   })
                 ]
               }),
@@ -244,47 +361,53 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
                     children: [
                       ...aboutMe,
                       new Paragraph({
-                        text: "Навыки", heading: "Heading2"
-                      }
-                      ),
+                        text: "Навыки",
+                        heading: "Heading2"
+                      }),
                       new Paragraph({
-                        text: technologiesString.toString(),
+                        text: technologiesString.toString()
                       })
                     ],
                     width: {
                       size: 3000,
-                      type: WidthType.DXA,
+                      type: WidthType.DXA
                     },
                     borders: {
                       top: { style: BorderStyle.NONE },
                       bottom: { style: BorderStyle.NONE },
                       left: { style: BorderStyle.NONE },
-                      right: { style: BorderStyle.NONE },
-                    },
+                      right: { style: BorderStyle.NONE }
+                    }
                   }),
                   new TableCell({
                     children: [
-                      new Paragraph({ text: "Опыт работы", heading: "Heading3" }),
-                      ...experienceDescription,// заменить копирование на что-то более элегантное, на объединение массивов?
-                      new Paragraph({ text: "Образование", heading: "Heading3" }),
-                      ...educationDescription,
+                      new Paragraph({
+                        text: "Опыт работы",
+                        heading: "Heading3"
+                      }),
+                      ...experienceDescription, // заменить копирование на что-то более элегантное, на объединение массивов?
+                      new Paragraph({
+                        text: "Образование",
+                        heading: "Heading3"
+                      }),
+                      ...educationDescription
                     ],
                     width: {
                       size: 6000,
-                      type: WidthType.DXA,
+                      type: WidthType.DXA
                     },
                     borders: {
                       top: { style: BorderStyle.NONE },
                       bottom: { style: BorderStyle.NONE },
                       left: { style: BorderStyle.NONE },
-                      right: { style: BorderStyle.NONE },
-                    },
-                  }),
-                ],
-              }),
-            ],
+                      right: { style: BorderStyle.NONE }
+                    }
+                  })
+                ]
+              })
+            ]
           }),
-          ...projectsDescription,
+          ...projectsDescription
         ]
       }
     ]

@@ -36,8 +36,7 @@ import {
   InfoInputs,
   InfoSection,
   Wrapper,
-  FileInputs,
-  ButtonsGroup
+  FileInputs
 } from "./index.styled"
 
 const JoyRideNoSSR = dynamic(() => import("react-joyride"), { ssr: false })
@@ -79,6 +78,9 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   }, [onboarding])
 
   const updateCVData = (key: string, value: any) => {
+    if (key === "fullName" && typeof value === "string") {
+      return setCVData({ ...cvData, [key]: value.toUpperCase() })
+    }
     setCVData({ ...cvData, [key]: value })
   }
 
@@ -284,19 +286,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         isOpened={!!modals.techComparison}
         close={() => handleToggleModal("techComparison", null)}
       />
-      <ButtonsGroup>
-        <Button text={"Выгрузить файл"} handleClick={handleExportFile} />
-        <FileInputs>
-          <input
-            type="file"
-            onChange={handleChange}
-            accept=".json"
-            ref={filePicker}
-          />
-        </FileInputs>
-        <Button text={"Загрузить файл"} handleClick={handlePick} />
-      </ButtonsGroup>
-
       <InfoSection>
         <ImageWithPreview
           label={"Фото"}
@@ -351,6 +340,18 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
             handleClick={saveDocument}
             disabled
           />
+        </Buttons>
+        <Buttons className="downloads">
+          <Button text={"Выгрузить файл"} handleClick={handleExportFile} />
+          <FileInputs>
+            <input
+              type="file"
+              onChange={handleChange}
+              accept=".json"
+              ref={filePicker}
+            />
+          </FileInputs>
+          <Button text={"Загрузить файл"} handleClick={handlePick} />
         </Buttons>
       </InfoSection>
       <TechSection

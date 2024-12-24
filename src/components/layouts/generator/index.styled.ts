@@ -27,13 +27,6 @@ export const Buttons = styled.div`
   padding: 20px;
 `
 
-export const ButtonsGroup = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  padding: 20px;
-`
-
 export const FileInputs = styled.div`
   opacity: 0;
   height: 0;

@@ -8,5 +8,5 @@ export const List = styled.div`
   flex-direction: column;
   gap: 10px;
   overflow: auto;
-  max-height: 100px;
+  max-height: 250px;
 `

@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   padding: 4px;
   display: flex;
   justify-content: space-between;
+  max-width: 1000px;
 `
 export const ItemDescription = styled.div`
   display: flex;
