@@ -51,12 +51,19 @@ export const CreateProject: FC<ICreateProject> = ({
     updateProject({ ...project, [field]: value })
 
   const updateTechArray = (type: string, name: string) => {
-    const existing = project.technologies.find((item) => item.name === name)
+    const techArray = project.technologies
+    const existing = techArray.find((item) => item.name === name)
 
     if (!existing) {
+      const lastIndex = techArray.findLastIndex((item) => item.type === type)
+
+      if (lastIndex === -1) {
+        techArray.push({ type, name })
+      } else techArray.splice(lastIndex + 1, 0, { type, name })
+
       updateProject({
         ...project,
-        technologies: [...project.technologies, { type, name }]
+        technologies: techArray
       })
     }
   }
