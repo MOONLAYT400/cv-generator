@@ -29,26 +29,6 @@ import {
 
 const styleForDocument: IStylesOptions = {
   default: {
-    heading4: {
-      run: {
-        size: "12pt",
-        bold: true,
-        color: "000000"
-      },
-      paragraph: {
-        spacing: {
-          before: 1,
-          after: 1
-        }
-      }
-    },
-    heading6: {
-      run: {
-        size: "24pt",
-        bold: true,
-        smallCaps: true
-      }
-    },
     listParagraph: {
       run: {
         size: "10pt",
@@ -244,6 +224,98 @@ const styleForDocument: IStylesOptions = {
         alignment: AlignmentType.LEFT,
         spacing: {
           after: 200
+        }
+      }
+    },
+    {
+      id: "projectHeading",
+      name: "Project Heading",
+      run: {
+        size: "24pt",
+        color: "000000",
+        font: "Century Gothic",
+        bold: true,
+        smallCaps: true
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT
+      }
+    },
+    {
+      id: "projectDate",
+      name: "Project Date",
+      run: {
+        size: "12pt",
+        color: "000000",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT,
+        spacing: {
+          after: 200
+        }
+      }
+    },
+    {
+      id: "projectDescription",
+      name: "Project Description",
+      run: {
+        size: "12pt",
+        color: "000000",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        spacing: {
+          after: 300
+        }
+      }
+    },
+    {
+      id: "responsibilitiesHeading",
+      name: "Responsibilities Heading",
+      run: {
+        size: "14pt",
+        bold: true,
+        color: "548ab7",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        spacing: {
+          before: 300,
+          after: 200
+        },
+        alignment: AlignmentType.LEFT
+      }
+    },
+    {
+      id: "projectStack",
+      name: "Project Stack",
+      run: {
+        size: "12pt",
+        color: "000000",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT,
+        spacing: {
+          line: 400
+        }
+      }
+    },
+    {
+      id: "spacedBulletItem",
+      name: "Spaced Bullet Item",
+      run: {
+        size: "12pt",
+        color: "000000",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT,
+        spacing: {
+          after: 150,
+          lineRule: "exact",
+          line: 400
         }
       }
     }
@@ -448,32 +520,80 @@ const getEducationDescription = (
 }
 
 const getProjectDescription = (projects: Array<IProjectItem>): Paragraph[] => {
-  const projectsDescriptionArr = projects.map((project) => {
-    const projectDescriptionParagraph = []
-    const progectName = new Paragraph({
-      text: project.name,
-      heading: "Heading6",
-      pageBreakBefore: true
+  const projectsDescriptionArr = projects
+    .map((project) => {
+      const technologies = project.technologies
+        .map((technology) => technology.name)
+        .join(", ")
+
+      const projectDescriptionParagraph = [
+        new Paragraph({
+          text: project.name,
+          style: "projectHeading",
+          pageBreakBefore: true,
+          border: {
+            bottom: {
+              color: "548ab7",
+              space: 15,
+              style: "single",
+              size: 4
+            }
+          }
+        }),
+        new Paragraph({
+          text: project.role,
+          style: "projectDate"
+        }),
+        new Paragraph({
+          text: project.description,
+          style: "projectDescription"
+        }),
+        new Paragraph({
+          style: "projectStack",
+          children: [
+            new TextRun({
+              text: "Стек: ",
+              bold: true,
+              size: "14pt",
+              color: "000000",
+              font: "Century Gothic"
+            }),
+            new TextRun({
+              text: technologies,
+              bold: false,
+              color: "000000",
+              font: "Century Gothic"
+            })
+          ]
+        }),
+        new Paragraph({
+          text: `Над чем я работал:`,
+          style: "responsibilitiesHeading"
+        })
+      ]
+
+      const projectWithResps = project.responsibilities.reduce(
+        (acc: Array<Paragraph>, resp) => {
+          acc.push(
+            new Paragraph({
+              text: `${resp.text.toString().trim()};`,
+              bullet: { level: 0 },
+              style: "spacedBulletItem",
+              run: {
+                color: "548ab7"
+              }
+            })
+          )
+          return acc
+        },
+        projectDescriptionParagraph
+      )
+
+      return projectWithResps
     })
-    const projectDescription = new Paragraph(project.description)
-    const technologies = project.technologies.map(
-      (technology) => technology.name
-    )
-    const projectTechnologies = new Paragraph({
-      children: [
-        new TextRun({ text: "Стек: ", bold: true }),
-        new TextRun({ text: technologies.join(", "), bold: false })
-      ],
-      heading: "Heading4"
-    })
-    projectDescriptionParagraph.push(
-      progectName,
-      projectDescription,
-      projectTechnologies
-    )
-    return projectDescriptionParagraph
-  })
-  return projectsDescriptionArr.flat(1)
+    .flat(1)
+
+  return projectsDescriptionArr
 }
 
 export const useCVGenerator = (params: ICVParams): (() => void) => {
