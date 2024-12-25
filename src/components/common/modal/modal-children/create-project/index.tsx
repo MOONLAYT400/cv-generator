@@ -105,7 +105,7 @@ export const CreateProject: FC<ICreateProject> = ({
             }
           />
           <Input
-            label="Роль"
+            label="Период работы"
             inputValue={project.role}
             saveInputValue={(role) =>
               handleUpdateProject("role", role as string)
