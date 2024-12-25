@@ -17,31 +17,19 @@ import {
 import { saveAs } from "file-saver"
 
 import { documentTemplateImage } from "@/assets/images/document-template-image"
+import { keyNames } from "@/constants/generator/names"
+import { extractBase64Data } from "@/helpers/base64image"
 import {
   ICVParams,
   IEducationItem,
   IExperienceItem,
-  IProjectItem
+  IProjectItem,
+  ITechItem
 } from "@/types/cv-data"
 
 const styleForDocument: IStylesOptions = {
   default: {
-    heading1: {
-      run: {
-        size: "43pt",
-        bold: false,
-        italics: false,
-        color: "000000", //"548ab7",
-        smallCaps: true,
-        font: "Century Gothic"
-      },
-      paragraph: {
-        spacing: {
-          after: 120
-        },
-        alignment: AlignmentType.LEFT
-      }
-    },
+    heading1: {},
     heading2: {
       run: {
         size: "12pt",
@@ -111,7 +99,7 @@ const styleForDocument: IStylesOptions = {
     },
     document: {
       run: {
-        size: "12pt",
+        size: "11pt",
         font: "Century Gothic",
         color: "000000"
       },
@@ -123,70 +111,387 @@ const styleForDocument: IStylesOptions = {
         }
       }
     }
-  }
+  },
+  paragraphStyles: [
+    {
+      id: "fullName",
+      name: "Full Name",
+      run: {
+        size: "43pt",
+        bold: false,
+        italics: false,
+        color: "000000",
+        smallCaps: true,
+        font: "Century Gothic"
+      },
+      paragraph: {
+        spacing: {
+          before: 380,
+          after: 380
+        },
+        alignment: AlignmentType.LEFT
+      }
+    },
+    {
+      id: "aboutMe",
+      name: "About Me",
+      run: {
+        size: "13pt",
+        bold: true,
+        color: "548ab7",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        spacing: {
+          before: 300,
+          after: 300
+        },
+        alignment: AlignmentType.LEFT
+      }
+    },
+    {
+      id: "stack",
+      name: "Stack",
+      run: {
+        size: "13pt",
+        bold: true,
+        color: "548ab7",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT
+      }
+    },
+    {
+      id: "stackKey",
+      name: "Stack Key",
+      run: {
+        size: "11pt",
+        bold: true,
+        color: "000000",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        spacing: {
+          after: 200
+        },
+        alignment: AlignmentType.LEFT
+      }
+    },
+    {
+      id: "experienceHeading",
+      name: "Experience Heading",
+      run: {
+        size: "13pt",
+        bold: true,
+        color: "000000",
+        font: "Century Gothic",
+        allCaps: true
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT,
+        spacing: {
+          after: 30
+        }
+      }
+    },
+    {
+      id: "companyName",
+      name: "Company Name",
+      run: {
+        size: "12pt",
+        bold: true,
+        color: "000000",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT,
+        spacing: {
+          before: 50,
+          after: 150
+        }
+      }
+    },
+    {
+      id: "roleName",
+      name: "Role Name",
+      run: {
+        size: "11pt",
+        bold: true,
+        color: "000000",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT,
+        spacing: {
+          after: 150
+        }
+      }
+    },
+    {
+      id: "experiencePeriod",
+      name: "Experience Period",
+      run: {
+        size: "10pt",
+        color: "000000",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT,
+        spacing: {
+          after: 150
+        }
+      }
+    },
+    {
+      id: "bulletItem",
+      name: "Bullet Item",
+      run: {
+        size: "11pt",
+        color: "000000",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT
+      }
+    },
+    {
+      id: "educationHeading",
+      name: "Education Heading",
+      run: {
+        size: "13pt",
+        bold: true,
+        color: "000000",
+        font: "Century Gothic",
+        allCaps: true
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT,
+        spacing: {
+          before: 200,
+          after: 200
+        }
+      }
+    },
+    {
+      id: "educationItem",
+      name: "Education Item",
+      run: {
+        size: "10pt",
+        color: "000000",
+        font: "Century Gothic",
+        bold: true
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT,
+        spacing: {
+          after: 200
+        }
+      }
+    }
+  ]
 }
 
-const getAboutMe = (shortBio: string): Paragraph[] => {
-  return [
-    new Paragraph({ text: "О себе", heading: "Heading2" }),
-    new Paragraph({ text: `${shortBio}` })
-  ]
+const createName = (fullName: string): Paragraph => {
+  return new Paragraph({
+    text: fullName,
+    style: "fullName"
+  })
+}
+
+const createAvatar = (photo: string): Paragraph => {
+  const base64ImageData = extractBase64Data(photo)
+
+  return new Paragraph({
+    children: [
+      new ImageRun({
+        data: Uint8Array.from(atob(base64ImageData), (c) => c.charCodeAt(0)),
+        transformation: {
+          width: 185,
+          height: 185
+        },
+        floating: {
+          layoutInCell: true,
+          horizontalPosition: {
+            align: "center",
+            offset: 0
+          },
+          verticalPosition: {
+            align: "center",
+            offset: 0
+          }
+        }
+      })
+    ]
+  })
+}
+
+const createAboutMe = (shortBio: string): Paragraph => {
+  return new Paragraph({
+    text: `О СЕБЕ`,
+    style: "aboutMe",
+    keepNext: true,
+    children: [
+      new TextRun({
+        text: shortBio,
+        bold: false,
+        size: "11pt",
+        color: "000000",
+        font: "Century Gothic",
+        break: 1
+      })
+    ]
+  })
+}
+
+const createOverallStack = (technologies: Array<ITechItem>): Paragraph => {
+  const formattedStack: { [key: string]: Array<string> } = {
+    languages: [],
+    fe: [],
+    be: [],
+    databases: [],
+    devops: [],
+    test: [],
+    additional: []
+  }
+
+  technologies.forEach((item) => {
+    formattedStack[item.type].push(item.name)
+  })
+
+  const children = Object.keys(formattedStack).reduce(
+    (children: Array<TextRun>, current: string) => {
+      if (formattedStack[current]?.length > 0) {
+        children.push(
+          new TextRun({
+            text: `${keyNames?.[current as keyof typeof keyNames]}: `,
+            bold: true,
+            size: "11pt",
+            color: "000000",
+            font: "Century Gothic",
+            break: 2
+          }),
+          new TextRun({
+            text: ` ${formattedStack[current]?.join(", ")}`,
+            bold: false,
+            size: "11pt",
+            color: "000000",
+            font: "Century Gothic"
+          })
+        )
+      }
+      return children
+    },
+    []
+  )
+
+  return new Paragraph({
+    text: "ПРОФЕССИОНАЛЬНЫЕ НАВЫКИ",
+    style: "stack",
+    children: children
+  })
 }
 
 const getExperienceDescription = (
   experience: Array<IExperienceItem>
 ): Paragraph[] => {
-  const experienceDescription = experience.map((itemExperiense) => {
-    const itemExperienseDescription = []
-    const companyName = new Paragraph({
-      text: itemExperiense.company,
-      heading: "Heading4"
-    })
-    const role = new Paragraph({
-      text: itemExperiense.role,
-      heading: "Heading4"
-    })
-    const workTime = new Paragraph({
-      text: `даты: ${itemExperiense.startDate}-${itemExperiense.endDate}`,
-      heading: "Heading5"
-    })
-    // const dutiesTitle = new Paragraph({ text: "Должностные обязанности:", heading: "Heading2"});
-    const dutiesColl = itemExperiense.duties.map((duty) => {
-      return new Paragraph({
-        text: `${duty.text.toString().trim()};`,
-        bullet: { level: 0 }
-      }) //, type: "hyphen"
-    })
+  const experienceDescription = experience.map((itemExperience) => {
+    const experience = [
+      new Paragraph({
+        text: itemExperience.company,
+        style: "companyName"
+      }),
+      new Paragraph({
+        text: itemExperience.role,
+        style: "roleName"
+      }),
+      new Paragraph({
+        text: `${itemExperience.startDate}-${itemExperience.endDate}`,
+        style: "experiencePeriod"
+      })
+    ]
 
-    itemExperienseDescription.push(companyName, role, workTime, dutiesColl) //dutiesTitle,
-    const newSome = itemExperienseDescription.flat(1)
-    console.log("newSome", newSome)
-    return newSome
+    const experienceWithDuties = itemExperience.duties.reduce(
+      (acc: Array<Paragraph>, duty) => {
+        acc.push(
+          new Paragraph({
+            text: `${duty.text.toString().trim()};`,
+            bullet: { level: 0 },
+            style: "bulletItem",
+            run: {
+              color: "548ab7"
+            }
+          })
+        )
+        return acc
+      },
+      experience
+    )
+
+    return experienceWithDuties
   })
-  return experienceDescription.flat(1)
+  return [
+    new Paragraph({
+      text: "Опыт работы",
+      style: "experienceHeading",
+      border: {
+        bottom: {
+          color: "548ab7",
+          space: 1,
+          style: "single",
+          size: 4
+        }
+      }
+    }),
+    ...experienceDescription.flat(1)
+  ]
 }
 
 const getEducationDescription = (
-  education: Array<IEducationItem>
+  educationData: Array<IEducationItem>
 ): Paragraph[] => {
-  return education.map((education) => {
-    return new Paragraph({
-      children: [
-        new TextRun({ text: `${education.university}`, break: 0 }),
-        new TextRun({ text: `${education.field}`, break: 1 }),
-        new TextRun({
-          text: `даты: ${education.startDate || ""}-${education.endDate || ""}`,
-          break: 1
+  const educations = educationData.reduce(
+    (acc: Array<Paragraph>, education) => {
+      acc.push(
+        new Paragraph({
+          text: `${education.university}`,
+          style: "educationItem",
+          children: [
+            new TextRun({
+              text: `${education.startDate || ""}-${
+                education.endDate || "текущее время"
+              }`,
+              bold: false,
+              break: 1
+            }),
+            new TextRun({ text: `${education.field}`, break: 1, bold: false })
+          ],
+          heading: "Heading5"
         })
-      ],
-      heading: "Heading5"
-    })
-  })
+      )
+      return acc
+    },
+    [
+      new Paragraph({
+        text: "Образование",
+        style: "educationHeading",
+        border: {
+          bottom: {
+            color: "548ab7",
+            space: 1,
+            style: "single",
+            size: 4
+          }
+        }
+      })
+    ]
+  )
+
+  return educations
 }
 
 const getProjectDescription = (projects: Array<IProjectItem>): Paragraph[] => {
   const projectsDescriptionArr = projects.map((project) => {
-    console.log(project)
     const projectDescriptionParagraph = []
     const progectName = new Paragraph({
       text: project.name,
@@ -225,21 +530,6 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
     projects
   } = params
 
-  const extractBase64Data = (base64String: string): string => {
-    if (!base64String) return ""
-    const base64Data = base64String.split(",")[1]
-    return base64Data
-  }
-
-  const base64ImageData = extractBase64Data(photo)
-
-  const technologiesString = technologies.map((item) => {
-    return ` ${item.name.toString()}`
-  })
-
-  const aboutMe = getAboutMe(shortBio)
-  const experienceDescription = getExperienceDescription(experience)
-  const educationDescription = getEducationDescription(education)
   const projectsDescription = getProjectDescription(projects)
 
   const doc = new Document({
@@ -249,10 +539,14 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
         properties: {
           page: {
             margin: {
-              top: 900,
-              right: 702,
-              bottom: 709,
-              left: 702
+              top: "1.27cm",
+              right: "0.99cm",
+              bottom: "1cm",
+              left: "0.99cm"
+            },
+            size: {
+              width: "21cm",
+              height: "29.7cm"
             }
           }
         },
@@ -266,7 +560,7 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
                       c.charCodeAt(0)
                     ),
                     transformation: {
-                      width: 755,
+                      width: 810,
                       height: 1080
                     },
                     floating: {
@@ -288,7 +582,11 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
         },
         children: [
           new Table({
-            columnWidths: [3000, 6000],
+            columnWidths: [20, 1, 33],
+            width: {
+              size: "19cm",
+              type: WidthType.DXA
+            },
             borders: {
               top: { style: BorderStyle.NONE },
               bottom: { style: BorderStyle.NONE },
@@ -299,35 +597,7 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
               new TableRow({
                 children: [
                   new TableCell({
-                    children: [
-                      new Paragraph({
-                        children: [
-                          new ImageRun({
-                            data: Uint8Array.from(atob(base64ImageData), (c) =>
-                              c.charCodeAt(0)
-                            ),
-                            transformation: {
-                              width: 150,
-                              height: 150
-                            },
-                            floating: {
-                              horizontalPosition: {
-                                align: "center",
-                                offset: 0
-                              },
-                              verticalPosition: {
-                                align: "center",
-                                offset: 0
-                              }
-                            }
-                          })
-                        ]
-                      })
-                    ],
-                    width: {
-                      size: 3000,
-                      type: WidthType.DXA
-                    },
+                    children: [createAvatar(photo)],
                     borders: {
                       top: { style: BorderStyle.NONE },
                       bottom: { style: BorderStyle.NONE },
@@ -336,16 +606,16 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
                     }
                   }),
                   new TableCell({
-                    children: [
-                      new Paragraph({
-                        text: fullName,
-                        heading: "Heading1"
-                      })
-                    ],
-                    width: {
-                      size: 6000,
-                      type: WidthType.DXA
-                    },
+                    children: [],
+                    borders: {
+                      top: { style: BorderStyle.NONE },
+                      bottom: { style: BorderStyle.NONE },
+                      left: { style: BorderStyle.NONE },
+                      right: { style: BorderStyle.NONE }
+                    }
+                  }),
+                  new TableCell({
+                    children: [createName(fullName)],
                     borders: {
                       top: { style: BorderStyle.NONE },
                       bottom: { style: BorderStyle.NONE },
@@ -359,19 +629,18 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
                 children: [
                   new TableCell({
                     children: [
-                      ...aboutMe,
-                      new Paragraph({
-                        text: "Навыки",
-                        heading: "Heading2"
-                      }),
-                      new Paragraph({
-                        text: technologiesString.toString()
-                      })
+                      createAboutMe(shortBio),
+                      createOverallStack(technologies)
                     ],
-                    width: {
-                      size: 3000,
-                      type: WidthType.DXA
-                    },
+                    borders: {
+                      top: { style: BorderStyle.NONE },
+                      bottom: { style: BorderStyle.NONE },
+                      left: { style: BorderStyle.NONE },
+                      right: { style: BorderStyle.NONE }
+                    }
+                  }),
+                  new TableCell({
+                    children: [],
                     borders: {
                       top: { style: BorderStyle.NONE },
                       bottom: { style: BorderStyle.NONE },
@@ -381,21 +650,9 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
                   }),
                   new TableCell({
                     children: [
-                      new Paragraph({
-                        text: "Опыт работы",
-                        heading: "Heading3"
-                      }),
-                      ...experienceDescription, // заменить копирование на что-то более элегантное, на объединение массивов?
-                      new Paragraph({
-                        text: "Образование",
-                        heading: "Heading3"
-                      }),
-                      ...educationDescription
+                      ...getExperienceDescription(experience),
+                      ...getEducationDescription(education)
                     ],
-                    width: {
-                      size: 6000,
-                      type: WidthType.DXA
-                    },
                     borders: {
                       top: { style: BorderStyle.NONE },
                       bottom: { style: BorderStyle.NONE },
@@ -413,12 +670,9 @@ export const useCVGenerator = (params: ICVParams): (() => void) => {
     ]
   })
 
-  const saveDocument = () => {
-    Packer.toBlob(doc).then((blob) => {
-      console.log(blob)
-      saveAs(blob, "example.docx")
-      console.log("Document created successfully")
-    })
+  const saveDocument = async () => {
+    const blob = await Packer.toBlob(doc)
+    saveAs(blob, fullName)
   }
 
   return saveDocument
