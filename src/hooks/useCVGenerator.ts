@@ -29,53 +29,11 @@ import {
 
 const styleForDocument: IStylesOptions = {
   default: {
-    heading1: {},
-    heading2: {
-      run: {
-        size: "12pt",
-        bold: true,
-        color: "548ab7"
-        // underline: {
-        //     type: UnderlineType.DOUBLE,
-        //     color: "548ab7",
-        // },
-      },
-      paragraph: {
-        spacing: {
-          before: 1.5,
-          after: 100
-        }
-      }
-    },
-    heading3: {
-      run: {
-        size: "11pt",
-        bold: true,
-        color: "000000"
-      },
-      paragraph: {
-        spacing: {
-          before: 1.5,
-          after: 100
-        }
-      }
-    },
     heading4: {
       run: {
         size: "12pt",
         bold: true,
         color: "000000"
-      },
-      paragraph: {
-        spacing: {
-          before: 1,
-          after: 1
-        }
-      }
-    },
-    heading5: {
-      run: {
-        size: "9pt"
       },
       paragraph: {
         spacing: {
@@ -465,8 +423,7 @@ const getEducationDescription = (
               break: 1
             }),
             new TextRun({ text: `${education.field}`, break: 1, bold: false })
-          ],
-          heading: "Heading5"
+          ]
         })
       )
       return acc
