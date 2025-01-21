@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react"
 import { Badge } from "@/components/common/badge"
 import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
-import { Select } from "@/components/common/select"
+import { SearchSelect } from "@/components/common/select-with-search"
 import { TextArea } from "@/components/common/text-area"
 import { ListInput } from "@/components/ui/input-with-list"
 import { techColors } from "@/constants/styles/colors"
@@ -135,39 +135,39 @@ export const CreateProject: FC<ICreateProject> = ({
         updateItem={updateProject}
       />
       <TechSection>
-        <Select
+        <SearchSelect
           label="Языки"
           options={file.languages}
           saveInputValue={(value) => updateTechArray("languages", value)}
         />
-        <Select
+        <SearchSelect
           label="Фронтенд"
           options={file.fe}
           saveInputValue={(value) => updateTechArray("fe", value)}
         />
-        <Select
+        <SearchSelect
           label="Бекенд"
           options={file.be}
           saveInputValue={(value) => updateTechArray("be", value)}
         />
-        <Select
+        <SearchSelect
           label="Базы данных"
           options={file.databases}
           saveInputValue={(value) => updateTechArray("databases", value)}
         />
       </TechSection>
       <TechSection>
-        <Select
+        <SearchSelect
           label="Девопс"
           options={file.devops}
           saveInputValue={(value) => updateTechArray("devops", value)}
         />
-        <Select
+        <SearchSelect
           label="Тесты"
           options={file.test}
           saveInputValue={(value) => updateTechArray("test", value)}
         />
-        <Select
+        <SearchSelect
           label="Дополнительно"
           options={file.additional}
           saveInputValue={(value) => updateTechArray("additional", value)}
