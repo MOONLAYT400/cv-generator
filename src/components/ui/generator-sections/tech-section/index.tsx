@@ -1,7 +1,7 @@
 import { FC } from "react"
 
 import { Badge } from "@/components/common/badge"
-import { Select } from "@/components/common/select"
+import { SearchSelect } from "@/components/common/select-with-search"
 import { techColors } from "@/constants/styles/colors"
 import { ITechItem } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
@@ -24,37 +24,37 @@ export const TechSection: FC<ITechSection> = ({
   return (
     <Wrapper className="tech">
       <TechSelects>
-        <Select
+        <SearchSelect
           label="Языки"
           options={techList.languages}
           saveInputValue={(value) => updateTechArray("languages", value)}
         />
-        <Select
+        <SearchSelect
           label="Фронтенд"
           options={techList.fe}
           saveInputValue={(value) => updateTechArray("fe", value)}
         />
-        <Select
+        <SearchSelect
           label="Бекенд"
           options={techList.be}
           saveInputValue={(value) => updateTechArray("be", value)}
         />
-        <Select
+        <SearchSelect
           label="Базы данных"
           options={techList.databases}
           saveInputValue={(value) => updateTechArray("databases", value)}
         />
-        <Select
+        <SearchSelect
           label="Девопс"
           options={techList.devops}
           saveInputValue={(value) => updateTechArray("devops", value)}
         />
-        <Select
+        <SearchSelect
           label="Тесты"
           options={techList.test}
           saveInputValue={(value) => updateTechArray("test", value)}
         />
-        <Select
+        <SearchSelect
           label="Дополнительно"
           options={techList.additional}
           saveInputValue={(value) => updateTechArray("additional", value)}
