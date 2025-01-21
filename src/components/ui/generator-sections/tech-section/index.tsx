@@ -21,7 +21,6 @@ export const TechSection: FC<ITechSection> = ({
   updateTechArray,
   handleRemoveTech
 }) => {
-  // test
   return (
     <Wrapper className="tech">
       <TechSelects>
