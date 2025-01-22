@@ -9,6 +9,8 @@ export const Wrapper = styled.div`
   gap: 20px;
   width: 100%;
   min-width: 800px;
+  max-height: 650px;
+  overflow-y: auto;
 `
 
 export const Title = styled.div`
