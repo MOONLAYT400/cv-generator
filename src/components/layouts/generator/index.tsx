@@ -1,6 +1,6 @@
 "use client"
 import dynamic from "next/dynamic"
-import { FC, useLayoutEffect, useRef, useState } from "react"
+import React, { FC, useLayoutEffect, useRef, useState } from "react"
 import { STATUS } from "react-joyride"
 
 import { Button } from "@/components/common/button"

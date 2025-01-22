@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 
 import { Badge } from "@/components/common/badge"
 import { SearchSelect } from "@/components/common/select-with-search"
@@ -6,7 +6,7 @@ import { techColors } from "@/constants/styles/colors"
 import { ITechItem } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
 
-import { TechList, TechSelects, Wrapper } from "./index.styled"
+import { SearchSection, TechList, TechSelects, Wrapper } from "./index.styled"
 
 interface ITechSection {
   techList: IStackData
@@ -21,8 +21,13 @@ export const TechSection: FC<ITechSection> = ({
   updateTechArray,
   handleRemoveTech
 }) => {
+    const [searchValue, setSearchValue] = useState<string>("")
   return (
     <Wrapper className="tech">
+      <SearchSection>
+        Search section
+        <input type="text" value={searchValue} onChange={event => setSearchValue(event.target.value)}/>
+      </SearchSection>
       <TechSelects>
         <SearchSelect
           label="Языки"

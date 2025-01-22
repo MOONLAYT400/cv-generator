@@ -114,7 +114,7 @@ export const SearchSelect: FC<SearchSelect> = ({
         >
           {filteredOptions?.map((option: any, index: number) => (
             <Item key={index} onClick={() => handleSelectOption(option)}>
-              <p>{typeof option === "object" ? option.label : option}</p>
+              <p>{typeof option === "object" ? option[displayField] : option}</p>
             </Item>
           ))}
         </DropDown>
