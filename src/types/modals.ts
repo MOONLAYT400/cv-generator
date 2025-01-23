@@ -4,7 +4,8 @@ import {
   ICVParams,
   IEducationItem,
   IExperienceItem,
-  IProjectItem
+  IProjectItem,
+  ITechItem
 } from "./cv-data"
 import { IStackData } from "./stack-data"
 
@@ -42,4 +43,8 @@ export interface ICreateProjectModal extends IModal {
 
 export interface ICompareTechModal extends IModal {
   cvData: ICVParams
+}
+
+export interface ITechHelpModal extends IModal {
+  data: ITechItem
 }
