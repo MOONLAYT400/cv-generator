@@ -1,6 +1,6 @@
 import { FC, useEffect, useState, useRef, ReactNode } from "react"
 
-import useDebounce from "@/hooks/useDebounce"
+import { useDebounce } from "@/hooks/useDebounce"
 
 import { CloseSystemIcon, Search20Icon } from "../icons"
 
@@ -95,7 +95,7 @@ export const Input: FC<ICustomInput> = ({
 
   const handleBlur = () => {
     setFocused(false)
-    if (!value) return
+    if (!value && !allowClearValue) return
     if (type === "number") {
       saveInputValue(+value)
       return

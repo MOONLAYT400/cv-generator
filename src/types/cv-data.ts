@@ -1,6 +1,8 @@
 export interface ITechItem {
+  value: string
+  description: string
+  alternative: Array<string>
   type: string
-  name: string
 }
 
 export interface IEducationItem {

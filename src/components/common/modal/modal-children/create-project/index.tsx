@@ -50,16 +50,16 @@ export const CreateProject: FC<ICreateProject> = ({
   const handleUpdateProject = (field: string, value: string) =>
     updateProject({ ...project, [field]: value })
 
-  const updateTechArray = (type: string, name: string) => {
+  const updateTechArray = (type: string, tech: ITechItem) => {
     const techArray = project.technologies
-    const existing = techArray.find((item) => item.name === name)
+    const existing = techArray.find((item) => item.value === tech.value)
 
     if (!existing) {
       const lastIndex = techArray.findLastIndex((item) => item.type === type)
 
       if (lastIndex === -1) {
-        techArray.push({ type, name })
-      } else techArray.splice(lastIndex + 1, 0, { type, name })
+        techArray.push(tech)
+      } else techArray.splice(lastIndex + 1, 0, tech)
 
       updateProject({
         ...project,
@@ -70,7 +70,7 @@ export const CreateProject: FC<ICreateProject> = ({
 
   const handleRemoveTech = (item: ITechItem) => {
     const filtered = project.technologies.filter(
-      (entry) => entry.name !== item.name
+      (entry) => entry.value !== item.value
     )
     updateProject({
       ...project,
@@ -137,21 +137,25 @@ export const CreateProject: FC<ICreateProject> = ({
       <TechSection>
         <SearchSelect
           label="Языки"
+          outputField="object"
           options={file.languages}
           saveInputValue={(value) => updateTechArray("languages", value)}
         />
         <SearchSelect
           label="Фронтенд"
+          outputField="object"
           options={file.fe}
           saveInputValue={(value) => updateTechArray("fe", value)}
         />
         <SearchSelect
           label="Бекенд"
           options={file.be}
+          outputField="object"
           saveInputValue={(value) => updateTechArray("be", value)}
         />
         <SearchSelect
           label="Базы данных"
+          outputField="object"
           options={file.databases}
           saveInputValue={(value) => updateTechArray("databases", value)}
         />
@@ -159,16 +163,19 @@ export const CreateProject: FC<ICreateProject> = ({
       <TechSection>
         <SearchSelect
           label="Девопс"
+          outputField="object"
           options={file.devops}
           saveInputValue={(value) => updateTechArray("devops", value)}
         />
         <SearchSelect
           label="Тесты"
+          outputField="object"
           options={file.test}
           saveInputValue={(value) => updateTechArray("test", value)}
         />
         <SearchSelect
           label="Дополнительно"
+          outputField="object"
           options={file.additional}
           saveInputValue={(value) => updateTechArray("additional", value)}
         />
