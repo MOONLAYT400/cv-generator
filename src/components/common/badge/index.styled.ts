@@ -23,6 +23,18 @@ export const Wrapper = styled.div<IWrapper>`
       : ``}
 `
 
+export const Help = styled.div`
+  display: flex;
+  align-items: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+`
+
 export const Remove = styled.div`
   display: flex;
   &:hover {

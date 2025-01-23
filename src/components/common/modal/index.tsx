@@ -8,7 +8,8 @@ import {
   IAddExperience,
   ICompareTechModal,
   ICreateProjectModal,
-  IModalWrapper
+  IModalWrapper,
+  ITechHelpModal
 } from "@/types/modals"
 
 import { CloseSystemIcon } from "../icons"
@@ -18,6 +19,7 @@ import { AddEducation } from "./modal-children/add-education"
 import { AddExperience } from "./modal-children/add-experience"
 import { CreateProject } from "./modal-children/create-project"
 import { CompareTech } from "./modal-children/missing-tech"
+import { TechHelp } from "./modal-children/tech-help"
 
 const ModalWrapper: FC<IModalWrapper> = ({
   id,
@@ -146,5 +148,15 @@ export const CompareTechModal: FC<ICompareTechModal> = ({
 }) => (
   <ModalWrapper close={close} isOpened={isOpened} id={MODALS.CREATE_PROJECT}>
     <CompareTech cvData={cvData} close={close} />
+  </ModalWrapper>
+)
+
+export const TechHelpModal: FC<ITechHelpModal> = ({
+  isOpened,
+  data,
+  close
+}) => (
+  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.CREATE_PROJECT}>
+    <TechHelp data={data} />
   </ModalWrapper>
 )
