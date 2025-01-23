@@ -16,7 +16,9 @@ export const useTechComparison = (data: ICVParams): IMissingTech => {
       .filter(
         (value, index, self) =>
           index ===
-          self.findIndex((t) => t.type === value.type && t.name === value.name)
+          self.findIndex(
+            (t) => t.type === value.type && t.value === value.value
+          )
       )
 
   const aggregateArrayToObject = (array: Array<any>, field: string) =>
@@ -28,8 +30,8 @@ export const useTechComparison = (data: ICVParams): IMissingTech => {
     primary: Array<ITechItem>,
     secondary: Array<ITechItem>
   ): Array<ITechItem> => {
-    const agrPrimary = aggregateArrayToObject(primary, "name")
-    const agrSecondary = aggregateArrayToObject(secondary, "name")
+    const agrPrimary = aggregateArrayToObject(primary, "value")
+    const agrSecondary = aggregateArrayToObject(secondary, "value")
 
     const missingProjectsTech: Array<ITechItem> = []
 

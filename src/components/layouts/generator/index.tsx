@@ -86,22 +86,22 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
 
   //tech control
 
-  const updateTechArray = (type: string, name: string) => {
+  const updateTechArray = (type: string, tech: ITechItem) => {
     const techArray = cvData.technologies
-    const existing = techArray.find((item) => item.name === name)
+    const existing = techArray.find((item) => item.value === tech.value)
 
     if (!existing) {
       const lastIndex = techArray.findLastIndex((item) => item.type === type)
       if (lastIndex === -1) {
-        techArray.push({ type, name })
-      } else techArray.splice(lastIndex + 1, 0, { type, name })
+        techArray.push(tech)
+      } else techArray.splice(lastIndex + 1, 0, tech)
       setCVData({ ...cvData, technologies: techArray })
     }
   }
 
   const handleRemoveTech = (item: ITechItem) => {
     const filtered = cvData.technologies.filter(
-      (entry) => entry.name !== item.name
+      (entry) => entry.value !== item.value
     )
     setCVData({
       ...cvData,

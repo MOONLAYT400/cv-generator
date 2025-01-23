@@ -386,7 +386,7 @@ const createOverallStack = (technologies: Array<ITechItem>): Paragraph => {
   }
 
   technologies.forEach((item) => {
-    formattedStack[item.type].push(item.name)
+    formattedStack[item.type].push(item.value)
   })
 
   const children = Object.keys(formattedStack).reduce(
@@ -523,7 +523,7 @@ const getProjectDescription = (projects: Array<IProjectItem>): Paragraph[] => {
   const projectsDescriptionArr = projects
     .map((project) => {
       const technologies = project.technologies
-        .map((technology) => technology.name)
+        .map((technology) => technology.value)
         .join(", ")
 
       const projectDescriptionParagraph = [

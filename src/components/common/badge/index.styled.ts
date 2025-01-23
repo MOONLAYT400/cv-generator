@@ -4,6 +4,7 @@ import { COLORS } from "@/constants/styles/colors"
 
 interface IWrapper {
   $color?: string
+  $hover?: boolean
 }
 
 export const Wrapper = styled.div<IWrapper>`
@@ -13,6 +14,13 @@ export const Wrapper = styled.div<IWrapper>`
   background: ${({ $color }) => $color ?? COLORS.BLUE};
   padding: 8px 10px;
   border-radius: 20px;
+  ${({ $hover }) =>
+    $hover
+      ? `  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }`
+      : ``}
 `
 
 export const Remove = styled.div`

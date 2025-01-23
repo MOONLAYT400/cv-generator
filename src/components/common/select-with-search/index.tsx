@@ -1,6 +1,6 @@
 import { FC, useEffect, useState, useRef } from "react"
 
-import useDebounce from "@/hooks/useDebounce"
+import { useDebounce } from "@/hooks/useDebounce"
 import { useOnClickOutside } from "@/hooks/useOnclickOutside"
 
 import { DownSystemIcon } from "../icons"
@@ -114,7 +114,9 @@ export const SearchSelect: FC<SearchSelect> = ({
         >
           {filteredOptions?.map((option: any, index: number) => (
             <Item key={index} onClick={() => handleSelectOption(option)}>
-              <p>{typeof option === "object" ? option[displayField] : option}</p>
+              <p>
+                {typeof option === "object" ? option[displayField] : option}
+              </p>
             </Item>
           ))}
         </DropDown>

@@ -7,7 +7,14 @@ export const Wrapper = styled.div`
 `
 
 export const SearchSection = styled.div`
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+`
+
+export const SearchResults = styled.div`
+  display: flex;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  gap: 5px;
 `
 
 export const TechSelects = styled.div`
