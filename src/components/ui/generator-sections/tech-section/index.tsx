@@ -130,6 +130,7 @@ export const TechSection: FC<ITechSection> = ({
       <TechList>
         {technologies.map((tech, index) => (
           <Badge
+            withHelp
             item={tech}
             key={"tech_" + index}
             color={techColors[tech.type as keyof typeof techColors]}
