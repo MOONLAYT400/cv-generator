@@ -436,6 +436,286 @@
       "alternative": [
         "React, Angular, Vue, Svelte, HTMX, Solid.js, Astro, Qwik"
       ]
+    },
+    {
+      "value": "Apollo",
+      "description": "Apollo: Набор инструментов для работы с GraphQL, позволяющий легко интегрировать API GraphQL в ваши приложения и управлять данными на клиентской стороне.",
+      "alternative": [
+        "Relay",
+        "urql",
+        "Hasura",
+        "graphql-request"
+      ]
+    },
+    {
+      "value": "Apollo GraphQL",
+      "description": "Apollo GraphQL: Ядро системы Apollo, которое предоставляет функции для определения, выполнения и обработки GraphQL запросов, позволяя разработчикам интегрировать гибкие API в свои приложения.",
+      "alternative": [
+        "GraphQL-Tools",
+        "Prisma",
+        "Relay"
+      ]
+    },
+    {
+      "value": "Ariakit",
+      "description": "Ariakit: Набор компонентов и хуков для создания доступных пользовательских интерфейсов в React, предлагающий мощные абстракции для функциональности интерфейса.",
+      "alternative": [
+        "Reach UI",
+        "Headless UI",
+        "React Aria"
+      ]
+    },
+    {
+      "value": "Axios",
+      "description": "Axios: Популярная библиотека для выполнения HTTP-запросов, предоставляющая простой API для взаимодействия с RESTful API и поддержку Promise для работы с асинхронными вызовами.",
+      "alternative": [
+        "Fetch API",
+        "Superagent",
+        "Got"
+      ]
+    },
+    {
+      "value": "Clarity",
+      "description": "Clarity: Дизайн-система и UI-компоненты от VMware, предлагающая набор инструментов для создания веб-приложений с акцентом на доступность и производительность.",
+      "alternative": [
+        "Material UI",
+        "Ant Design",
+        "Blueprint"
+      ]
+    },
+    {
+      "value": "Facebook Auth",
+      "description": "Facebook Auth: Механизм аутентификации через Facebook, позволяющий пользователям входить в приложения с использованием своих учетных записей Facebook.",
+      "alternative": [
+        "Google Auth",
+        "Apple Auth",
+        "Microsoft Auth"
+      ]
+    },
+    {
+      "value": "Formik",
+      "description": "Formik: Библиотека для React, упрощающая работу с формами, обеспечивая валидацию, управление состоянием и обработку данных форм.",
+      "alternative": [
+        "React Hook Form",
+        "Final Form",
+        "Redux Form"
+      ]
+    },
+    {
+      "value": "I18n",
+      "description": "I18n: Общий термин для интернационализации, то есть адаптации приложений под разные языки и региональные особенности.",
+      "alternative": [
+        "React Intl",
+        "LinguiJS",
+        "i18next"
+      ]
+    },
+    {
+      "value": "i18next",
+      "description": "i18next: Библиотека для интернационализации JavaScript-приложений, поддерживающая различные языки и локализации с гибкими API.",
+      "alternative": [
+        "React Intl",
+        "Polyglot.js",
+        "LinguiJS"
+      ]
+    },
+    {
+      "value": "Mantine (Mantine UI)",
+      "description": "Mantine: Современная библиотека компонентов для React, обеспечивающая множество готовых элементов интерфейса и инструментов для их стилизации.",
+      "alternative": [
+        "Material UI",
+        "Chakra UI",
+        "Ant Design"
+      ]
+    },
+    {
+      "value": "next-intl",
+      "description": "next-intl: Библиотека для интернационализации Next.js приложений, предлагающая простой способ настройка перевода и локализации.",
+      "alternative": [
+        "i18next",
+        "React Intl",
+        "LinguiJS"
+      ]
+    },
+    {
+      "value": "Next-PWA",
+      "description": "Next-PWA: Плагин для Next.js, который добавляет функциональность Progressive Web Application (PWA) в проекты на основе Next.js, обеспечивая офлайн-работу и поддержку установки на устройства.",
+      "alternative": [
+        "Next.js без PWA",
+        "Workbox",
+        "PWA-Launcher"
+      ]
+    },
+    {
+      "value": "React Hook Form",
+      "description": "React Hook Form: Утилита для управления состоянием форм в React с использованием хуков, которая минимизирует перерисовку компонентов и повышает производительность.",
+      "alternative": [
+        "Formik",
+        "Final Form",
+        "Redux Form"
+      ]
+    },
+    {
+      "value": "React libraries",
+      "description": "React libraries: Обширная коллекция библиотек и компонентов, разработанных для улучшения функциональности и пользовательского опыта в приложениях на React.",
+      "alternative": [
+        "Redux",
+        "MobX",
+        "React Router"
+      ]
+    },
+    {
+      "value": "SCSS",
+      "description": "SCSS: Расширение CSS, добавляющее поддержку переменных, вложенности и миксинов, что делает процесс написания стилей более гибким и удобным.",
+      "alternative": [
+        "SASS",
+        "LESS",
+        "PostCSS"
+      ]
+    },
+    {
+      "value": "Storybook",
+      "description": "Storybook: Инструмент для разработки пользовательских компонентов в изоляции, позволяющий визуализировать и тестировать компоненты для различных состояний.",
+      "alternative": [
+        "Styleguidist",
+        "Docz",
+        "Bit"
+      ]
+    },
+    {
+      "value": "SWR",
+      "description": "SWR: Библиотека для React, упрощающая загрузку данных, с использованием актуального кэширования и автоматического обновления данных.",
+      "alternative": [
+        "React Query",
+        "TanStack Query",
+        "Apollo Client"
+      ]
+    },
+    {
+      "value": "TanStack Query",
+      "description": "TanStack Query: Библиотека для управления серверными состояниями в React и других фреймворках, обеспечивающая удобный API и кэширование запросов.",
+      "alternative": [
+        "React Query",
+        "Apollo Client",
+        "SWR"
+      ]
+    },
+    {
+      "value": "UI",
+      "description": "UI: Общий термин, описывающий пользовательский интерфейс; относится к разработке компонентов и систем, которые обеспечивают взаимодействие с пользователем.",
+      "alternative": [
+        "UX",
+        "Front-end Frameworks",
+        "Design Systems"
+      ]
+    },
+    {
+      "value": "VR",
+      "description": "VR (виртуальная реальность): Технология, позволяющая пользователям взаимодействовать с трехмерными средами через специальные устройства и программное обеспечение.",
+      "alternative": [
+        "AR (дополненная реальность)",
+        "WebXR",
+        "Three.js"
+      ]
+    },
+    {
+      "value": "emoji-mart",
+      "description": "emoji-mart: Библиотека для интеграции выборщиков эмодзи в веб-приложения, обеспечивающая удобный интерфейс для выбора и вставки эмодзи.",
+      "alternative": [
+        "react-emoji-picker",
+        "emoji-button",
+        "emoji-picker-react"
+      ]
+    },
+    {
+      "value": "Prosemirror",
+      "description": "Prosemirror: Документный редактор на основе JavaScript, предлагающий гибкие API и возможности для создания интерактивных текстовых интерфейсов.",
+      "alternative": [
+        "Draft.js",
+        "Slate",
+        "TinyMCE"
+      ]
+    },
+    {
+      "value": "PWA",
+      "description": "PWA: Прогрессивные веб-приложения, которые используют современные веб-технологии для создания приложений, работающих как на вебе, так и в качестве нативных приложений.",
+      "alternative": [
+        "React Native",
+        "Flutter",
+        "Electron"
+      ]
+    },
+    {
+      "value": "Reactor",
+      "description": "Reactor: Изначально разработанный фреймворк на основе React для упрощения создания интерфейсов и управления состоянием, фокусируется на его производительности.",
+      "alternative": [
+        "React",
+        "Vue",
+        "Angular"
+      ]
+    },
+    {
+      "value": "react-virtualized",
+      "description": "react-virtualized: Библиотека для оптимизации производительности отрисовки больших списков и таблиц в React, обеспечивающая виртуализированный рендеринг для экономии ресурсов.",
+      "alternative": [
+        "react-window",
+        "List.js",
+        "React Infinite Scroll"
+      ]
+    },
+    {
+      "value": "StreamChat",
+      "description": "StreamChat: Платформа для интеграции функций чата в приложения, предлагающая API, SDK и компоненты для создания мощных решений чата.",
+      "alternative": [
+        "Firebase",
+        "Twilio",
+        "Socket.io"
+      ]
+    },
+    {
+      "value": "Yup",
+      "description": "Yup: Библиотека для валидации данных в JavaScript, часто используемая с формами для проверки и подтверждения корректности введенных данных.",
+      "alternative": [
+        "Joi",
+        "Zod",
+        "Vest"
+      ]
+    },
+    {
+      "value": "Zod",
+      "description": "Zod: Библиотека для валидации и разбора данных, обеспечивающая простое и интуитивное API для проверки типов и структуры данных в JavaScript.",
+      "alternative": [
+        "Yup",
+        "Joi",
+        "Superstruct"
+      ]
+    },
+    {
+      "value": "zustand",
+      "description": "zustand: Минималистичная библиотека для управления состоянием в React-приложениях, основанная на хуках и контексте, обеспечивающая простой и эффективный подход к управлению состоянием.",
+      "alternative": [
+        "Redux",
+        "MobX",
+        "Recoil"
+      ]
+    },
+    {
+      "value": "QT",
+      "description": "QT: Кросс-платформенный фреймворк для разработки приложений на C++, который также поддерживает JavaScript через QtQuick и QML, позволяя создавать мощные интерфейсы для настольных и мобильных приложений.",
+      "alternative": [
+        "Electron",
+        "Flutter",
+        "Xamarin"
+      ]
+    },
+    {
+      "value": "Custom SSO",
+      "description": "Custom SSO: Решение для единой аутентификации, позволяющее пользователям входить в множество приложений с одним набором учетных данных, обеспечивая безопасность и удобство.",
+      "alternative": [
+        "OAuth",
+        "OpenID Connect",
+        "Auth0"
+      ]
     }
   ],
   "be": [
@@ -707,6 +987,132 @@
         "SHA-256 + Salting",
         "SHA-3"
       ]
+    },
+    {
+      "value": "Node.js",
+      "description": "Node.js: Среда выполнения JavaScript, позволяющая запускать JavaScript на сервере, обеспечивая асинхронный ввод-вывод и подход, основанный на событиях, что делает её идеальной для создания масштабируемых сетевых приложений.",
+      "alternative": [
+        "Deno",
+        "Python (Flask, Django)",
+        "Ruby on Rails"
+      ]
+    },
+    {
+      "value": "Auth0",
+      "description": "Auth0: Платформа для аутентификации и авторизации пользователей, предлагающая гибкие решения для интеграции SSO, социального входа и защиты приложений.",
+      "alternative": [
+        "Okta",
+        "Firebase Authentication",
+        "AWS Cognito"
+      ]
+    },
+    {
+      "value": "AWS",
+      "description": "AWS (Amazon Web Services): Обширная облачная платформа от Amazon, предлагающая широкий спектр сервисов для вычислительных мощностей, хранения данных, анализа, машинного обучения и многого другого.",
+      "alternative": [
+        "Google Cloud Platform",
+        "Microsoft Azure",
+        "IBM Cloud"
+      ]
+    },
+    {
+      "value": "Azure",
+      "description": "Azure: Облачная платформа от Microsoft, предоставляющая услуги вычислений, анализа, хранения и сетевых технологий для разработки и управления приложениями в облаке.",
+      "alternative": [
+        "AWS",
+        "Google Cloud Platform",
+        "IBM Cloud"
+      ]
+    },
+    {
+      "value": "Azure Blob storage",
+      "description": "Azure Blob storage: Сервис от Microsoft Azure для хранения больших объемов неструктурированных данных, таких как текст и бинарные данные, с высокой доступностью и масштабируемостью.",
+      "alternative": [
+        "Amazon S3",
+        "Google Cloud Storage",
+        "IBM Cloud Object Storage"
+      ]
+    },
+    {
+      "value": "Botpress",
+      "description": "Botpress: Платформа для создания, развертывания и управления чат-ботами с использованием открытого исходного кода, предлагающая инструменты для обработки естественного языка и взаимодействия с пользователями.",
+      "alternative": [
+        "Dialogflow",
+        "Microsoft Bot Framework",
+        "Rasa"
+      ]
+    },
+    {
+      "value": "BullMQ",
+      "description": "BullMQ: Современная библиотека для управления очередями и обработки фоновых заданий в Node.js, предлагающая производительность, масштабируемость и простоту использования.",
+      "alternative": [
+        "Bull",
+        "Bee-Queue",
+        "Kue"
+      ]
+    },
+    {
+      "value": "Docker",
+      "description": "Docker: Платформа для контейнеризации, позволяющая разработчикам упаковка приложений и их зависимостей в контейнеры для упрощения развертывания и управления приложениями в различных средах.",
+      "alternative": [
+        "Kubernetes",
+        "OpenShift",
+        "Podman"
+      ]
+    },
+    {
+      "value": "Kafka",
+      "description": "Kafka: Распределенная потоковая платформа для обработки и передачи событий в реальном времени, обеспечивающая высокую пропускную способность и устойчивость к сбоям.",
+      "alternative": [
+        "RabbitMQ",
+        "Amazon Kinesis",
+        "Apache Pulsar"
+      ]
+    },
+    {
+      "value": "OpenAI API",
+      "description": "OpenAI API: Платформа, предоставляющая доступ к мощным моделям искусственного интеллекта OpenAI, таким как GPT, для решения задач обработки естественного языка, генерации текста и других приложений.",
+      "alternative": [
+        "Hugging Face API",
+        "Google Cloud Natural Language API",
+        "IBM Watson"
+      ]
+    },
+    {
+      "value": "RPC",
+      "description": "RPC (Remote Procedure Call): Протокол, позволяющий одному процессу вызывать функции и процедуры, работающие на другом компьютере, упрощая взаимодействие между клиентом и сервером.",
+      "alternative": [
+        "gRPC",
+        "JSON-RPC",
+        "XML-RPC"
+      ]
+    },
+    {
+      "value": "SSO",
+      "description": "SSO (Single Sign-On): Механизм аутентификации, позволяющий пользователям входить в несколько приложений с одной учетной записи, упрощая управление доступом и повышая безопасность.",
+      "alternative": [
+        "OAuth",
+        "OpenID Connect",
+        "LDAP"
+      ]
+    },
+    {
+      "value": "SendGrid",
+      "description": "SendGrid: Платформа для отправки email-сообщений, предлагающая API и инструменты для управления рассылками, уведомлениями и другими коммуникациями по электронной почте.",
+      "alternative": [
+        "Mailgun",
+        "Amazon SES",
+        "Postmark"
+      ]
+    },
+    {
+      "value": "Zod",
+      "description": "Zod: Библиотека для валидации и разбора данных, обеспечивающая простое и интуитивное API для проверки типов и структуры данных в JavaScript.",
+      "alternative": [
+        "Yup",
+        "Joi",
+        "Superstruct"
+      ]
     }
   ],
   "databases": [
@@ -763,6 +1169,26 @@
         "MariaDB",
         "AstraDb",
         "Prisma"
+      ]
+    },
+    {
+      "value": "MySQL",
+      "description": "MySQL: Популярная система управления реляционными базами данных с открытым исходным кодом, известная своей высокой производительностью, надежностью и простотой использования, часто применяется для веб-приложений.",
+      "alternative": [
+        "PostgreSQL",
+        "MariaDB",
+        "SQLite",
+        "Microsoft SQL Server"
+      ]
+    },
+    {
+      "value": "SQL",
+      "description": "SQL (Structured Query Language): Стандартный язык для работы с реляционными базами данных, используемый для запросов, обновления и управления данными в базе данных.",
+      "alternative": [
+        "PL/SQL",
+        "T-SQL",
+        "NoSQL (для работы с не реляционными базами)",
+        "LINQ"  
       ]
     }
   ],
@@ -953,6 +1379,24 @@
         "AVA",
         "TestCafe"
       ]
+    },
+    {
+      "value": "Enzyme",
+      "description": "Enzyme: Библиотека для тестирования компонентов React, разработанная Airbnb, которая позволяет взаимодействовать с компонентами, проводить тесты и делать срезы состояния, упрощая процесс юнит-тестирования.",
+      "alternative": [
+        "React Testing Library",
+        "Jest",
+        "Mocha"
+      ]
+    },
+    {
+      "value": "Sentry",
+      "description": "Sentry: Платформа для мониторинга приложений, которая отслеживает ошибки и производительность, предоставляет инструменты для анализа сбоев и помогает разработчикам быстро решать проблемы с их приложениями.",
+      "alternative": [
+        "New Relic",
+        "Rollbar",
+        "LogRocket"
+      ]
     }
   ],
   "devops": [
@@ -963,7 +1407,7 @@
         "Apache HTTP Server",
         "Caddy",
         "LiteSpeed"
-      ]
+      ]      
     },
     {
       "value": "Jenkins",
@@ -1017,6 +1461,51 @@
         "Apache HBase",
         "Amazon DynamoDB"
       ]
+    },
+    {
+      "value": "Git",
+      "description": "Git: Распределенная система контроля версий, которая позволяет разработчикам отслеживать изменения в коде, управлять версиями и совместно работать над проектами, обеспечивая надежность и гибкость разработки.",
+      "alternative": [
+        "Subversion (SVN)",
+        "Mercurial",
+        "Bazaar"
+      ]
+    },
+    {
+      "value": "NPM",
+      "description": "NPM (Node Package Manager): Пакетный менеджер для JavaScript, который позволяет разработчикам устанавливать, обновлять и управлять зависимостями их проектов, а также публиковать собственные пакеты.",
+      "alternative": [
+        "Yarn",
+        "pnpm",
+        "Bower"
+      ]
+    },
+    {
+      "value": "NX",
+      "description": "NX: Инструмент для управления монорепозиториями, который помогает организовывать и масштабировать проекты на основе Angular, React и других технологий, предлагает возможности для кэширования, тестирования и сборки.",
+      "alternative": [
+        "Lerna",
+        "Rush",
+        "Bit"
+      ]
+    },
+    {
+      "value": "Postman",
+      "description": "Postman: Инструмент для разработки и тестирования API, который позволяет отправлять HTTP-запросы, проверять ответы и автоматизировать тестирование API, облегчая взаимодействие между клиентом и сервером.",
+      "alternative": [
+        "Insomnia",
+        "Swagger",
+        "Paw"
+      ]
+    },
+    {
+      "value": "Yarn",
+      "description": "Yarn: Альтернативный менеджер пакетов для JavaScript, разработанный Facebook, который обеспечивает быструю и безопасную установку зависимостей с использованием кеширования и параллельной загрузки.",
+      "alternative": [
+        "NPM",
+        "pnpm",
+        "Bower"
+      ]
     }
   ],
   "additional": [
@@ -1056,6 +1545,25 @@
         "Webpack",
         "Parcel",
         "Snowpack"
+      ]
+    },
+    {
+      "value": "Bash",
+      "description": "Bash (Bourne Again SHell): Unix-совместимая оболочка командной строки и язык сценариев, позволяющий пользователям взаимодействовать с системой через команды и автоматизировать задачи путем написания скриптов.",
+      "alternative": [
+        "Zsh",
+        "Fish",
+        "PowerShell"
+      ]
+    },
+    {
+      "value": "GPT-4",
+      "description": "GPT-4: Модель машинного обучения от OpenAI, способная генерировать текст, понимать контекст и отвечать на вопросы на естественном языке, что позволяет её использовать в широком спектре приложений, от чат-ботов до генерации контента.",
+      "alternative": [
+        "GPT-3",
+        "BERT",
+        "Claude",
+        "T5"
       ]
     }
   ]
