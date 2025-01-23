@@ -6,6 +6,17 @@ export const Wrapper = styled.div`
   padding: 0 10px;
 `
 
+export const SearchSection = styled.div`
+  margin-bottom: 20px;
+`
+
+export const SearchResults = styled.div`
+  display: flex;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  gap: 5px;
+`
+
 export const TechSelects = styled.div`
   display: flex;
   gap: 50px;
