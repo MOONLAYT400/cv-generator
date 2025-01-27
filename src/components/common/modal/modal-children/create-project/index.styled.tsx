@@ -53,6 +53,28 @@ export const TechList = styled.div`
   padding: 0 10px;
 `
 
+interface ITechItemStyled {
+  $color?: string
+}
+
+export const TechItem = styled.div<ITechItemStyled>`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 10px;
+  border-radius: 20px;
+  background-color: ${({ $color }) => $color ?? COLORS.BLUE};
+  color: ${COLORS.WHITE_87};
+`
+
+export const Remove = styled.div`
+  display: flex;
+  &:hover {
+    cursor: pointer;
+    color: ${COLORS.SEMANTIC_RED};
+  }
+`
+
 export const Buttons = styled.div`
   display: flex;
   justify-content: space-around;
