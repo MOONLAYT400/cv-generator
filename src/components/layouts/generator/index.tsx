@@ -5,7 +5,6 @@ import { STATUS } from "react-joyride"
 
 import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
-import { CompareTechModal } from "@/components/common/modal"
 import { OnboardingTooltip } from "@/components/common/onboarding-tooltip"
 import { TextArea } from "@/components/common/text-area"
 import { ImageWithPreview } from "@/components/common/upload-image"
@@ -55,12 +54,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
 
   const saveDocument = useCVGenerator(cvData)
 
-  const [modals, controlModals] = useState({
-    project: null,
-    education: null,
-    experience: null,
-    techComparison: null
-  })
   const [run, setRun] = useState(false)
 
   useLayoutEffect(() => {
@@ -184,14 +177,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     setCVData({ ...cvData, projects: filtered })
   }
 
-  //modal controls
-  const handleToggleModal = (
-    type: string,
-    value: IProjectItem | IEducationItem | IExperienceItem | null
-  ) => {
-    controlModals({ ...modals, [type]: value })
-  }
-
   const handleJoyrideCallback = (data: any) => {
     const { status } = data
 
@@ -257,11 +242,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
           options: onboardingStyleOptions
         }}
       />
-      <CompareTechModal
-        cvData={cvData}
-        isOpened={!!modals.techComparison}
-        close={() => handleToggleModal("techComparison", null)}
-      />
       <InfoSection>
         <ImageWithPreview
           label={"Фото"}
@@ -282,25 +262,11 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
           />
         </InfoInputs>
         <Buttons className="downloads">
-          <Button
-            text="Сравнить технологии"
-            handleClick={() =>
-              handleToggleModal("techComparison", {} as IEducationItem)
-            }
-          />
-          <Button
-            text="Создать резюме docx"
-            handleClick={saveDocument}
-            // disabled
-          />
-          <Button
+          {/* <Button
             text="Создать резюме pdf"
             handleClick={saveDocument}
             disabled
-          />
-        </Buttons>
-        <Buttons className="files">
-          <Button text={"Выгрузить файл"} handleClick={handleExportFile} />
+            /> */}
           <FileInputs>
             <input
               type="file"
@@ -309,12 +275,15 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
               ref={filePicker}
             />
           </FileInputs>
+          <Button text={"Выгрузить файл"} handleClick={handleExportFile} />
           <Button text={"Загрузить файл"} handleClick={handlePick} />
+          <Button text="Создать резюме docx" handleClick={saveDocument} />
         </Buttons>
       </InfoSection>
       <TechSection
-        technologies={cvData.technologies}
         techList={file}
+        cvData={cvData}
+        technologies={cvData.technologies}
         handleRemoveTech={handleRemoveTech}
         updateTechArray={updateTechArray}
       />

@@ -1,8 +1,10 @@
 import { FC, useEffect, useMemo, useState } from "react"
 
 import { Badge } from "@/components/common/badge"
+import { Button } from "@/components/common/button"
 import { CloseSystemIcon } from "@/components/common/icons"
 import { Input } from "@/components/common/input"
+import { CompareTechModal } from "@/components/common/modal"
 import { SearchSelect } from "@/components/common/select-with-search"
 import { techColors } from "@/constants/styles/colors"
 import { ITechItem } from "@/types/cv-data"
@@ -11,12 +13,14 @@ import { IStackData } from "@/types/stack-data"
 import {
   SearchResults,
   SearchSection,
+  Section,
   TechList,
   TechSelects,
   Wrapper
 } from "./index.styled"
 
 interface ITechSection {
+  cvData: any
   techList: IStackData
   technologies: Array<ITechItem>
   updateTechArray: (name: string, value: ITechItem) => void
@@ -24,14 +28,16 @@ interface ITechSection {
 }
 
 export const TechSection: FC<ITechSection> = ({
-  technologies,
+  cvData,
   techList,
+  technologies,
   updateTechArray,
   handleRemoveTech
 }) => {
   const flatList = useMemo(() => Object.values(techList).flat(), [techList])
   const [searchResults, setSearchResults] = useState<any[]>([])
   const [searchValue, setSearchValue] = useState<string>("")
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     getSearchResult()
@@ -56,20 +62,33 @@ export const TechSection: FC<ITechSection> = ({
     setSearchValue("")
   }
 
+  const handleToggleModal = (value: boolean) => setIsModalOpen(value)
+
   return (
     <Wrapper className="tech">
+      <CompareTechModal
+        cvData={cvData}
+        isOpened={isModalOpen}
+        close={() => handleToggleModal(false)}
+      />
       <SearchSection>
-        <Input
-          actionInput
-          withDebounce
-          allowClearValue
-          label="Найти технологию:"
-          inputValue={searchValue}
-          icon={<CloseSystemIcon />}
-          placeholder="Введите название..."
-          actionHandler={handleClearInput}
-          saveInputValue={(value) => setSearchValue(value as string)}
-        />
+        <Section>
+          <Input
+            actionInput
+            withDebounce
+            allowClearValue
+            inputValue={searchValue}
+            icon={<CloseSystemIcon />}
+            label={"Найти технологию:"}
+            actionHandler={handleClearInput}
+            placeholder={"Введите название..."}
+            saveInputValue={(value) => setSearchValue(value as string)}
+          />
+          <Button
+            text="Сравнить технологии"
+            handleClick={() => handleToggleModal(true)}
+          />
+        </Section>
         {searchResults?.length ? (
           <SearchResults>
             {searchResults.map((res, index) => (
