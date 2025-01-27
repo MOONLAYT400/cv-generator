@@ -100,7 +100,7 @@ export const AddEducationModal: FC<IAddEducation> = ({
   close,
   saveEducation
 }) => (
-  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.ADD_EXPERIENCE}>
+  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.ADD_EDUCATION}>
     <AddEducation
       saveEducation={saveEducation}
       close={close}
@@ -146,7 +146,7 @@ export const CompareTechModal: FC<ICompareTechModal> = ({
   cvData,
   close
 }) => (
-  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.CREATE_PROJECT}>
+  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.COMPARE_TECH}>
     <CompareTech cvData={cvData} close={close} />
   </ModalWrapper>
 )
@@ -156,7 +156,7 @@ export const TechHelpModal: FC<ITechHelpModal> = ({
   data,
   close
 }) => (
-  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.CREATE_PROJECT}>
+  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.TECH_HELP}>
     <TechHelp data={data} />
   </ModalWrapper>
 )
