@@ -55,7 +55,7 @@ const styleForDocument: IStylesOptions = {
       id: "fullName",
       name: "Full Name",
       run: {
-        size: "43pt",
+        size: "38pt",
         bold: false,
         italics: false,
         color: "000000",
@@ -337,8 +337,8 @@ const createAvatar = (photo: string): Paragraph => {
       new ImageRun({
         data: Uint8Array.from(atob(base64ImageData), (c) => c.charCodeAt(0)),
         transformation: {
-          width: 185,
-          height: 185
+          width: 170,
+          height: 170
         },
         floating: {
           layoutInCell: true,
