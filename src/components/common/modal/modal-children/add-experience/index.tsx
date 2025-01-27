@@ -1,12 +1,13 @@
+import { nanoid } from 'nanoid'
 import { FC, useEffect, useState } from "react"
+
+import { Buttons, Title, Wrapper } from "./index.styled"
 
 import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
 import { ListInput } from "@/components/ui/input-with-list"
 import { IExperienceItem } from "@/types/cv-data"
 
-import { Buttons, Title, Wrapper } from "./index.styled"
-import { nanoid } from 'nanoid'
 
 interface IAddExperience {
   experienceData: IExperienceItem | null
