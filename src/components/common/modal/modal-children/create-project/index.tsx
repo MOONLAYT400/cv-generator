@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react"
 
-import { Badge } from "@/components/common/badge"
 import { Button } from "@/components/common/button"
+import { CloseSystemIcon } from "@/components/common/icons"
 import { Input } from "@/components/common/input"
 import { SearchSelect } from "@/components/common/select-with-search"
 import { TextArea } from "@/components/common/text-area"
@@ -14,6 +14,8 @@ import {
   Buttons,
   Inputs,
   InputsSection,
+  Remove,
+  TechItem,
   TechList,
   TechSection,
   Title,
@@ -182,12 +184,15 @@ export const CreateProject: FC<ICreateProject> = ({
       </TechSection>
       <TechList>
         {project.technologies.map((tech, index) => (
-          <Badge
-            item={tech}
+          <TechItem
             key={"languge_" + index}
-            color={techColors[tech.type as keyof typeof techColors]}
-            deleteHandler={handleRemoveTech}
-          />
+            $color={techColors[tech.type as keyof typeof techColors]}
+          >
+            {tech.value}
+            <Remove onClick={() => handleRemoveTech(tech)}>
+              <CloseSystemIcon />
+            </Remove>
+          </TechItem>
         ))}
       </TechList>
       <Buttons>
