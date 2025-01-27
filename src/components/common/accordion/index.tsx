@@ -8,11 +8,13 @@ interface IAccordion {
   title: string
   children: ReactNode
   isActiveDefault?: boolean
+  titleButton?: ReactNode
 }
 
 export const Accordion: FC<IAccordion> = ({
   title,
   children,
+  titleButton,
   isActiveDefault = false
 }) => {
   const [isActive, setActive] = useState(isActiveDefault)
@@ -24,6 +26,7 @@ export const Accordion: FC<IAccordion> = ({
       <Title onClick={toggleAccordion}>
         {title}
         <ButtonsWrapper>
+          {titleButton ? titleButton : null}
           {isActive ? <MinusSystemIcon /> : <PlusSystemIcon />}
         </ButtonsWrapper>
       </Title>

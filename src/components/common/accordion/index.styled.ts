@@ -31,7 +31,7 @@ export const Title = styled.div`
 export const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 10px;
 `
 
 export const Content = styled.div<IAccordionStyled>`

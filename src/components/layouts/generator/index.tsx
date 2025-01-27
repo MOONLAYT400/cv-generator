@@ -5,12 +5,7 @@ import { STATUS } from "react-joyride"
 
 import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
-import {
-  AddEducationModal,
-  AddExperienceModal,
-  CompareTechModal,
-  CreateProjectModal
-} from "@/components/common/modal"
+import { CompareTechModal } from "@/components/common/modal"
 import { OnboardingTooltip } from "@/components/common/onboarding-tooltip"
 import { TextArea } from "@/components/common/text-area"
 import { ImageWithPreview } from "@/components/common/upload-image"
@@ -262,25 +257,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
           options: onboardingStyleOptions
         }}
       />
-      <AddEducationModal
-        education={modals.education}
-        isOpened={!!modals.education}
-        saveEducation={handleSaveEducation}
-        close={() => handleToggleModal("education", null)}
-      />
-      <AddExperienceModal
-        experience={modals.experience}
-        isOpened={!!modals.experience}
-        saveExperience={handleSaveExperience}
-        close={() => handleToggleModal("experience", null)}
-      />
-      <CreateProjectModal
-        file={file}
-        project={modals.project}
-        isOpened={!!modals.project}
-        saveProject={handleAddProject}
-        close={() => handleToggleModal("project", null)}
-      />
       <CompareTechModal
         cvData={cvData}
         isOpened={!!modals.techComparison}
@@ -305,24 +281,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
             saveInputValue={(shortBio) => updateCVData("shortBio", shortBio)}
           />
         </InfoInputs>
-        <Buttons className="content">
-          <Button
-            text={"+ Образование"}
-            handleClick={() =>
-              handleToggleModal("education", {} as IEducationItem)
-            }
-          />
-          <Button
-            text={"+ Опыт работы"}
-            handleClick={() =>
-              handleToggleModal("experience", {} as IExperienceItem)
-            }
-          />
-          <Button
-            text="+ Проект"
-            handleClick={() => handleToggleModal("project", {} as IProjectItem)}
-          />
-        </Buttons>
         <Buttons className="downloads">
           <Button
             text="Сравнить технологии"
@@ -362,21 +320,18 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
       />
       <EducationsSection
         educations={cvData.education}
-        updateEducation={(education) =>
-          handleToggleModal("education", education)
-        }
+        saveEducation={handleSaveEducation}
         deleteEducation={handleDeleteEducation}
       />
       <ExperienceSection
         experiences={cvData.experience}
-        updateExperience={(experience) =>
-          handleToggleModal("experience", experience)
-        }
+        saveExperience={handleSaveExperience}
         deleteExperience={handleDeleteExperience}
       />
       <ProjectsSection
+        file={file}
         projects={cvData.projects}
-        updateProject={(project) => handleToggleModal("project", project)}
+        saveProject={handleAddProject}
         deleteProject={handleDeleteProject}
       />
     </Wrapper>

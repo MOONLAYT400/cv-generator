@@ -1,34 +1,63 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 
 import { Accordion } from "@/components/common/accordion"
 import { Button } from "@/components/common/button"
+import { AddExperienceModal } from "@/components/common/modal"
 import { IExperienceItem } from "@/types/cv-data"
 
 import { ExperienceItem, Wrapper, ExperienceList } from "./index.styled"
 
 interface IExperienceSection {
   experiences: Array<IExperienceItem>
-  updateExperience: (education: IExperienceItem) => void
+  saveExperience: (
+    type: "create" | "update",
+    education: IExperienceItem
+  ) => void
   deleteExperience: (id: number) => void
 }
 
 export const ExperienceSection: FC<IExperienceSection> = ({
   experiences,
-  updateExperience,
+  saveExperience,
   deleteExperience
 }) => {
+  const [experience, setExperience] = useState<IExperienceItem | null>(null)
+
+  const handleOpenModal = (experience: IExperienceItem) =>
+    setExperience(experience)
+  const handleCloseModal = () => setExperience(null)
+
   return (
     <Wrapper className="experience">
-      <Accordion title="Опыт работы" isActiveDefault>
+      <AddExperienceModal
+        experience={experience}
+        isOpened={!!experience}
+        saveExperience={saveExperience}
+        close={handleCloseModal}
+      />
+      <Accordion
+        title="Опыт работы"
+        isActiveDefault
+        titleButton={
+          <Button
+            text={"+ Опыт работы"}
+            handleClick={() => handleOpenModal({} as IExperienceItem)}
+          />
+        }
+      >
         <ExperienceList>
           {experiences?.map((experience: IExperienceItem) => (
             <ExperienceItem
               key={experience.id}
-              onClick={() => updateExperience(experience)}
+              onClick={() => handleOpenModal(experience)}
             >
               <p>{experience?.company}</p>
               <p>{experience?.role}</p>
-              <div>{experience?.duties.map((item)=><p key={item.id}>{item.text}</p>)}</div>
+              <div>
+                {experience?.duties.map((item) => (
+                  <p key={item.id}>{item.text}</p>
+                ))}
+              </div>
               <p>{experience?.startDate}</p>
               <p>{experience?.endDate}</p>
               <Button
