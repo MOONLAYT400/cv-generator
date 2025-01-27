@@ -28,6 +28,12 @@ export const Title = styled.div`
   line-height: 32px;
 `
 
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`
+
 export const Content = styled.div<IAccordionStyled>`
   overflow: hidden;
   max-height: ${({ $isActive }) => ($isActive ? "100rem" : 0)};
