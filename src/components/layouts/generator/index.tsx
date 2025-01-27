@@ -1,4 +1,5 @@
 "use client"
+import { nanoid } from "nanoid"
 import dynamic from "next/dynamic"
 import React, { FC, useLayoutEffect, useRef, useState } from "react"
 import { STATUS } from "react-joyride"
@@ -115,7 +116,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     educationData: IEducationItem
   ) => {
     if (type === "create") {
-      const education = { ...educationData, id: cvData.education.length + 1 }
+      const education = { ...educationData, id: nanoid() }
       const updatedEducations = [...cvData.education, education]
       setCVData({ ...cvData, education: updatedEducations })
       return
@@ -130,7 +131,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     setCVData({ ...cvData, education: updatedEducations })
   }
 
-  const handleDeleteEducation = (id: number) => {
+  const handleDeleteEducation = (id: string | number) => {
     const filtered = cvData.education.filter((ed) => ed.id !== id)
     setCVData({ ...cvData, education: filtered })
   }
@@ -142,7 +143,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     experienceData: IExperienceItem
   ) => {
     if (type === "create") {
-      const experience = { ...experienceData, id: cvData.experience.length + 1 }
+      const experience = { ...experienceData, id: nanoid() }
       const updatedExperience = [...cvData.experience, experience]
       setCVData({ ...cvData, experience: updatedExperience })
       return
@@ -157,7 +158,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     setCVData({ ...cvData, experience: updatedExperience })
   }
 
-  const handleDeleteExperience = (id: number) => {
+  const handleDeleteExperience = (id: string | number) => {
     const filtered = cvData.experience.filter((exp) => exp.id !== id)
     setCVData({ ...cvData, experience: filtered })
   }
@@ -169,7 +170,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
     projectData: IProjectItem
   ) => {
     if (type === "create") {
-      const project = { ...projectData, id: cvData.projects.length + 1 }
+      const project = { ...projectData, id: nanoid() }
       const updatedProjects = [...cvData.projects, project]
       setCVData({ ...cvData, projects: updatedProjects })
       return
