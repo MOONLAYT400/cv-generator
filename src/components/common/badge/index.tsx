@@ -28,8 +28,6 @@ export const Badge: FC<IBadge> = ({
 
   const handleCloseHelp = () => setIsOpened(false)
 
-  console.log(item)
-
   return (
     <Wrapper
       $color={color}
