@@ -5,7 +5,6 @@ export const Wrapper = styled.div``
 export const InfoSection = styled.div`
   display: flex;
   gap: 30px;
-  max-width: 600px;
   width: 100%;
   margin-bottom: 20px;
   padding: 0 10px;
