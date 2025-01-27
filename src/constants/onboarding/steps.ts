@@ -18,10 +18,10 @@ export const onboardingSteps = [
     spotlightPadding: 1
   },
   {
-    title: "Контент",
+    title: "Секция загрузки",
     content:
-      "Здесь можно добавить информацию о соискателе - образование, данные об опыте работы и проекты, в которых соискатель принимал участие",
-    target: ".content",
+      "Здесь можно сравнить общий стек с автоматически суммированным стеком из проектов, а так же скачать себе готовые файлы резюме в разных форматах",
+    target: ".downloads",
     disableBeacon: true,
     floaterProps: {
       disableAnimation: true
@@ -29,10 +29,10 @@ export const onboardingSteps = [
     spotlightPadding: 1
   },
   {
-    title: "Секция загрузки",
+    title: "Работа с файлом",
     content:
-      "Здесь можно сравнить общий стек с автоматически суммированным стеком из проектов, а так же скачать себе готовые файлы резюме в разных форматах",
-    target: ".downloads",
+      "Здесь можно загрузить ранее сохраненный файл JSON и продолжить работу с ним, а так же сохранить текущий файл",
+    target: ".files",
     disableBeacon: true,
     floaterProps: {
       disableAnimation: true

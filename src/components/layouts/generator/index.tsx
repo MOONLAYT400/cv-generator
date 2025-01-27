@@ -299,7 +299,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
             disabled
           />
         </Buttons>
-        <Buttons className="downloads">
+        <Buttons className="files">
           <Button text={"Выгрузить файл"} handleClick={handleExportFile} />
           <FileInputs>
             <input
