@@ -15,7 +15,7 @@ export interface IEducationItem {
 }
 
 export interface IDutyItem {
-  id: number
+  id: string | number
   text: string | number
 }
 
