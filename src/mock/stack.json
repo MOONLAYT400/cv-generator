@@ -99,8 +99,8 @@
       "type": "fe"
     },
     {
-      "value": "NextJS",
-      "description": "NextJS: Это фреймворк для React, позволяющий создавать серверные рендеринг приложения. Он обеспечивает улучшенную SEO-оптимизацию и быструю загрузку страниц.",
+      "value": "Next.js",
+      "description": "Next.js: Это фреймворк для React, позволяющий создавать серверные рендеринг приложения. Он обеспечивает улучшенную SEO-оптимизацию и быструю загрузку страниц.",
       "alternative": [
         "Gatsby",
         "Remix",
@@ -134,21 +134,21 @@
         "MobX",
         "Recoil",
         "Zustand",
-        "Redux Toolkit",
+        "Redux Toolkit (RTK)",
         "Effector"
       ],
       "type": "fe"
     },
     {
-      "value": "Redux Toolkit",
-      "description": "Redux Toolkit: Набор инструментов для упрощения разработки с Redux. Он включает в себя облегченные методы создания редьюсеров и экшенов, улучшая код.",
+      "value": "Redux Toolkit (RTK)",
+      "description": "Redux Toolkit (RTK): Набор инструментов для упрощения разработки с Redux. Он включает в себя облегченные методы создания редьюсеров и экшенов, улучшая код.",
       "alternative": [
         "Redux",
         "React Context API",
         "MobX",
         "Recoil",
         "Zustand",
-        "Redux Toolkit",
+        "Redux Toolkit (RTK)",
         "Effector"
       ],
       "type": "fe"
@@ -168,7 +168,7 @@
         "MobX",
         "Recoil",
         "Zustand",
-        "Redux Toolkit",
+        "Redux Toolkit (RTK)",
         "Effector"
       ],
       "type": "fe"
@@ -182,7 +182,7 @@
         "MobX",
         "Recoil",
         "Zustand",
-        "Redux Toolkit",
+        "Redux Toolkit (RTK)",
         "Effector"
       ],
       "type": "fe"
@@ -597,8 +597,8 @@
   ],
   "be": [
     {
-      "value": "Express JS",
-      "description": "Express JS — минималистичный и гибкий web-фреймворк для Node.js, обеспечивающий мощный набор функций для веб-приложений.",
+      "value": "Express (Express.js)",
+      "description": "Express (Express.js) — минималистичный и гибкий web-фреймворк для Node.js, обеспечивающий мощный набор функций для веб-приложений.",
       "alternative": [
         "Hapi.js",
         "NestJS",
@@ -812,8 +812,8 @@
       "type": "be"
     },
     {
-      "value": "Cors",
-      "description": "Cors (Cross-Origin Resource Sharing) — механизм безопасности в браузере, позволяющий контролировать доступ к ресурсам с разных доменов.",
+      "value": "CORS",
+      "description": "CORS (Cross-Origin Resource Sharing) — механизм безопасности в браузере, позволяющий контролировать доступ к ресурсам с разных доменов.",
       "alternative": [
         "Nginx",
         "Caddy",
