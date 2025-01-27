@@ -210,7 +210,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   }
 
   const downloadJSON = (obj: ICVParams) => {
-    // J.= нужно ли эту функцию вынести в отдельный модуль?
     const name = obj.fullName
     const dataUri =
       "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj))
@@ -223,21 +222,20 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
   }
 
   const handleExportFile = () => {
-    //J. TS не прописан
     downloadJSON(cvData)
   }
 
   const filePicker = useRef<HTMLInputElement>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target?.files?.[0] //J.= что то мне кажется это какая -то фигня) сделала чтобы TS не ругался на null
+    const file = e.target?.files?.[0]
     if (!file) {
       return
     }
     const reader = new FileReader()
     reader.readAsText(file)
     reader.onload = function () {
-      const data: ICVParams = JSON.parse(reader.result as string) //J.= обработать если не тот формат json
+      const data: ICVParams = JSON.parse(reader.result as string)
       setCVData(data)
     }
   }
