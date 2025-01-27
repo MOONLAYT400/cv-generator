@@ -34,4 +34,7 @@ export const FileInputs = styled.div`
   overflow: hidden;
   padding: 0;
   margin: 0;
+  input {
+    position: absolute;
+  }
 `

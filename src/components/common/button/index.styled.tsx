@@ -9,8 +9,8 @@ interface ButtonStyles {
 
 const buttonStyles = {
   primary: {
-    border: COLORS.VIOLET,
-    background: COLORS.VIOLET,
+    border: COLORS.DARK_BLUE,
+    background: COLORS.DARK_BLUE,
     color: COLORS.WHITE
   },
   danger: {

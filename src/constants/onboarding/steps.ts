@@ -20,19 +20,8 @@ export const onboardingSteps = [
   {
     title: "Секция загрузки",
     content:
-      "Здесь можно сравнить общий стек с автоматически суммированным стеком из проектов, а так же скачать себе готовые файлы резюме в разных форматах",
+      "Здесь можно загрузить ранее сохраненный файл JSON и продолжить работу с ним, а так же сохранить текущий файл и  скачать себе готовые файлы резюме в разных форматах",
     target: ".downloads",
-    disableBeacon: true,
-    floaterProps: {
-      disableAnimation: true
-    },
-    spotlightPadding: 1
-  },
-  {
-    title: "Работа с файлом",
-    content:
-      "Здесь можно загрузить ранее сохраненный файл JSON и продолжить работу с ним, а так же сохранить текущий файл",
-    target: ".files",
     disableBeacon: true,
     floaterProps: {
       disableAnimation: true
