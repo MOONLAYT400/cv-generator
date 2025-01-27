@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useState } from "react"
 
 import { MinusSystemIcon, PlusSystemIcon } from "../icons"
 
-import { Content, Title, Wrapper } from "./index.styled"
+import { ButtonsWrapper, Content, Title, Wrapper } from "./index.styled"
 
 interface IAccordion {
   title: string
@@ -23,7 +23,9 @@ export const Accordion: FC<IAccordion> = ({
     <Wrapper $isActive={isActive}>
       <Title onClick={toggleAccordion}>
         {title}
-        {isActive ? <MinusSystemIcon /> : <PlusSystemIcon />}
+        <ButtonsWrapper>
+          {isActive ? <MinusSystemIcon /> : <PlusSystemIcon />}
+        </ButtonsWrapper>
       </Title>
       <Content $isActive={isActive}>{children}</Content>
     </Wrapper>
