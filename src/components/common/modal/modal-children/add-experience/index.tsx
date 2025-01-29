@@ -43,7 +43,7 @@ export const AddExperience: FC<IAddExperience> = ({
 
   const handleUpdateDuties = (value: string | number) => {
     const newDuty = {
-      id: nanoid(), //getDutyID(),
+      id: nanoid(),
       text: value
     }
     updateExperience({ ...experience, duties: [...experience.duties, newDuty] })
@@ -56,7 +56,6 @@ export const AddExperience: FC<IAddExperience> = ({
     )
     close()
   }
-  // const getDutyID = () => Math.floor(Math.random() * 1000)
 
   return (
     <Wrapper>
