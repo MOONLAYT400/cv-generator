@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid"
 import { FC, useEffect, useState } from "react"
 
 import { Button } from "@/components/common/button"
@@ -89,17 +90,15 @@ export const CreateProject: FC<ICreateProject> = ({
   }
 
   const handleUpdateResponsibilities = (value: string | number) => {
-    const newDuty = {
-      id: getDutyID(),
+    const newResponsibilitiy = {
+      id: nanoid(),
       text: value
     }
     updateProject({
       ...project,
-      responsibilities: [...project.responsibilities, newDuty]
+      responsibilities: [...project.responsibilities, newResponsibilitiy]
     })
   }
-
-  const getDutyID = () => Math.floor(Math.random() * 1000)
 
   return (
     <Wrapper>
