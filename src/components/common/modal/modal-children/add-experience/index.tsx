@@ -1,11 +1,13 @@
+import { nanoid } from 'nanoid'
 import { FC, useEffect, useState } from "react"
+
+import { Buttons, Title, Wrapper } from "./index.styled"
 
 import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
 import { ListInput } from "@/components/ui/input-with-list"
 import { IExperienceItem } from "@/types/cv-data"
 
-import { Buttons, Title, Wrapper } from "./index.styled"
 
 interface IAddExperience {
   experienceData: IExperienceItem | null
@@ -41,7 +43,7 @@ export const AddExperience: FC<IAddExperience> = ({
 
   const handleUpdateDuties = (value: string | number) => {
     const newDuty = {
-      id: getDutyID(),
+      id: nanoid(),
       text: value
     }
     updateExperience({ ...experience, duties: [...experience.duties, newDuty] })
@@ -54,7 +56,6 @@ export const AddExperience: FC<IAddExperience> = ({
     )
     close()
   }
-  const getDutyID = () => Math.floor(Math.random() * 1000)
 
   return (
     <Wrapper>

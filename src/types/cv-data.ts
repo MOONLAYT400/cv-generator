@@ -6,7 +6,7 @@ export interface ITechItem {
 }
 
 export interface IEducationItem {
-  id?: number
+  id?: string | number
   university: string
   department: string
   field: string
@@ -15,14 +15,14 @@ export interface IEducationItem {
 }
 
 export interface IDutyItem {
-  id: number
+  id: string | number
   text: string | number
 }
 
 export interface IResponsibilityItem extends IDutyItem {}
 
 export interface IExperienceItem {
-  id?: number
+  id?: string | number
   company: string
   role: string
   duties: Array<IDutyItem>
@@ -31,7 +31,7 @@ export interface IExperienceItem {
 }
 
 export interface IProjectItem {
-  id?: number
+  id?: string | number
   name: string
   description: string
   responsibilities: Array<IResponsibilityItem>
