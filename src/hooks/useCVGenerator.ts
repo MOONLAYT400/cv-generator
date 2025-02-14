@@ -257,6 +257,21 @@ const styleForDocument: IStylesOptions = {
       }
     },
     {
+      id: "projectRole",
+      name: "Project Role",
+      run: {
+        size: "14pt",
+        color: "000000",
+        font: "Century Gothic"
+      },
+      paragraph: {
+        alignment: AlignmentType.LEFT,
+        spacing: {
+          after: 100
+        }
+      }
+    },
+    {
       id: "projectDescription",
       name: "Project Description",
       run: {
@@ -541,8 +556,46 @@ const getProjectDescription = (projects: Array<IProjectItem>): Paragraph[] => {
           }
         }),
         new Paragraph({
-          text: project.role,
+          text: project.period,
           style: "projectDate"
+        }),
+        new Paragraph({
+          style: "projectRole",
+          children: [
+            new TextRun({
+              text: "Роль: ",
+              bold: true,
+              size: "14pt",
+              color: "000000",
+              font: "Century Gothic"
+            }),
+            new TextRun({
+              text: project.role,
+              bold: false,
+              size: "14pt",
+              color: "000000",
+              font: "Century Gothic"
+            })
+          ]
+        }),
+        new Paragraph({
+          style: "projectRole",
+          children: [
+            new TextRun({
+              text: "Отрасль: ",
+              bold: true,
+              size: "14pt",
+              color: "000000",
+              font: "Century Gothic"
+            }),
+            new TextRun({
+              text: project.industry,
+              bold: false,
+              size: "14pt",
+              color: "000000",
+              font: "Century Gothic"
+            })
+          ]
         }),
         new Paragraph({
           text: project.description,

@@ -40,6 +40,8 @@ export const CreateProject: FC<ICreateProject> = ({
     name: "",
     description: "",
     role: "",
+    industry: "",
+    period: "",
     technologies: [],
     responsibilities: []
   })
@@ -114,9 +116,9 @@ export const CreateProject: FC<ICreateProject> = ({
           />
           <Input
             label="Период работы"
-            inputValue={project.role}
-            saveInputValue={(role) =>
-              handleUpdateProject("role", role as string)
+            inputValue={project.period}
+            saveInputValue={(period) =>
+              handleUpdateProject("period", period as string)
             }
           />
         </Inputs>
@@ -126,6 +128,20 @@ export const CreateProject: FC<ICreateProject> = ({
           saveInputValue={(description) =>
             handleUpdateProject("description", description as string)
           }
+        />
+      </InputsSection>
+      <InputsSection>
+        <Input
+          label="Отрасль"
+          inputValue={project.industry}
+          saveInputValue={(industry) =>
+            handleUpdateProject("industry", industry as string)
+          }
+        />{" "}
+        <Input
+          label="Роль"
+          inputValue={project.role}
+          saveInputValue={(role) => handleUpdateProject("role", role as string)}
         />
       </InputsSection>
       <ListInput

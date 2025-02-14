@@ -36,6 +36,8 @@ export interface IProjectItem {
   description: string
   responsibilities: Array<IResponsibilityItem>
   role: string
+  industry: string
+  period: string
   technologies: Array<ITechItem>
 }
 
