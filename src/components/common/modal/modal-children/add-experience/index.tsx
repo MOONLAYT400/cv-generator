@@ -34,9 +34,6 @@ export const AddExperience: FC<IAddExperience> = ({
     if (experienceData && "company" in experienceData) {
       updateExperience(experienceData)
     }
-    const isEmtyExperience = Object.values(experience).every(
-      (value) => value.length === 0
-    )
   }, [])
 
   const handleUpdateExperience = (key: string, value: any) => {
