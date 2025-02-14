@@ -102,6 +102,10 @@ export const CreateProject: FC<ICreateProject> = ({
     })
   }
 
+  const isEmtyProject = Object.values(project).every(
+    (value) => value.length === 0
+  )
+
   return (
     <Wrapper>
       <Title>Добавить проект</Title>
@@ -214,6 +218,7 @@ export const CreateProject: FC<ICreateProject> = ({
         <Button
           text={projectData && "name" in projectData ? "Обновить" : "Добавить"}
           handleClick={handleButtonClick}
+          disabled={isEmtyProject}
         />
         <Button text={"Отмена"} buttonType={"danger"} handleClick={close} />
       </Buttons>
