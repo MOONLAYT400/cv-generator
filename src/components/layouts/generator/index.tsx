@@ -37,10 +37,10 @@ import {
 const JoyRideNoSSR = dynamic(() => import("react-joyride"), { ssr: false })
 
 interface IGeneratorLayout {
-  file: IStackData
+  techStack: IStackData
 }
 
-export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
+export const GeneratorLayout: FC<IGeneratorLayout> = ({ techStack }) => {
   const [onboarding, handleSetOnboarding] = useLocalStorage("onboarding")
 
   const [cvData, setCVData] = useState<ICVParams>({
@@ -280,7 +280,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         </Buttons>
       </InfoSection>
       <TechSection
-        techList={file}
+        techStack={techStack}
         cvData={cvData}
         technologies={cvData.technologies}
         handleRemoveTech={handleRemoveTech}
@@ -297,7 +297,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         deleteExperience={handleDeleteExperience}
       />
       <ProjectsSection
-        file={file}
+        file={techStack}
         projects={cvData.projects}
         saveProject={handleAddProject}
         deleteProject={handleDeleteProject}
