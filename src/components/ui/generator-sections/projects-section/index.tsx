@@ -38,12 +38,12 @@ export const ProjectsSection: FC<IProjectItemsSection> = ({
       <Accordion
         title="Проекты"
         isActiveDefault
-        titleButton={
-          <Button
-            text="+ Проект"
-            handleClick={() => handleOpenModal({} as IProjectItem)}
-          />
-        }
+        titleButtons={[
+          {
+            text: "+ Проект",
+            click: () => handleOpenModal({} as IProjectItem)
+          }
+        ]}
       >
         <ProjectList>
           {projects.map((project: IProjectItem, index: number) => (

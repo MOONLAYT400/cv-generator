@@ -34,12 +34,12 @@ export const EducationsSection: FC<IEducationSection> = ({
       <Accordion
         title="Образование"
         isActiveDefault
-        titleButton={
-          <Button
-            text={"+ Образование"}
-            handleClick={() => handleOpenModal({} as IEducationItem)}
-          />
-        }
+        titleButtons={[
+          {
+            text: "+ Образование",
+            click: () => handleOpenModal({} as IEducationItem)
+          }
+        ]}
       >
         <EducationsList>
           {educations.map((education: IEducationItem) => (

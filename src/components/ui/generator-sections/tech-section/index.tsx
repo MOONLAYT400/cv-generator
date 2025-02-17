@@ -1,10 +1,11 @@
 import { FC, useEffect, useMemo, useState } from "react"
 
+import { Accordion } from "@/components/common/accordion"
 import { Badge } from "@/components/common/badge"
 import { Button } from "@/components/common/button"
 import { CloseSystemIcon } from "@/components/common/icons"
 import { Input } from "@/components/common/input"
-import { CompareTechModal } from "@/components/common/modal"
+import { CompareTechModal, CreateStackModal } from "@/components/common/modal"
 import { SearchSelect } from "@/components/common/select-with-search"
 import { techColors } from "@/constants/styles/colors"
 import { ITechItem } from "@/types/cv-data"
@@ -21,7 +22,7 @@ import {
 
 interface ITechSection {
   cvData: any
-  techList: IStackData
+  techStack: IStackData
   technologies: Array<ITechItem>
   updateTechArray: (name: string, value: ITechItem) => void
   handleRemoveTech: (item: ITechItem) => void
@@ -29,15 +30,19 @@ interface ITechSection {
 
 export const TechSection: FC<ITechSection> = ({
   cvData,
-  techList,
+  techStack,
   technologies,
   updateTechArray,
   handleRemoveTech
 }) => {
-  const flatList = useMemo(() => Object.values(techList).flat(), [techList])
+  const flatList = useMemo(() => Object.values(techStack).flat(), [techStack])
+  const [techList, setTechList] = useState<IStackData>(techStack)
   const [searchResults, setSearchResults] = useState<any[]>([])
   const [searchValue, setSearchValue] = useState<string>("")
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState({
+    compare: false,
+    add: false
+  })
 
   useEffect(() => {
     getSearchResult()
@@ -62,14 +67,20 @@ export const TechSection: FC<ITechSection> = ({
     setSearchValue("")
   }
 
-  const handleToggleModal = (value: boolean) => setIsModalOpen(value)
+  const handleToggleModal = (name: string, value: boolean) =>
+    setIsModalOpen({ ...isModalOpen, [name]: value })
 
   return (
     <Wrapper className="tech">
       <CompareTechModal
         cvData={cvData}
-        isOpened={isModalOpen}
-        close={() => handleToggleModal(false)}
+        isOpened={isModalOpen.compare}
+        close={() => handleToggleModal("compare", false)}
+      />
+      <CreateStackModal
+        techStack={techList}
+        isOpened={isModalOpen.add}
+        close={() => handleToggleModal("add", false)}
       />
       <SearchSection>
         <Section>
@@ -85,9 +96,13 @@ export const TechSection: FC<ITechSection> = ({
             saveInputValue={(value) => setSearchValue(value as string)}
           />
           <Button
-            text="Сравнить технологии"
-            handleClick={() => handleToggleModal(true)}
+            text="Добавить технологии"
+            handleClick={() => handleToggleModal("add", true)}
           />
+          <Button
+            text="Сравнить технологии"
+            handleClick={() => handleToggleModal("compare", true)}
+          />{" "}
         </Section>
         {searchResults?.length ? (
           <SearchResults>
@@ -146,17 +161,32 @@ export const TechSection: FC<ITechSection> = ({
           saveInputValue={(value) => updateTechArray("additional", value)}
         />
       </TechSelects>
-      <TechList>
-        {technologies.map((tech, index) => (
-          <Badge
-            withHelp
-            item={tech}
-            key={"tech_" + index}
-            color={techColors[tech.type as keyof typeof techColors]}
-            deleteHandler={handleRemoveTech}
-          />
-        ))}
-      </TechList>
+      <Accordion
+        title="Технологии"
+        isActiveDefault
+        titleButtons={[
+          {
+            text: "Добавить технологии",
+            click: () => handleToggleModal("add", true)
+          },
+          {
+            text: "Сравнить технологии",
+            click: () => handleToggleModal("compare", true)
+          }
+        ]}
+      >
+        <TechList>
+          {technologies.map((tech, index) => (
+            <Badge
+              withHelp
+              item={tech}
+              key={"tech_" + index}
+              color={techColors[tech.type as keyof typeof techColors]}
+              deleteHandler={handleRemoveTech}
+            />
+          ))}
+        </TechList>
+      </Accordion>
     </Wrapper>
   )
 }
