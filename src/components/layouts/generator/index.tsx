@@ -88,6 +88,14 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ techStack }) => {
     }
   }
 
+  const bulkUpdateTechArray = (techData: IStackData) => {
+    const techArray = Object.values(techData)
+      .flat()
+      .filter((item) => item.checked)
+
+    setCVData({ ...cvData, technologies: techArray })
+  }
+
   const handleRemoveTech = (item: ITechItem) => {
     const filtered = cvData.technologies.filter(
       (entry) => entry.value !== item.value
@@ -282,9 +290,9 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ techStack }) => {
       <TechSection
         techStack={techStack}
         cvData={cvData}
-        technologies={cvData.technologies}
-        handleRemoveTech={handleRemoveTech}
         updateTechArray={updateTechArray}
+        handleRemoveTech={handleRemoveTech}
+        bulkUpdateTechArray={bulkUpdateTechArray}
       />
       <EducationsSection
         educations={cvData.education}
