@@ -3,6 +3,7 @@ export interface ITechItem {
   description: string
   alternative: Array<string>
   type: string
+  checked: boolean
 }
 
 export interface IEducationItem {

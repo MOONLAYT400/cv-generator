@@ -38,12 +38,12 @@ export const ExperienceSection: FC<IExperienceSection> = ({
       <Accordion
         title="Опыт работы"
         isActiveDefault
-        titleButton={
-          <Button
-            text={"+ Опыт работы"}
-            handleClick={() => handleOpenModal({} as IExperienceItem)}
-          />
-        }
+        titleButtons={[
+          {
+            text: "+ Опыт работы",
+            click: () => handleOpenModal({} as IExperienceItem)
+          }
+        ]}
       >
         <ExperienceList>
           {experiences?.map((experience: IExperienceItem) => (

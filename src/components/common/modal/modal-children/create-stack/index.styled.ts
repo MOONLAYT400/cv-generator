@@ -8,9 +8,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  max-width: 800px;
-  max-height: 650px;
-  overflow-y: auto;
+  max-width: 600px;
 `
 
 export const Title = styled.div`
@@ -20,7 +18,7 @@ export const Title = styled.div`
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
-  line-height: 40px;
+  line-height: 24px;
 `
 
 export const TabsWrapper = styled.div`
@@ -57,7 +55,6 @@ export const Tab = styled.div<TabType>`
     border: 1px solid ${COLORS.WHITE_16};
   }
 `
-
 export const SliderWrapper = styled.div`
   display: grid;
   height: 100%;
@@ -78,20 +75,6 @@ export const SlideWrapper = styled.div<SlideType>`
   opacity: ${({ $activeTab }) => ($activeTab ? 1 : 0)};
   transition: all 0.5s;
   color: ${COLORS.WHITE_87};
-`
-
-export const InputsSection = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 20px;
-  margin-bottom: 10px;
-`
-
-export const Inputs = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 `
 
 export const TechWrapper = styled.div`

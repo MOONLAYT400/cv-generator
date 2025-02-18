@@ -1,11 +1,11 @@
 import { FC, useEffect, useMemo, useState } from "react"
 
+import { Accordion } from "@/components/common/accordion"
 import { Badge } from "@/components/common/badge"
 import { Button } from "@/components/common/button"
 import { CloseSystemIcon } from "@/components/common/icons"
 import { Input } from "@/components/common/input"
-import { CompareTechModal } from "@/components/common/modal"
-import { SearchSelect } from "@/components/common/select-with-search"
+import { CompareTechModal, CreateStackModal } from "@/components/common/modal"
 import { techColors } from "@/constants/styles/colors"
 import { ITechItem } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
@@ -15,29 +15,32 @@ import {
   SearchSection,
   Section,
   TechList,
-  TechSelects,
   Wrapper
 } from "./index.styled"
 
 interface ITechSection {
   cvData: any
-  techList: IStackData
-  technologies: Array<ITechItem>
-  updateTechArray: (name: string, value: ITechItem) => void
+  techStack: IStackData
   handleRemoveTech: (item: ITechItem) => void
+  bulkUpdateTechArray: (techData: IStackData) => void
+  updateTechArray: (name: string, value: ITechItem) => void
 }
 
 export const TechSection: FC<ITechSection> = ({
   cvData,
-  techList,
-  technologies,
+  techStack,
   updateTechArray,
-  handleRemoveTech
+  handleRemoveTech,
+  bulkUpdateTechArray
 }) => {
-  const flatList = useMemo(() => Object.values(techList).flat(), [techList])
+  const flatList = useMemo(() => Object.values(techStack).flat(), [techStack])
+  const [techList, setTechList] = useState<IStackData>(techStack)
   const [searchResults, setSearchResults] = useState<any[]>([])
   const [searchValue, setSearchValue] = useState<string>("")
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState({
+    compare: false,
+    add: false
+  })
 
   useEffect(() => {
     getSearchResult()
@@ -54,22 +57,44 @@ export const TechSection: FC<ITechSection> = ({
     }
   }
 
-  const handleSelectResult = (item: ITechItem): void =>
-    updateTechArray(item.type, item)
+  const handleToggleItem = (item: ITechItem) => {
+    const stack = techList[item.type as keyof typeof techList]
+    const itemIndex = stack.findIndex((tech) => tech.value === item.value)
+    stack[itemIndex].checked = !stack[itemIndex].checked
+    setTechList({ ...techList, [item.type]: stack })
+    if (stack[itemIndex].checked) {
+      updateTechArray(item.type, item)
+    } else {
+      handleRemoveTech(item)
+    }
+  }
 
   const handleClearInput = () => {
     setSearchResults([])
     setSearchValue("")
   }
 
-  const handleToggleModal = (value: boolean) => setIsModalOpen(value)
+  const updateTechList = (techData: IStackData) => {
+    setTechList(techData)
+    bulkUpdateTechArray(techData)
+  }
+
+  const handleToggleModal = (name: string, value: boolean) =>
+    setIsModalOpen({ ...isModalOpen, [name]: value })
 
   return (
     <Wrapper className="tech">
       <CompareTechModal
         cvData={cvData}
-        isOpened={isModalOpen}
-        close={() => handleToggleModal(false)}
+        isOpened={isModalOpen.compare}
+        close={() => handleToggleModal("compare", false)}
+      />
+      <CreateStackModal
+        cvTech={cvData.technologies}
+        techStack={techList}
+        isOpened={isModalOpen.add}
+        close={() => handleToggleModal("add", false)}
+        updateTechList={updateTechList}
       />
       <SearchSection>
         <Section>
@@ -85,9 +110,13 @@ export const TechSection: FC<ITechSection> = ({
             saveInputValue={(value) => setSearchValue(value as string)}
           />
           <Button
-            text="Сравнить технологии"
-            handleClick={() => handleToggleModal(true)}
+            text="Добавить технологии"
+            handleClick={() => handleToggleModal("add", true)}
           />
+          <Button
+            text="Сравнить технологии"
+            handleClick={() => handleToggleModal("compare", true)}
+          />{" "}
         </Section>
         {searchResults?.length ? (
           <SearchResults>
@@ -95,68 +124,26 @@ export const TechSection: FC<ITechSection> = ({
               <Badge
                 item={res}
                 key={"res_" + index}
-                clickHandler={() => handleSelectResult(res)}
+                clickHandler={() => handleToggleItem(res)}
                 color={techColors[res.type as keyof typeof techColors]}
               />
             ))}
           </SearchResults>
         ) : null}
       </SearchSection>
-      <TechSelects>
-        <SearchSelect
-          label={"Языки"}
-          outputField={"object"}
-          options={techList.languages}
-          saveInputValue={(value) => updateTechArray("languages", value)}
-        />
-        <SearchSelect
-          label="Фронтенд"
-          options={techList.fe}
-          outputField={"object"}
-          saveInputValue={(value) => updateTechArray("fe", value)}
-        />
-        <SearchSelect
-          label="Бекенд"
-          options={techList.be}
-          outputField={"object"}
-          saveInputValue={(value) => updateTechArray("be", value)}
-        />
-        <SearchSelect
-          label="Базы данных"
-          outputField={"object"}
-          options={techList.databases}
-          saveInputValue={(value) => updateTechArray("databases", value)}
-        />
-        <SearchSelect
-          label="Девопс"
-          outputField={"object"}
-          options={techList.devops}
-          saveInputValue={(value) => updateTechArray("devops", value)}
-        />
-        <SearchSelect
-          label="Тесты"
-          outputField={"object"}
-          options={techList.test}
-          saveInputValue={(value) => updateTechArray("test", value)}
-        />
-        <SearchSelect
-          label="Дополнительно"
-          outputField={"object"}
-          options={techList.additional}
-          saveInputValue={(value) => updateTechArray("additional", value)}
-        />
-      </TechSelects>
-      <TechList>
-        {technologies.map((tech, index) => (
-          <Badge
-            withHelp
-            item={tech}
-            key={"tech_" + index}
-            color={techColors[tech.type as keyof typeof techColors]}
-            deleteHandler={handleRemoveTech}
-          />
-        ))}
-      </TechList>
+      <Accordion title="Технологии" isActiveDefault>
+        <TechList>
+          {cvData.technologies.map((tech: ITechItem, index: number) => (
+            <Badge
+              withHelp
+              item={tech}
+              key={"tech_" + index}
+              color={techColors[tech.type as keyof typeof techColors]}
+              deleteHandler={handleToggleItem}
+            />
+          ))}
+        </TechList>
+      </Accordion>
     </Wrapper>
   )
 }

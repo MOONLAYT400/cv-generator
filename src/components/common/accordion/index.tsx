@@ -1,20 +1,26 @@
 import React, { FC, ReactNode, useState } from "react"
 
+import { Button } from "../button"
 import { MinusSystemIcon, PlusSystemIcon } from "../icons"
 
 import { ButtonsWrapper, Content, Title, Wrapper } from "./index.styled"
+
+type TitleButtonType = {
+  text: string
+  click: () => void
+}
 
 interface IAccordion {
   title: string
   children: ReactNode
   isActiveDefault?: boolean
-  titleButton?: ReactNode
+  titleButtons?: Array<TitleButtonType>
 }
 
 export const Accordion: FC<IAccordion> = ({
   title,
   children,
-  titleButton,
+  titleButtons,
   isActiveDefault = false
 }) => {
   const [isActive, setActive] = useState(isActiveDefault)
@@ -26,7 +32,17 @@ export const Accordion: FC<IAccordion> = ({
       <Title onClick={toggleAccordion}>
         {title}
         <ButtonsWrapper>
-          {titleButton ? titleButton : null}
+          {titleButtons?.length
+            ? titleButtons?.map((b, i) => {
+                return (
+                  <Button
+                    text={b.text}
+                    handleClick={b.click}
+                    key={`Accordion_button_${i}`}
+                  />
+                )
+              })
+            : null}
           {isActive ? <MinusSystemIcon /> : <PlusSystemIcon />}
         </ButtonsWrapper>
       </Title>
