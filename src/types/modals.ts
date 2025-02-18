@@ -46,6 +46,7 @@ export interface ICompareTechModal extends IModal {
 }
 
 export interface ICreateStackModal extends IModal {
+  cvTech: Array<ITechItem>
   techStack: IStackData
   updateTechList: (techData: IStackData) => void
 }

@@ -1,8 +1,9 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 
 import { Button } from "@/components/common/button"
 import { Checkbox } from "@/components/common/checkbox"
 import { techStackTitles } from "@/constants/generator/names"
+import { ITechItem } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
 
 import {
@@ -18,18 +19,38 @@ import {
 } from "./index.styled"
 
 interface ICreateStack {
+  cvTech: Array<ITechItem>
   techStack: IStackData
   close: () => void
   updateTechList: (techData: IStackData) => void
 }
 
 export const CreateStack: FC<ICreateStack> = ({
+  cvTech,
   techStack,
   close,
   updateTechList
 }) => {
   const [activeTab, setActiveTab] = useState("languages")
-  const [techList, setTechList] = useState(techStack)
+  const [techList, setTechList] = useState<IStackData>({} as IStackData)
+
+  useEffect(() => {
+    updateProjectTech()
+  }, [])
+
+  const updateProjectTech = () => {
+    const updated = techStack
+    cvTech.forEach((tech) => {
+      const index = updated[tech.type as keyof typeof updated].findIndex(
+        (i) => i.value === tech.value
+      )
+      if (index >= 0) {
+        updated[tech.type as keyof typeof techStack][index].checked =
+          tech.checked
+      }
+    })
+    setTechList(updated)
+  }
 
   const updateTechStack = (type: string, value: string) => {
     const updated = techList[type as keyof typeof techList].map((item) => {

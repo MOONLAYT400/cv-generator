@@ -27,6 +27,12 @@ export const Wrapper = styled.div<Wrapper>`
   line-height: 16px;
   user-select: none;
 
+  &:hover {
+    span {
+      opacity: 0.6;
+    }
+  }
+
   ${({ disabled }) =>
     disabled &&
     `

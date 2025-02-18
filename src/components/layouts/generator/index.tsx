@@ -269,11 +269,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ techStack }) => {
           />
         </InfoInputs>
         <Buttons className="downloads">
-          {/* <Button
-            text="Создать резюме pdf"
-            handleClick={saveDocument}
-            disabled
-            /> */}
           <FileInputs>
             <input
               type="file"
@@ -282,9 +277,9 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ techStack }) => {
               ref={filePicker}
             />
           </FileInputs>
-          <Button text={"Выгрузить файл"} handleClick={handleExportFile} />
-          <Button text={"Загрузить файл"} handleClick={handlePick} />
-          <Button text="Создать резюме docx" handleClick={saveDocument} />
+          <Button text={"Скачать JSON"} handleClick={handleExportFile} />
+          <Button text={"Загрузить JSON"} handleClick={handlePick} />
+          <Button text={"Скачать резюме docx"} handleClick={saveDocument} />
         </Buttons>
       </InfoSection>
       <TechSection

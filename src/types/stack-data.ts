@@ -1,5 +1,5 @@
 type TechItemType = {
-  alternative: string
+  alternative: Array<string>
   description: string
   type:
     | "fe"

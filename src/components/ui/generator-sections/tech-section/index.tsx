@@ -57,22 +57,16 @@ export const TechSection: FC<ITechSection> = ({
     }
   }
 
-  const handleSelectResult = (item: ITechItem): void => {
-    const updated = techList[item.type as keyof typeof techList].map((tech) => {
-      if (tech.value === item.value) return { ...tech, checked: true }
-      return tech
-    })
-    setTechList({ ...techList, [item.type]: updated })
-    updateTechArray(item.type, item)
-  }
-
-  const handleDeleteItem = (item: ITechItem) => {
-    const updated = techList[item.type as keyof typeof techList].map((tech) => {
-      if (tech.value === item.value) return { ...tech, checked: false }
-      return tech
-    })
-    setTechList({ ...techList, [item.type]: updated })
-    handleRemoveTech(item)
+  const handleToggleItem = (item: ITechItem) => {
+    const stack = techList[item.type as keyof typeof techList]
+    const itemIndex = stack.findIndex((tech) => tech.value === item.value)
+    stack[itemIndex].checked = !stack[itemIndex].checked
+    setTechList({ ...techList, [item.type]: stack })
+    if (stack[itemIndex].checked) {
+      updateTechArray(item.type, item)
+    } else {
+      handleRemoveTech(item)
+    }
   }
 
   const handleClearInput = () => {
@@ -96,6 +90,7 @@ export const TechSection: FC<ITechSection> = ({
         close={() => handleToggleModal("compare", false)}
       />
       <CreateStackModal
+        cvTech={cvData.technologies}
         techStack={techList}
         isOpened={isModalOpen.add}
         close={() => handleToggleModal("add", false)}
@@ -129,27 +124,14 @@ export const TechSection: FC<ITechSection> = ({
               <Badge
                 item={res}
                 key={"res_" + index}
-                clickHandler={() => handleSelectResult(res)}
+                clickHandler={() => handleToggleItem(res)}
                 color={techColors[res.type as keyof typeof techColors]}
               />
             ))}
           </SearchResults>
         ) : null}
       </SearchSection>
-      <Accordion
-        title="Технологии"
-        isActiveDefault
-        titleButtons={[
-          {
-            text: "Добавить технологии",
-            click: () => handleToggleModal("add", true)
-          },
-          {
-            text: "Сравнить технологии",
-            click: () => handleToggleModal("compare", true)
-          }
-        ]}
-      >
+      <Accordion title="Технологии" isActiveDefault>
         <TechList>
           {cvData.technologies.map((tech: ITechItem, index: number) => (
             <Badge
@@ -157,7 +139,7 @@ export const TechSection: FC<ITechSection> = ({
               item={tech}
               key={"tech_" + index}
               color={techColors[tech.type as keyof typeof techColors]}
-              deleteHandler={handleDeleteItem}
+              deleteHandler={handleToggleItem}
             />
           ))}
         </TechList>

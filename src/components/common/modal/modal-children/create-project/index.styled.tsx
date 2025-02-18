@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  min-width: 800px;
+  max-width: 800px;
   max-height: 650px;
   overflow-y: auto;
 `
@@ -23,10 +23,68 @@ export const Title = styled.div`
   line-height: 40px;
 `
 
+export const TabsWrapper = styled.div`
+  /* width: fit-content; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid ${COLORS.WHITE_16};
+`
+
+type TabType = {
+  $active: boolean
+}
+
+export const Tab = styled.div<TabType>`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  background: ${({ $active }) => ($active ? COLORS.DARK_BLUE : "transparent")};
+  color: ${COLORS.WHITE_87};
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.1s ease-in;
+  &:hover {
+    border: 1px solid ${COLORS.WHITE_16};
+  }
+`
+
+export const SliderWrapper = styled.div`
+  display: grid;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  grid-template-columns: 1fr 1fr 1fr;
+`
+
+type SlideType = {
+  $activeTab: boolean
+}
+
+export const SlideWrapper = styled.div<SlideType>`
+  grid-column-start: 1;
+  grid-row-start: 2;
+  grid-column-end: span 3;
+  transform: translateX(${({ $activeTab }) => ($activeTab ? "0%" : "100%")});
+  opacity: ${({ $activeTab }) => ($activeTab ? 1 : 0)};
+  transition: all 0.5s;
+  color: ${COLORS.WHITE_87};
+`
+
 export const InputsSection = styled.div`
   width: 100%;
   display: flex;
   gap: 20px;
+  margin-bottom: 10px;
 `
 
 export const Inputs = styled.div`
@@ -36,43 +94,21 @@ export const Inputs = styled.div`
   gap: 10px;
 `
 
-export const TechSection = styled.div`
-  display: flex;
-  gap: 20px;
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 0 10px;
-`
-
-export const TechList = styled.div`
-  max-width: 800px;
+export const TechWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-  padding: 0 10px;
+  gap: 8px;
+  overflow-y: auto;
+  max-height: 400px;
 `
 
-interface ITechItemStyled {
-  $color?: string
-}
-
-export const TechItem = styled.div<ITechItemStyled>`
+export const TechItem = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 8px 10px;
-  border-radius: 20px;
-  background-color: ${({ $color }) => $color ?? COLORS.BLUE};
-  color: ${COLORS.WHITE_87};
-`
-
-export const Remove = styled.div`
-  display: flex;
-  &:hover {
-    cursor: pointer;
-    color: ${COLORS.SEMANTIC_RED};
-  }
+  gap: 4px;
+  padding: 8px 12px;
+  background: ${COLORS.WHITE_16};
+  border-radius: 4px;
 `
 
 export const Buttons = styled.div`

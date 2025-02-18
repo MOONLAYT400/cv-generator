@@ -154,6 +154,7 @@ export const CompareTechModal: FC<ICompareTechModal> = ({
 )
 
 export const CreateStackModal: FC<ICreateStackModal> = ({
+  cvTech,
   isOpened,
   techStack,
   close,
@@ -161,6 +162,7 @@ export const CreateStackModal: FC<ICreateStackModal> = ({
 }) => (
   <ModalWrapper close={close} isOpened={isOpened} id={MODALS.CREATE_STACK}>
     <CreateStack
+      cvTech={cvTech}
       techStack={techStack}
       close={close}
       updateTechList={updateTechList}

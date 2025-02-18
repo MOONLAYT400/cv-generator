@@ -52,7 +52,6 @@ export const InputWrapper = styled.div<IInputWrapper>`
   ${({ $isError }) =>
     $isError ? `border: 1px solid ${COLORS.SEMANTIC_RED}` : ""};
   border-radius: 12px;
-  box-shadow: 2px 2px 10px 1px ${COLORS.WHITE_24};
   @media (${DEVICE_SIZE.TABLET}) {
     border-radius: 16px;
     padding: 14px 16px;
