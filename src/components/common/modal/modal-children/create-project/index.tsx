@@ -181,7 +181,7 @@ export const CreateProject: FC<ICreateProject> = ({
           />
         </SlideWrapper>
         <SlideWrapper $activeTab={activeTab === "tech"}>
-          <TabsWrapper>
+          <TabsWrapper $margin>
             {Object.keys(techList).map((key) => (
               <Tab
                 key={key}
