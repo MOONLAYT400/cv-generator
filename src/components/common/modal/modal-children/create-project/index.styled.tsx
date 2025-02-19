@@ -23,11 +23,15 @@ export const Title = styled.div`
   line-height: 40px;
 `
 
-export const TabsWrapper = styled.div`
-  /* width: fit-content; */
+type TabWrapperType = {
+  $margin?: boolean
+}
+
+export const TabsWrapper = styled.div<TabWrapperType>`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${({ $margin }) => ($margin ? "margin-bottom: 10px;" : "")};
   border-bottom: 1px solid ${COLORS.WHITE_16};
 `
 
@@ -72,7 +76,7 @@ type SlideType = {
 
 export const SlideWrapper = styled.div<SlideType>`
   grid-column-start: 1;
-  grid-row-start: 2;
+  grid-row-start: 1;
   grid-column-end: span 3;
   transform: translateX(${({ $activeTab }) => ($activeTab ? "0%" : "100%")});
   opacity: ${({ $activeTab }) => ($activeTab ? 1 : 0)};
