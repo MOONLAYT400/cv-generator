@@ -7,12 +7,11 @@ type Props = {
 }
 
 export const Themes: React.FC<Props> = ({ handleThemeChange }) => {
-    const currentTheme = JSON.parse(localStorage.getItem("current-theme") || '');
-    const alternativeTheme = currentTheme?.name === "light" ? "dark" : "light";
 
     return (
         <ThemeContainer>
-            <ThemeButton className={alternativeTheme} onClick={() => handleThemeChange(themes[alternativeTheme])}></ThemeButton>
+            <ThemeButton className='dark' onClick={()=>handleThemeChange(themes.dark)}></ThemeButton>
+            <ThemeButton className='light' onClick={()=>handleThemeChange(themes.light)}></ThemeButton>
         </ThemeContainer>
     )
 }
