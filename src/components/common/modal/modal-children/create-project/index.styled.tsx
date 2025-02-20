@@ -15,7 +15,6 @@ export const Wrapper = styled.div`
 
 export const Title = styled.div`
   width: 100%;
-  color: ${COLORS.WHITE_87};
   font-family: Inter;
   font-size: 18px;
   font-style: normal;
@@ -64,7 +63,6 @@ export const TechItem = styled.div<ITechItemStyled>`
   padding: 8px 10px;
   border-radius: 20px;
   background-color: ${({ $color }) => $color ?? COLORS.BLUE};
-  color: ${COLORS.WHITE_87};
 `
 
 export const Remove = styled.div`

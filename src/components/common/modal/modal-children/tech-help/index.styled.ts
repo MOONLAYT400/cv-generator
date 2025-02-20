@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 
 export const Title = styled.div`
   width: 100%;
-  color: ${COLORS.WHITE_87};
+  
   font-family: Inter;
   font-size: 18px;
   font-style: normal;
@@ -22,7 +22,6 @@ export const Title = styled.div`
 
 export const Secondary = styled.div`
   width: 100%;
-  color: ${COLORS.WHITE_87};
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
@@ -32,7 +31,7 @@ export const Secondary = styled.div`
 
 export const Description = styled.div`
   width: 100%;
-  color: ${COLORS.WHITE_48};
+
   font-family: Inter;
   font-size: 14px;
   font-style: normal;

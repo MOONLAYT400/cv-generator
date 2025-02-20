@@ -20,7 +20,6 @@ export const Label = styled.div`
   display: flex;
   gap: 2px;
   padding-left: 10px;
-  color: ${COLORS.WHITE_87};
   font-family: Inter;
   font-size: 13px;
   font-style: normal;
@@ -44,15 +43,13 @@ export const InputWrapper = styled.div<IInputWrapper>`
   align-items: center;
   gap: 16px;
   padding: 8px 16px;
-  color: ${COLORS.WHITE_87};
-  border: 1px solid ${COLORS.WHITE_24};
-
+  border: 1px solid ${({theme}) => theme.colors.shadow};
   ${({ $focused }) =>
     $focused ? `border: 1px solid ${COLORS.TURQUOISE}` : ""};
   ${({ $isError }) =>
     $isError ? `border: 1px solid ${COLORS.SEMANTIC_RED}` : ""};
   border-radius: 12px;
-  box-shadow: 2px 2px 10px 1px ${COLORS.WHITE_24};
+  box-shadow: 2px 2px 10px 1px ${({theme}) => theme.colors.shadow};
   @media (${DEVICE_SIZE.TABLET}) {
     border-radius: 16px;
     padding: 14px 16px;
@@ -63,7 +60,7 @@ export const InputField = styled.input<IInputWrapper>`
   width: 100%;
   background: transparent;
   outline: none;
-  color: ${COLORS.WHITE_87};
+  color: ${({ theme }) => theme.colors.text};
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
@@ -77,7 +74,7 @@ export const InputField = styled.input<IInputWrapper>`
   }
 
   &::placeholder {
-    color: ${COLORS.WHITE_48};
+    color: ${({ theme }) => theme.colors.placeholder};
     font-family: Inter;
     font-size: 13px;
     font-style: normal;

@@ -14,14 +14,14 @@ export const Wrapper = styled.div`
 
 export const TooltipTitle = styled.p`
   font-family: Inter;
-  color: ${COLORS.WHITE_87};
+
   font-weight: 600;
   font-size: 20px;
 `
 
 export const TooltipContent = styled.p`
   font-family: Inter;
-  color: ${COLORS.WHITE_87};
+
   font-weight: 400;
   font-size: 16px;
 `
@@ -34,7 +34,7 @@ export const TooltipFooter = styled.div`
 
 export const Button = styled.button`
   padding: 6px 16px;
-  color: ${COLORS.WHITE_87};
+
   background: ${COLORS.VIOLET};
   font-weight: 600;
   font-size: 16px;
@@ -47,17 +47,17 @@ export const Button = styled.button`
 
 export const BackButton = styled(Button)`
   padding: 6px 16px;
-  color: ${COLORS.WHITE_87};
+
   background: transparent;
   font-weight: 600;
   font-size: 16px;
   border-radius: 24px;
-  border: 1px solid ${COLORS.WHITE_24};
+  border: 1px solid ${({ theme }) => theme.colors.shadow}
+  
   &:hover {
     opacity: 0.8;
   }
 `
-
 export const FormattedMessage = styled.div`
-  color: ${COLORS.WHITE_87};
+
 `

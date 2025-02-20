@@ -2,6 +2,7 @@ import { styled } from "styled-components"
 
 import { COLORS } from "@/constants/styles/colors"
 import { DEVICE_SIZE } from "@/constants/styles/device-size"
+import { Theme } from "@/styles/themes.styled"
 
 interface ButtonStyles {
   $buttonType: "primary" | "secondary" | "danger" | "ghost"
@@ -9,14 +10,13 @@ interface ButtonStyles {
 
 const buttonStyles = {
   primary: {
-    border: COLORS.DARK_BLUE,
-    background: COLORS.DARK_BLUE,
-    color: COLORS.WHITE
+   border: (theme: Theme) => theme.colors.button,
+   color: (theme: Theme) => theme.colors.text
   },
   danger: {
-    border: COLORS.ORANGE,
+    border: (theme: Theme) => theme.colors.buttonD,
     background: COLORS.ORANGE,
-    color: COLORS.WHITE
+    color: (theme: Theme) => theme.colors.text
   }
 }
 
@@ -29,16 +29,14 @@ export const Wrapper = styled.button<ButtonStyles>`
   padding: 8px 16px;
   border-radius: 5px;
   border: 1px solid
-    ${({ $buttonType }) =>
-      buttonStyles[$buttonType as keyof typeof buttonStyles].border ??
-      COLORS.VIOLET};
-
-  background: ${({ $buttonType }) =>
-    buttonStyles[$buttonType as keyof typeof buttonStyles].background ??
-    COLORS.VIOLET};
-  color: ${({ $buttonType }) =>
-    buttonStyles[$buttonType as keyof typeof buttonStyles].color ??
-    COLORS.WHITE};
+  ${({ theme }) => theme.colors.button};
+  background: ${({ theme, $buttonType }) => 
+    buttonStyles[$buttonType as keyof typeof buttonStyles].border(theme) ??
+     COLORS.VIOLET}; 
+  
+  color: ${({ theme, $buttonType }) => 
+    buttonStyles[$buttonType as keyof typeof buttonStyles].color(theme) ??
+     COLORS.VIOLET};
 
   outline: none;
   font-size: 14px;
@@ -74,8 +72,8 @@ export const Wrapper = styled.button<ButtonStyles>`
 export const Loader = styled.div<ButtonStyles>`
   margin: auto;
   border: 2px solid
-    ${({ $buttonType }) =>
-      buttonStyles[$buttonType as keyof typeof buttonStyles].color ??
+    ${({ theme, $buttonType }) =>
+      buttonStyles[$buttonType as keyof typeof buttonStyles].color(theme) ??
       COLORS.WHITE};
   border-radius: 50%;
   border-top: 2px solid transparent;

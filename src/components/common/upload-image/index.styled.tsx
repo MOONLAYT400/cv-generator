@@ -12,7 +12,6 @@ export const Wrapper = styled.div<IUploadLogo>`
 
   label {
     font-family: Inter;
-    color: ${COLORS.WHITE_87};
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
@@ -36,7 +35,7 @@ export const FIleDrop = styled.div<IUploadLogo>`
   position: relative;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px 10px 1px ${COLORS.WHITE_24};
+  box-shadow: 2px 2px 10px 1px  ${({ theme }) => theme.colors.shadow} ;
   img {
     width: 100%;
     position: absolute;
@@ -68,5 +67,5 @@ export const ThumbnailWrapper = styled.div<IUploadLogo>`
   align-items: center;
   text-align: center;
   font-family: Inter;
-  color: ${COLORS.WHITE_87};
+
 `

@@ -20,7 +20,6 @@ export const Label = styled.div`
   display: flex;
   gap: 2px;
   padding-left: 16px;
-  color: ${COLORS.WHITE_87};
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
@@ -44,7 +43,6 @@ export const InputWrapper = styled.div<IInputWrapper>`
   border: 1px solid
     ${({ $focused }) => (!$focused ? COLORS.WHITE_24 : COLORS.TURQUOISE)};
   background: transparent;
-  color: ${COLORS.WHITE_87};
   user-select: none;
 
   p {
@@ -54,7 +52,6 @@ export const InputWrapper = styled.div<IInputWrapper>`
     white-space: nowrap;
     text-align: center;
     min-width: 20px;
-    color: ${COLORS.WHITE_87};
     font-family: Inter;
     font-size: 14px;
     font-style: normal;
@@ -71,7 +68,7 @@ export const DropDown = styled.div<IInputWrapper>`
   ${({ $position }) => ($position === "top" ? "bottom: 110%;" : "top: 110%;")};
   left: 0;
   z-index: 1;
-  max-height: 150px;
+  max-height: 350px;
   overflow-y: auto;
   display: ${({ $isOpened }) => ($isOpened ? "flex" : "none")};
   flex-direction: column;
@@ -79,17 +76,17 @@ export const DropDown = styled.div<IInputWrapper>`
   padding: 8px 10px;
   border-radius: 16px;
   border: 1px solid ${COLORS.WHITE_24};
-  color: ${COLORS.WHITE_87};
-  background: ${COLORS.BLACK_BACKGROUND};
-  &::-webkit-scrollbar {
+  background: ${COLORS.SEMANTIC_RED};
+    &::-webkit-scrollbar {
     display: none;
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
 `
+
 export const Item = styled.div<IInputWrapper>`
   background: ${({ $active }) => ($active ? COLORS.VIOLET : "transparent")};
-  color: ${COLORS.WHITE_87};
+
   padding: 10px 10px;
   border-radius: 16px;
   font-family: Inter;

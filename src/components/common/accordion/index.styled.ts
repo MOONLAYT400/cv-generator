@@ -1,7 +1,5 @@
 import { styled } from "styled-components"
 
-import { COLORS } from "@/constants/styles/colors"
-
 interface IAccordionStyled {
   $isActive?: boolean
 }
@@ -11,7 +9,7 @@ export const Wrapper = styled.div<IAccordionStyled>`
   display: flex;
   flex-direction: column;
   gap: 32px;
-  border-bottom: 1px solid ${COLORS.WHITE_24};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.shadow};
 `
 
 export const Title = styled.div`
@@ -20,7 +18,7 @@ export const Title = styled.div`
   justify-content: space-between;
   cursor: pointer;
   user-select: none;
-  color: ${COLORS.WHITE_87};
+  
   font-family: Inter;
   font-size: 24px;
   font-style: normal;

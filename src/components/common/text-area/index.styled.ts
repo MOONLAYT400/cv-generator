@@ -16,7 +16,6 @@ export const Wrapper = styled.div<IInputWrapper>`
 
 export const Label = styled.p`
   padding-left: 16px;
-  color: ${COLORS.WHITE_87};
   font-family: Inter;
   font-size: 12px;
   font-style: normal;
@@ -30,6 +29,7 @@ export const Label = styled.p`
     }
   }
 `
+
 type IInput = {
   disabled?: boolean
   $error?: boolean
@@ -42,7 +42,7 @@ export const InputWrapper = styled.div<IInputWrapper>`
   background: transparent;
   ${({ $focused }) =>
     $focused ? `border: 1px solid ${COLORS.TURQUOISE};` : ""};
-  box-shadow: 2px 2px 10px 1px ${COLORS.WHITE_24};
+  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.shadow};
   &:focus {
     border: 1px solid ${COLORS.TURQUOISE};
   }
@@ -57,7 +57,7 @@ export const InputField = styled.textarea<IInput>`
   background: transparent;
   border-radius: 8px;
   outline: none;
-  color: ${COLORS.WHITE_87};
+  color: ${({theme})=> theme.colors.text};
   font-family: Inter;
   font-size: 12px;
   font-style: normal;

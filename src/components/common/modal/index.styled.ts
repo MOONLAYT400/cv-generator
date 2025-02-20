@@ -51,7 +51,7 @@ export const Modal = styled.div<IWrapper>`
   position: relative;
   padding: 30px;
   border-radius: 12px;
-  background: ${COLORS.BLACK_BACKGROUND};
+  background: ${({theme}) => theme.colors.modals};
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.15);
   display: flex;
   justify-content: center;

@@ -21,7 +21,6 @@ export const Label = styled.div`
   display: flex;
   gap: 2px;
   padding-left: 16px;
-  color: ${COLORS.WHITE_87};
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
@@ -43,11 +42,10 @@ export const InputWrapper = styled.div<IInputWrapper>`
   padding: 13px 14px;
   border-radius: 16px;
   border: 1px solid
-    ${({ $focused }) => (!$focused ? COLORS.WHITE_24 : COLORS.TURQUOISE)};
+    ${({ theme, $focused }) => (!$focused ? theme.colors.placeholder : COLORS.TURQUOISE)};
   background: transparent;
-  color: ${COLORS.WHITE_87};
+  color: ${({theme}) => theme.colors.text};
   user-select: none;
-
   cursor: pointer;
 `
 
@@ -55,7 +53,6 @@ export const InputField = styled.input<IInputWrapper>`
   width: 100%;
   background: transparent;
   outline: none;
-  color: ${COLORS.WHITE_87};
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
@@ -69,7 +66,7 @@ export const InputField = styled.input<IInputWrapper>`
   }
 
   &::placeholder {
-    color: ${COLORS.WHITE_48};
+    color: ${({theme}) => theme.colors.placeholder};
     font-family: Inter;
     font-size: 13px;
     font-style: normal;
@@ -78,7 +75,7 @@ export const InputField = styled.input<IInputWrapper>`
   }
 
   &::-ms-input-placeholder {
-    color: ${COLORS.WHITE_48};
+    color: ${({theme}) => theme.colors.placeholder} ;
   }
 
   &::-webkit-outer-spin-button,
@@ -116,17 +113,16 @@ export const DropDown = styled.div<IInputWrapper>`
   padding: 8px 10px;
   border-radius: 16px;
   border: 1px solid ${COLORS.WHITE_24};
-  color: ${COLORS.WHITE_87};
-  background: ${COLORS.BLACK_BACKGROUND};
+  background: ${({theme}) => theme.colors.modals};
   &::-webkit-scrollbar {
     display: none;
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
 `
+
 export const Item = styled.div<IInputWrapper>`
   background: ${({ $active }) => ($active ? COLORS.VIOLET : "transparent")};
-  color: ${COLORS.WHITE_87};
   padding: 10px 10px;
   border-radius: 16px;
   font-family: Inter;
