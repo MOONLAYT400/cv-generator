@@ -37,10 +37,10 @@ import {
 const JoyRideNoSSR = dynamic(() => import("react-joyride"), { ssr: false })
 
 interface IGeneratorLayout {
-  file: IStackData
+  techStack: IStackData
 }
 
-export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
+export const GeneratorLayout: FC<IGeneratorLayout> = ({ techStack }) => {
   const [onboarding, handleSetOnboarding] = useLocalStorage("onboarding")
 
   const [cvData, setCVData] = useState<ICVParams>({
@@ -86,6 +86,14 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
       } else techArray.splice(lastIndex + 1, 0, tech)
       setCVData({ ...cvData, technologies: techArray })
     }
+  }
+
+  const bulkUpdateTechArray = (techData: IStackData) => {
+    const techArray = Object.values(techData)
+      .flat()
+      .filter((item) => item.checked)
+
+    setCVData({ ...cvData, technologies: techArray })
   }
 
   const handleRemoveTech = (item: ITechItem) => {
@@ -261,11 +269,6 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
           />
         </InfoInputs>
         <Buttons className="downloads">
-          {/* <Button
-            text="Создать резюме pdf"
-            handleClick={saveDocument}
-            disabled
-            /> */}
           <FileInputs>
             <input
               type="file"
@@ -274,17 +277,17 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
               ref={filePicker}
             />
           </FileInputs>
-          <Button text={"Выгрузить файл"} handleClick={handleExportFile} />
-          <Button text={"Загрузить файл"} handleClick={handlePick} />
-          <Button text="Создать резюме docx" handleClick={saveDocument} />
+          <Button text={"Скачать JSON"} handleClick={handleExportFile} />
+          <Button text={"Загрузить JSON"} handleClick={handlePick} />
+          <Button text={"Скачать резюме docx"} handleClick={saveDocument} />
         </Buttons>
       </InfoSection>
       <TechSection
-        techList={file}
+        techStack={techStack}
         cvData={cvData}
-        technologies={cvData.technologies}
-        handleRemoveTech={handleRemoveTech}
         updateTechArray={updateTechArray}
+        handleRemoveTech={handleRemoveTech}
+        bulkUpdateTechArray={bulkUpdateTechArray}
       />
       <EducationsSection
         educations={cvData.education}
@@ -297,7 +300,7 @@ export const GeneratorLayout: FC<IGeneratorLayout> = ({ file }) => {
         deleteExperience={handleDeleteExperience}
       />
       <ProjectsSection
-        file={file}
+        file={techStack}
         projects={cvData.projects}
         saveProject={handleAddProject}
         deleteProject={handleDeleteProject}

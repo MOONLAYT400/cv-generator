@@ -2,12 +2,11 @@ import { nanoid } from "nanoid"
 import { FC, useEffect, useState } from "react"
 
 import { Button } from "@/components/common/button"
-import { CloseSystemIcon } from "@/components/common/icons"
+import { Checkbox } from "@/components/common/checkbox"
 import { Input } from "@/components/common/input"
-import { SearchSelect } from "@/components/common/select-with-search"
 import { TextArea } from "@/components/common/text-area"
 import { ListInput } from "@/components/ui/input-with-list"
-import { techColors } from "@/constants/styles/colors"
+import { techStackTitles } from "@/constants/generator/names"
 import { IProjectItem, ITechItem } from "@/types/cv-data"
 import { IStackData } from "@/types/stack-data"
 
@@ -15,10 +14,12 @@ import {
   Buttons,
   Inputs,
   InputsSection,
-  Remove,
+  SliderWrapper,
+  SlideWrapper,
+  Tab,
+  TabsWrapper,
   TechItem,
-  TechList,
-  TechSection,
+  TechWrapper,
   Title,
   Wrapper
 } from "./index.styled"
@@ -40,52 +41,49 @@ export const CreateProject: FC<ICreateProject> = ({
     name: "",
     description: "",
     role: "",
+    industry: "",
+    period: "",
     technologies: [],
     responsibilities: []
   })
+  const [activeTab, setActiveTab] = useState("info")
+  const [activeTechTab, setActiveTechTab] = useState("languages")
+  const [techList, setTechList] = useState<IStackData>(file)
 
   useEffect(() => {
     if (projectData && "name" in projectData) {
       updateProject(projectData)
+      updateProjectTech()
     }
   }, [])
+
+  const updateProjectTech = () => {
+    projectData?.technologies.forEach((tech) => {
+      const index = techList[tech.type as keyof typeof techList].findIndex(
+        (i) => i.value === tech.value
+      )
+      if (index) {
+        techList[tech.type as keyof typeof techList][index].checked =
+          tech.checked
+      }
+    })
+  }
 
   const handleUpdateProject = (field: string, value: string) =>
     updateProject({ ...project, [field]: value })
 
-  const updateTechArray = (type: string, tech: ITechItem) => {
-    const techArray = project.technologies
-    const existing = techArray.find((item) => item.value === tech.value)
+  const handleSaveProject = () => {
+    const techArray: ITechItem[] = []
 
-    if (!existing) {
-      const lastIndex = techArray.findLastIndex((item) => item.type === type)
-
-      if (lastIndex === -1) {
-        techArray.push(tech)
-      } else techArray.splice(lastIndex + 1, 0, tech)
-
-      updateProject({
-        ...project,
-        technologies: techArray
+    Object.keys(techList).forEach((key) => {
+      techList[key as keyof typeof techList].forEach((tech) => {
+        if (tech.checked) techArray.push(tech)
       })
-    }
-  }
-
-  const handleRemoveTech = (item: ITechItem) => {
-    const filtered = project.technologies.filter(
-      (entry) => entry.value !== item.value
-    )
-    updateProject({
-      ...project,
-      technologies: filtered
     })
-  }
-
-  const handleButtonClick = () => {
-    saveProject(
-      projectData && "name" in projectData ? "update" : "create",
-      project
-    )
+    saveProject(projectData && "name" in projectData ? "update" : "create", {
+      ...project,
+      technologies: techArray
+    })
     close()
   }
 
@@ -100,104 +98,124 @@ export const CreateProject: FC<ICreateProject> = ({
     })
   }
 
+  const isEmtyProject = Object.values(project).every(
+    (value) => value.length === 0
+  )
+
+  const updateTechStack = (type: string, value: string) => {
+    const updated = techList[type as keyof typeof techList].map((item) => {
+      if (item.value === value) {
+        return { ...item, checked: !item.checked }
+      }
+      return item
+    })
+    setTechList({ ...techList, [type]: updated })
+  }
+
   return (
     <Wrapper>
       <Title>Добавить проект</Title>
-      <InputsSection>
-        <Inputs>
-          <Input
-            label="Название"
-            inputValue={project.name}
-            saveInputValue={(name) =>
-              handleUpdateProject("name", name as string)
-            }
+      <TabsWrapper>
+        <Tab
+          $active={activeTab === "info"}
+          onClick={() => setActiveTab("info")}
+        >
+          Основные данные
+        </Tab>
+        <Tab
+          $active={activeTab === "tech"}
+          onClick={() => setActiveTab("tech")}
+        >
+          Технологии
+        </Tab>
+      </TabsWrapper>
+      <SliderWrapper>
+        <SlideWrapper $activeTab={activeTab === "info"}>
+          <InputsSection>
+            <Inputs>
+              <Input
+                label="Название"
+                inputValue={project.name}
+                saveInputValue={(name) =>
+                  handleUpdateProject("name", name as string)
+                }
+              />
+              <Input
+                label="Период работы"
+                inputValue={project.period}
+                saveInputValue={(period) =>
+                  handleUpdateProject("period", period as string)
+                }
+              />
+            </Inputs>
+            <TextArea
+              label="Описание"
+              inputValue={project.description}
+              saveInputValue={(description) =>
+                handleUpdateProject("description", description as string)
+              }
+            />
+          </InputsSection>
+          <InputsSection>
+            <Input
+              label="Отрасль"
+              inputValue={project.industry}
+              saveInputValue={(industry) =>
+                handleUpdateProject("industry", industry as string)
+              }
+            />{" "}
+            <Input
+              label="Роль"
+              inputValue={project.role}
+              saveInputValue={(role) =>
+                handleUpdateProject("role", role as string)
+              }
+            />
+          </InputsSection>
+          <ListInput
+            title={"Над чем я работал"}
+            type={"responsibilities"}
+            items={project.responsibilities}
+            saveItem={handleUpdateResponsibilities}
+            updateItem={updateProject}
           />
-          <Input
-            label="Период работы"
-            inputValue={project.role}
-            saveInputValue={(role) =>
-              handleUpdateProject("role", role as string)
-            }
-          />
-        </Inputs>
-        <TextArea
-          label="Описание"
-          inputValue={project.description}
-          saveInputValue={(description) =>
-            handleUpdateProject("description", description as string)
-          }
-        />
-      </InputsSection>
-      <ListInput
-        title={"Над чем я работал"}
-        type={"responsibilities"}
-        items={project.responsibilities}
-        saveItem={handleUpdateResponsibilities}
-        updateItem={updateProject}
-      />
-      <TechSection>
-        <SearchSelect
-          label="Языки"
-          outputField="object"
-          options={file.languages}
-          saveInputValue={(value) => updateTechArray("languages", value)}
-        />
-        <SearchSelect
-          label="Фронтенд"
-          outputField="object"
-          options={file.fe}
-          saveInputValue={(value) => updateTechArray("fe", value)}
-        />
-        <SearchSelect
-          label="Бекенд"
-          options={file.be}
-          outputField="object"
-          saveInputValue={(value) => updateTechArray("be", value)}
-        />
-        <SearchSelect
-          label="Базы данных"
-          outputField="object"
-          options={file.databases}
-          saveInputValue={(value) => updateTechArray("databases", value)}
-        />
-      </TechSection>
-      <TechSection>
-        <SearchSelect
-          label="Девопс"
-          outputField="object"
-          options={file.devops}
-          saveInputValue={(value) => updateTechArray("devops", value)}
-        />
-        <SearchSelect
-          label="Тесты"
-          outputField="object"
-          options={file.test}
-          saveInputValue={(value) => updateTechArray("test", value)}
-        />
-        <SearchSelect
-          label="Дополнительно"
-          outputField="object"
-          options={file.additional}
-          saveInputValue={(value) => updateTechArray("additional", value)}
-        />
-      </TechSection>
-      <TechList>
-        {project.technologies.map((tech, index) => (
-          <TechItem
-            key={"languge_" + index}
-            $color={techColors[tech.type as keyof typeof techColors]}
-          >
-            {tech.value}
-            <Remove onClick={() => handleRemoveTech(tech)}>
-              <CloseSystemIcon />
-            </Remove>
-          </TechItem>
-        ))}
-      </TechList>
+        </SlideWrapper>
+        <SlideWrapper $activeTab={activeTab === "tech"}>
+          <TabsWrapper $margin>
+            {Object.keys(techList).map((key) => (
+              <Tab
+                key={key}
+                $active={activeTechTab === key}
+                onClick={() => setActiveTechTab(key)}
+              >
+                {techStackTitles[key as keyof typeof techStackTitles]}
+              </Tab>
+            ))}
+          </TabsWrapper>
+          <SliderWrapper>
+            {Object.keys(techList).map((key) => (
+              <SlideWrapper key={key} $activeTab={activeTechTab === key}>
+                <TechWrapper>
+                  {techList[key as keyof typeof techList].map((item) => (
+                    <TechItem key={item.value}>
+                      <Checkbox
+                        text={item.value}
+                        check={() => updateTechStack(item.type, item.value)}
+                        isChecked={item.checked}
+                      />
+                    </TechItem>
+                  ))}
+                </TechWrapper>
+              </SlideWrapper>
+            ))}
+          </SliderWrapper>
+        </SlideWrapper>
+      </SliderWrapper>
       <Buttons>
         <Button
           text={projectData && "name" in projectData ? "Обновить" : "Добавить"}
-          handleClick={handleButtonClick}
+          handleClick={handleSaveProject}
+          disabled={isEmtyProject}
         />
         <Button text={"Отмена"} buttonType={"danger"} handleClick={close} />
       </Buttons>

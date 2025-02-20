@@ -8,6 +8,7 @@ import {
   IAddExperience,
   ICompareTechModal,
   ICreateProjectModal,
+  ICreateStackModal,
   IModalWrapper,
   ITechHelpModal
 } from "@/types/modals"
@@ -18,6 +19,7 @@ import { CloseButton, Modal, Wrapper } from "./index.styled"
 import { AddEducation } from "./modal-children/add-education"
 import { AddExperience } from "./modal-children/add-experience"
 import { CreateProject } from "./modal-children/create-project"
+import { CreateStack } from "./modal-children/create-stack"
 import { CompareTech } from "./modal-children/missing-tech"
 import { TechHelp } from "./modal-children/tech-help"
 
@@ -148,6 +150,23 @@ export const CompareTechModal: FC<ICompareTechModal> = ({
 }) => (
   <ModalWrapper close={close} isOpened={isOpened} id={MODALS.COMPARE_TECH}>
     <CompareTech cvData={cvData} close={close} />
+  </ModalWrapper>
+)
+
+export const CreateStackModal: FC<ICreateStackModal> = ({
+  cvTech,
+  isOpened,
+  techStack,
+  close,
+  updateTechList
+}) => (
+  <ModalWrapper close={close} isOpened={isOpened} id={MODALS.CREATE_STACK}>
+    <CreateStack
+      cvTech={cvTech}
+      techStack={techStack}
+      close={close}
+      updateTechList={updateTechList}
+    />
   </ModalWrapper>
 )
 

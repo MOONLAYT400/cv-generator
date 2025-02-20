@@ -3,6 +3,7 @@ export interface ITechItem {
   description: string
   alternative: Array<string>
   type: string
+  checked: boolean
 }
 
 export interface IEducationItem {
@@ -36,6 +37,8 @@ export interface IProjectItem {
   description: string
   responsibilities: Array<IResponsibilityItem>
   role: string
+  industry: string
+  period: string
   technologies: Array<ITechItem>
 }
 

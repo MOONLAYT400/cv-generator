@@ -1,13 +1,12 @@
-import { nanoid } from 'nanoid'
+import { nanoid } from "nanoid"
 import { FC, useEffect, useState } from "react"
-
-import { Buttons, Title, Wrapper } from "./index.styled"
 
 import { Button } from "@/components/common/button"
 import { Input } from "@/components/common/input"
 import { ListInput } from "@/components/ui/input-with-list"
 import { IExperienceItem } from "@/types/cv-data"
 
+import { Buttons, Title, Wrapper } from "./index.styled"
 
 interface IAddExperience {
   experienceData: IExperienceItem | null
@@ -57,6 +56,10 @@ export const AddExperience: FC<IAddExperience> = ({
     close()
   }
 
+  const isEmtyExperience = Object.values(experience).every(
+    (value) => value.length === 0
+  )
+
   return (
     <Wrapper>
       <Title>Опыт работы</Title>
@@ -101,6 +104,7 @@ export const AddExperience: FC<IAddExperience> = ({
               : "Добавить"
           }
           handleClick={handleSave}
+          disabled={isEmtyExperience}
         />
         <Button text={"Отмена"} buttonType={"danger"} handleClick={close} />
       </Buttons>

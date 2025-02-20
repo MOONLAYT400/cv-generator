@@ -8,29 +8,24 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  max-width: 800px;
-  max-height: 650px;
-  overflow-y: auto;
+  max-width: 600px;
 `
 
 export const Title = styled.div`
   width: 100%;
+  color: ${COLORS.WHITE_87};
   font-family: Inter;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
-  line-height: 40px;
+  line-height: 24px;
 `
 
-type TabWrapperType = {
-  $margin?: boolean
-}
-
-export const TabsWrapper = styled.div<TabWrapperType>`
+export const TabsWrapper = styled.div`
+  /* width: fit-content; */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${({ $margin }) => ($margin ? "margin-bottom: 10px;" : "")};
   border-bottom: 1px solid ${COLORS.WHITE_16};
 `
 
@@ -60,7 +55,6 @@ export const Tab = styled.div<TabType>`
     border: 1px solid ${COLORS.WHITE_16};
   }
 `
-
 export const SliderWrapper = styled.div`
   display: grid;
   height: 100%;
@@ -75,26 +69,12 @@ type SlideType = {
 
 export const SlideWrapper = styled.div<SlideType>`
   grid-column-start: 1;
-  grid-row-start: 1;
+  grid-row-start: 2;
   grid-column-end: span 3;
   transform: translateX(${({ $activeTab }) => ($activeTab ? "0%" : "100%")});
   opacity: ${({ $activeTab }) => ($activeTab ? 1 : 0)};
   transition: all 0.5s;
   color: ${COLORS.WHITE_87};
-`
-
-export const InputsSection = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 20px;
-  margin-bottom: 10px;
-`
-
-export const Inputs = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 `
 
 export const TechWrapper = styled.div`

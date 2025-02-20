@@ -666,6 +666,23 @@ export const CloseSystemIcon = () => (
   </svg>
 )
 
+export const CheckSystemIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M15.541 6.47767C15.8279 6.77648 15.8182 7.25126 15.5194 7.53811L8.75 14.0367L4.4806 9.93811C4.18179 9.65126 4.1721 9.17648 4.45896 8.87767C4.74582 8.57886 5.22059 8.56917 5.5194 8.85603L8.75 11.9574L14.4806 6.45603C14.7794 6.16917 15.2542 6.17886 15.541 6.47767Z"
+      fill="currentColor"
+    />
+  </svg>
+)
+
 export const DownSystemIcon = () => (
   <svg
     width="16"

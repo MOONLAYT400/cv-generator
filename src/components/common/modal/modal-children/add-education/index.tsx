@@ -43,6 +43,10 @@ export const AddEducation: FC<IAddEducation> = ({
     close()
   }
 
+  const isEmtyEducation = Object.values(education).every(
+    (value) => value.length === 0
+  )
+
   return (
     <Wrapper>
       <Title>Образование</Title>
@@ -90,6 +94,7 @@ export const AddEducation: FC<IAddEducation> = ({
               : "Добавить"
           }
           handleClick={handleButtonClick}
+          disabled={isEmtyEducation}
         />
         <Button text={"Отмена"} buttonType={"danger"} handleClick={close} />
       </Buttons>
