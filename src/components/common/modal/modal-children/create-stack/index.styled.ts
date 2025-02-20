@@ -1,6 +1,6 @@
 import { styled } from "styled-components"
 
-import { COLORS } from "@/constants/styles/colors"
+// import { COLORS } from "@/constants/styles/colors"
 import { DEVICE_SIZE } from "@/constants/styles/device-size"
 
 export const Wrapper = styled.div`
@@ -13,7 +13,6 @@ export const Wrapper = styled.div`
 
 export const Title = styled.div`
   width: 100%;
-  color: ${COLORS.WHITE_87};
   font-family: Inter;
   font-size: 18px;
   font-style: normal;
@@ -26,7 +25,7 @@ export const TabsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid ${COLORS.WHITE_16};
+  border-bottom: 1px solid ${({theme})=> theme.colors.placeholder};
 `
 
 type TabType = {
@@ -40,8 +39,7 @@ export const Tab = styled.div<TabType>`
   justify-content: center;
   gap: 4px;
   padding: 8px;
-  background: ${({ $active }) => ($active ? COLORS.DARK_BLUE : "transparent")};
-  color: ${COLORS.WHITE_87};
+  background: ${({theme, $active }) => ($active ? theme.colors.button : "transparent")};
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
@@ -52,9 +50,10 @@ export const Tab = styled.div<TabType>`
   cursor: pointer;
   transition: all 0.1s ease-in;
   &:hover {
-    border: 1px solid ${COLORS.WHITE_16};
+    border: 1px solid ${({theme})=> theme.colors.placeholder};
   }
 `
+
 export const SliderWrapper = styled.div`
   display: grid;
   height: 100%;
@@ -74,7 +73,7 @@ export const SlideWrapper = styled.div<SlideType>`
   transform: translateX(${({ $activeTab }) => ($activeTab ? "0%" : "100%")});
   opacity: ${({ $activeTab }) => ($activeTab ? 1 : 0)};
   transition: all 0.5s;
-  color: ${COLORS.WHITE_87};
+    color: ${({theme}) => theme.colors.text};
 `
 
 export const TechWrapper = styled.div`
@@ -90,7 +89,7 @@ export const TechItem = styled.div`
   align-items: center;
   gap: 4px;
   padding: 8px 12px;
-  background: ${COLORS.WHITE_16};
+  background: ${({theme}) => theme.colors.button};
   border-radius: 4px;
 `
 

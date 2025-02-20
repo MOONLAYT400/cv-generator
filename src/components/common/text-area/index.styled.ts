@@ -38,7 +38,7 @@ type IInput = {
 export const InputWrapper = styled.div<IInputWrapper>`
   padding: 8px 16px;
   border-radius: 12px;
-  border: 1px solid ${COLORS.WHITE_24};
+  border: 1px solid ${({theme})=>theme.colors.shadow};
   background: transparent;
   ${({ $focused }) =>
     $focused ? `border: 1px solid ${COLORS.TURQUOISE};` : ""};

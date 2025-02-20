@@ -29,7 +29,7 @@ export const FIleDrop = styled.div<IUploadLogo>`
   width: 180px;
   height: 180px;
   overflow: hidden;
-  border: 1px solid ${COLORS.WHITE_24};
+  border: 1px solid ${({theme}) => theme.colors.shadow};
   border-radius: 10px;
   display: flex;
   position: relative;

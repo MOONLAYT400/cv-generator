@@ -19,7 +19,6 @@ export const Wrapper = styled.div<Wrapper>`
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  color: ${COLORS.WHITE_87};
   font-family: Inter;
   font-size: 14px;
   font-style: normal;

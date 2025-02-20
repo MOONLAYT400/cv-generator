@@ -45,7 +45,7 @@ export const Tab = styled.div<TabType>`
   justify-content: center;
   gap: 4px;
   padding: 8px;
-  background: ${({ $active }) => ($active ? COLORS.DARK_BLUE : "transparent")};
+  background: ${({theme, $active }) => ($active ? theme.colors.button : "transparent")};
   color: ${COLORS.WHITE_87};
   font-family: Inter;
   font-size: 14px;
