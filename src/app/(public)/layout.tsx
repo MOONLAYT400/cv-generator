@@ -2,9 +2,8 @@
 import { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components"
 
-import { Themes } from "../../components/ui/theme-section/index"
 import GlobalStyle from '../../styles/global-styled'
-import {themes, defaultTheme, Theme} from '../../styles/themes.styled'
+import { themes, defaultTheme, Theme } from '../../styles/themes.styled'
 
 import { ChildrenWrapper, Wrapper } from "./layout.styled"
 
@@ -14,10 +13,10 @@ import { Header } from "@/components/ui/header"
 export default function PublicLayout({
   children
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode,
 }>) {
   const [selectedTheme, setSelectedTheme] = useState<Theme>(themes[defaultTheme]);
-  const handleThemeChange = (theme: Theme):void => {
+  const handleThemeChange = (theme: Theme): void => {
     setSelectedTheme(theme);
     localStorage.setItem("current-theme", JSON.stringify(theme));
   };
@@ -33,8 +32,7 @@ export default function PublicLayout({
       <NavWrapper>
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyle />
-          <Header/>
-          <Themes handleThemeChange={handleThemeChange} actualTheme={selectedTheme}></Themes>
+          <Header handleThemeChange={handleThemeChange} actualTheme={selectedTheme} />
           <ChildrenWrapper>{children}</ChildrenWrapper>
         </ThemeProvider>
       </NavWrapper>

@@ -5,13 +5,17 @@ export const ThemeContainer = styled.div`
   flex-wrap: wrap;
   justify-content: right;
   align-items: center;
-  padding: 10px;
 `;
 
 export const ThemeButton = styled.button`
   margin: 0 5px;
-  padding: 10px;
+  padding-left: 10px;
   color: ${({ theme }) => theme.colors.text};
   background: transparent;
   border: none;
+
+  &:hover {
+    opacity: 0.85;
+    cursor: pointer;
+  }
 `;
