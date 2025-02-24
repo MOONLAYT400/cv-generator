@@ -15,7 +15,7 @@ const buttonStyles = {
   },
   danger: {
     border: (theme: Theme) => theme.colors.buttonD,
-    background: COLORS.ORANGE,
+    background: (theme: Theme) => theme.colors.buttonD,
     color: (theme: Theme) => theme.colors.text
   }
 }
@@ -29,7 +29,9 @@ export const Wrapper = styled.button<ButtonStyles>`
   padding: 8px 16px;
   border-radius: 5px;
   border: 1px solid
-  ${({ theme }) => theme.colors.button};
+  ${({ theme, $buttonType }) => 
+    buttonStyles[$buttonType as keyof typeof buttonStyles].border(theme) ??
+     COLORS.VIOLET};;
   background: ${({ theme, $buttonType }) => 
     buttonStyles[$buttonType as keyof typeof buttonStyles].border(theme) ??
      COLORS.VIOLET}; 

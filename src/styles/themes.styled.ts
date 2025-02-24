@@ -28,7 +28,7 @@ export const themes: ThemesStyle = {
         background: "#130e27",
         text: "hsl(0, 0%, 100%)",
         button: "#2c69db",
-        buttonD: "orange",
+        buttonD: "#f35325",
         shadow: "#FFFFFF3D",
         placeholder: "#FFFFFF3D",
         modals: "#151718",

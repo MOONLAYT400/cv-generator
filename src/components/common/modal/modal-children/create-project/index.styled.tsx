@@ -46,7 +46,6 @@ export const Tab = styled.div<TabType>`
   gap: 4px;
   padding: 8px;
   background: ${({theme, $active }) => ($active ? theme.colors.button : "transparent")};
-  color: ${COLORS.WHITE_87};
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
@@ -80,7 +79,6 @@ export const SlideWrapper = styled.div<SlideType>`
   transform: translateX(${({ $activeTab }) => ($activeTab ? "0%" : "100%")});
   opacity: ${({ $activeTab }) => ($activeTab ? 1 : 0)};
   transition: all 0.5s;
-  color: ${COLORS.WHITE_87};
 `
 
 export const InputsSection = styled.div`
