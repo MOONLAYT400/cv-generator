@@ -34,7 +34,7 @@ export default function PublicLayout({
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyle />
           <Header/>
-          <Themes handleThemeChange={handleThemeChange}></Themes>
+          <Themes handleThemeChange={handleThemeChange} actualTheme={selectedTheme}></Themes>
           <ChildrenWrapper>{children}</ChildrenWrapper>
         </ThemeProvider>
       </NavWrapper>
